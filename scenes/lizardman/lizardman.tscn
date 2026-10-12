@@ -1,0 +1,244 @@
+[gd_scene format=3 uid="uid://ckpp7m7aodavq"]
+
+[ext_resource type="Texture2D" uid="uid://c733g2uejw0i6" path="res://assets/textures/Sprite-0003.png" id="1_bd1po"]
+[ext_resource type="Script" uid="uid://cvbw6vm7vfv1e" path="res://scenes/lizardman/lizardman.gd" id="1_h8l8o"]
+[ext_resource type="Texture2D" uid="uid://iyxspt54jlxv" path="res://assets/textures/character_sprites/platformerDefense/sprite/dead.png" id="2_rbbdn"]
+[ext_resource type="Script" uid="uid://b15viop4pc36g" path="res://src/pawn/facing.gd" id="3_rbbdn"]
+[ext_resource type="Script" uid="uid://b8kkov3krvwgp" path="res://src/gameplay/combat/hurt_box2d.gd" id="4_h8l8o"]
+[ext_resource type="Script" uid="uid://ctwtyolwfxgp" path="res://src/gameplay/finite_state_machine/finite_state_machine.gd" id="4_w74ym"]
+[ext_resource type="Script" uid="uid://cndn410gup7sm" path="res://src/gameplay/combat/hit_box2d.gd" id="5_fd70g"]
+[ext_resource type="Script" uid="uid://bkldy3n0oo6kj" path="res://scenes/fox/idle_state.gd" id="5_h8l8o"]
+[ext_resource type="Script" uid="uid://djdd8p733srqh" path="res://scenes/fox/walk_state.gd" id="6_fd70g"]
+[ext_resource type="Script" uid="uid://c21hyptxoqrib" path="res://scenes/fox/aim_state.gd" id="7_qrbxa"]
+[ext_resource type="Script" uid="uid://bw7nieib55dp1" path="res://scenes/fox/hurt_state.gd" id="9_nnjub"]
+[ext_resource type="Script" uid="uid://6raksy1dnjw5" path="res://scenes/fox/die_state.gd" id="10_notbo"]
+[ext_resource type="Script" uid="uid://dik7h3tkyjlcn" path="res://src/pawn/ai_controller.gd" id="11_w74ym"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nmin3"]
+size = Vector2(32, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6702g"]
+atlas = ExtResource("1_bd1po")
+region = Rect2(128, 128, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8l8o"]
+atlas = ExtResource("1_bd1po")
+region = Rect2(0, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hmeia"]
+atlas = ExtResource("1_bd1po")
+region = Rect2(128, 384, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8hymu"]
+atlas = ExtResource("1_bd1po")
+region = Rect2(0, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o8wqq"]
+atlas = ExtResource("1_bd1po")
+region = Rect2(64, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dmnom"]
+atlas = ExtResource("1_bd1po")
+region = Rect2(128, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgjlv"]
+atlas = ExtResource("1_bd1po")
+region = Rect2(0, 256, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3lwp7"]
+atlas = ExtResource("1_bd1po")
+region = Rect2(64, 256, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46l0p"]
+atlas = ExtResource("1_bd1po")
+region = Rect2(128, 256, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ye4ru"]
+atlas = ExtResource("1_bd1po")
+region = Rect2(0, 512, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbbum"]
+atlas = ExtResource("1_bd1po")
+region = Rect2(64, 512, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4g33i"]
+atlas = ExtResource("1_bd1po")
+region = Rect2(128, 512, 64, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hyxq3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6702g")
+}],
+"loop": 0,
+"name": &"aim",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_rbbdn")
+}],
+"loop": 1,
+"name": &"dead",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8l8o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hmeia")
+}],
+"loop": 0,
+"name": &"hurt",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8hymu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o8wqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dmnom")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pgjlv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3lwp7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46l0p")
+}],
+"loop": 0,
+"name": &"shoot",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ye4ru")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbbum")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4g33i")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fd70g"]
+size = Vector2(48, 106)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ceijg"]
+size = Vector2(64, 104)
+
+[node name="Lizardman" type="CharacterBody2D" unique_id=1555829717 groups=["Enemies"]]
+collision_layer = 4
+script = ExtResource("1_h8l8o")
+walk_speed = 50.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1814515239]
+position = Vector2(0, 36)
+shape = SubResource("RectangleShape2D_nmin3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=704857493]
+modulate = Color(0, 1, 0, 1)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_hyxq3")
+animation = &"hurt"
+offset = Vector2(0, -2)
+
+[node name="HurtBox2D" type="Area2D" parent="." unique_id=1276949715]
+collision_layer = 64
+collision_mask = 32
+script = ExtResource("4_h8l8o")
+metadata/_custom_type_script = "uid://b8kkov3krvwgp"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox2D" unique_id=56495678]
+position = Vector2(0, 35)
+shape = SubResource("RectangleShape2D_fd70g")
+debug_color = Color(0, 1, 0, 0.41960785)
+
+[node name="HitBox2D" type="Area2D" parent="." unique_id=402380105]
+position = Vector2(8, 0)
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("5_fd70g")
+toggled = true
+metadata/_custom_type_script = "uid://cndn410gup7sm"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox2D" unique_id=948312755]
+position = Vector2(0, 36)
+shape = SubResource("RectangleShape2D_ceijg")
+debug_color = Color(0.9843137, 0, 0, 0.41960785)
+
+[node name="Facing" type="Node" parent="." unique_id=2070224251 node_paths=PackedStringArray("pawn", "controller", "sprite", "hit_box")]
+script = ExtResource("3_rbbdn")
+pawn = NodePath("..")
+controller = NodePath("../AIController")
+sprite = NodePath("../AnimatedSprite2D")
+hit_box = NodePath("../HitBox2D")
+metadata/_custom_type_script = "uid://b15viop4pc36g"
+
+[node name="AIController" type="Node" parent="." unique_id=1861016874 node_paths=PackedStringArray("pawn", "facing", "state_machine")]
+script = ExtResource("11_w74ym")
+approach_distance = 58.0
+pawn = NodePath("..")
+facing = NodePath("../Facing")
+state_machine = NodePath("../StateMachine")
+
+[node name="StateMachine" type="Node" parent="." unique_id=907329660 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_w74ym")
+initial_state = NodePath("IdleState")
+metadata/_custom_type_script = "uid://ctwtyolwfxgp"
+
+[node name="IdleState" type="Node" parent="StateMachine" unique_id=142331184 node_paths=PackedStringArray("pawn", "controller", "sprite", "facing")]
+script = ExtResource("5_h8l8o")
+pawn = NodePath("../..")
+controller = NodePath("../../AIController")
+sprite = NodePath("../../AnimatedSprite2D")
+facing = NodePath("../../Facing")
+
+[node name="WalkState" type="Node" parent="StateMachine" unique_id=1781539092 node_paths=PackedStringArray("pawn", "controller", "sprite", "facing")]
+script = ExtResource("6_fd70g")
+pawn = NodePath("../..")
+controller = NodePath("../../AIController")
+sprite = NodePath("../../AnimatedSprite2D")
+facing = NodePath("../../Facing")
+
+[node name="AimState" type="Node" parent="StateMachine" unique_id=1886797954 node_paths=PackedStringArray("pawn", "controller", "sprite", "facing")]
+script = ExtResource("7_qrbxa")
+pawn = NodePath("../..")
+controller = NodePath("../../AIController")
+sprite = NodePath("../../AnimatedSprite2D")
+facing = NodePath("../../Facing")
+
+[node name="HurtState" type="Node" parent="StateMachine" unique_id=1600841719 node_paths=PackedStringArray("pawn", "controller", "sprite", "facing")]
+script = ExtResource("9_nnjub")
+state_duration = 0.5
+pawn = NodePath("../..")
+controller = NodePath("../../AIController")
+sprite = NodePath("../../AnimatedSprite2D")
+facing = NodePath("../../Facing")
+
+[node name="DieState" type="Node" parent="StateMachine" unique_id=1147488857 node_paths=PackedStringArray("pawn", "controller", "sprite", "facing")]
+script = ExtResource("10_notbo")
+pawn = NodePath("../..")
+controller = NodePath("../../AIController")
+sprite = NodePath("../../AnimatedSprite2D")
+facing = NodePath("../../Facing")
+
+[connection signal="damage_taken" from="HurtBox2D" to="." method="_on_hurt_box_2d_damage_taken"]
+[connection signal="entered" from="StateMachine/IdleState" to="." method="_on_idle_state_entered"]
+[connection signal="entered" from="StateMachine/HurtState" to="." method="_on_hurt_state_entered"]
