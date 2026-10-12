@@ -1,0 +1,225 @@
+[gd_scene format=3 uid="uid://do3slqiquyb0a"]
+
+[ext_resource type="Script" uid="uid://ce7j1il14jnqp" path="res://scenes/fox/fox.gd" id="1_cmr24"]
+[ext_resource type="Script" uid="uid://b15viop4pc36g" path="res://src/pawn/facing.gd" id="3_jaa0m"]
+[ext_resource type="Texture2D" uid="uid://iyxspt54jlxv" path="res://assets/textures/character_sprites/platformerDefense/sprite/dead.png" id="3_jxqej"]
+[ext_resource type="Script" uid="uid://d1ab03x8dacfb" path="res://scenes/fox/weapon.gd" id="3_tolq4"]
+[ext_resource type="Texture2D" uid="uid://c733g2uejw0i6" path="res://assets/textures/Sprite-0003.png" id="3_vemp1"]
+[ext_resource type="Script" uid="uid://b6d0w8n24pt1x" path="res://src/pawn/input_controller.gd" id="4_46bbx"]
+[ext_resource type="Script" uid="uid://ctwtyolwfxgp" path="res://src/gameplay/finite_state_machine/finite_state_machine.gd" id="7_jxqej"]
+[ext_resource type="Script" uid="uid://bkldy3n0oo6kj" path="res://scenes/fox/idle_state.gd" id="8_cvi11"]
+[ext_resource type="Script" uid="uid://djdd8p733srqh" path="res://scenes/fox/walk_state.gd" id="9_ye4ru"]
+[ext_resource type="Script" uid="uid://c21hyptxoqrib" path="res://scenes/fox/aim_state.gd" id="10_rbbum"]
+[ext_resource type="Script" uid="uid://p5xgehcl3ckr" path="res://scenes/fox/shoot_state.gd" id="11_4g33i"]
+[ext_resource type="Script" uid="uid://bw7nieib55dp1" path="res://scenes/fox/hurt_state.gd" id="12_sfg1d"]
+[ext_resource type="Script" uid="uid://6raksy1dnjw5" path="res://scenes/fox/die_state.gd" id="13_r1aym"]
+[ext_resource type="Script" uid="uid://016fiiavb5sm" path="res://scenes/fox/reload_state.gd" id="14_hmeia"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q8uhx"]
+radius = 32.0
+height = 192.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6702g"]
+atlas = ExtResource("3_vemp1")
+region = Rect2(128, 128, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfg1d"]
+atlas = ExtResource("3_vemp1")
+region = Rect2(0, 384, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r1aym"]
+atlas = ExtResource("3_vemp1")
+region = Rect2(64, 384, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hmeia"]
+atlas = ExtResource("3_vemp1")
+region = Rect2(128, 384, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jxqej"]
+atlas = ExtResource("3_vemp1")
+region = Rect2(0, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgjlv"]
+atlas = ExtResource("3_vemp1")
+region = Rect2(0, 256, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3lwp7"]
+atlas = ExtResource("3_vemp1")
+region = Rect2(64, 256, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46l0p"]
+atlas = ExtResource("3_vemp1")
+region = Rect2(128, 256, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ye4ru"]
+atlas = ExtResource("3_vemp1")
+region = Rect2(0, 512, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbbum"]
+atlas = ExtResource("3_vemp1")
+region = Rect2(64, 512, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4g33i"]
+atlas = ExtResource("3_vemp1")
+region = Rect2(128, 512, 64, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_46bbx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6702g")
+}],
+"loop": 0,
+"name": &"aim",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_jxqej")
+}],
+"loop": 1,
+"name": &"dead",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sfg1d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r1aym")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hmeia")
+}],
+"loop": 0,
+"name": &"hurt",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jxqej")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pgjlv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3lwp7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46l0p")
+}],
+"loop": 0,
+"name": &"shoot",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ye4ru")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbbum")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4g33i")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 12.0
+}]
+
+[node name="Fox" type="CharacterBody2D" unique_id=458270211 node_paths=PackedStringArray("facing")]
+script = ExtResource("1_cmr24")
+facing = NodePath("Facing")
+walk_speed = 200.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1239253769]
+position = Vector2(0, 24)
+shape = SubResource("CapsuleShape2D_q8uhx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1430646362]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_46bbx")
+animation = &"shoot"
+frame = 2
+frame_progress = 1.0
+
+[node name="Weapon" type="Node2D" parent="." unique_id=312978189]
+script = ExtResource("3_tolq4")
+
+[node name="RayCast2D" type="RayCast2D" parent="Weapon" unique_id=1589498772]
+target_position = Vector2(1000, 0)
+
+[node name="FirePoint" type="Marker2D" parent="Weapon" unique_id=701722621]
+position = Vector2(32, 0)
+
+[node name="Facing" type="Node" parent="." unique_id=1512754974 node_paths=PackedStringArray("pawn", "controller", "sprite", "weapon_ray_cast", "fire_point")]
+script = ExtResource("3_jaa0m")
+pawn = NodePath("..")
+controller = NodePath("../InputController")
+sprite = NodePath("../AnimatedSprite2D")
+weapon_ray_cast = NodePath("../Weapon/RayCast2D")
+fire_point = NodePath("../Weapon/FirePoint")
+metadata/_custom_type_script = "uid://b15viop4pc36g"
+
+[node name="InputController" type="Node" parent="." unique_id=1756526721 node_paths=PackedStringArray("state_machine")]
+script = ExtResource("4_46bbx")
+state_machine = NodePath("../StateMachine")
+
+[node name="StateMachine" type="Node" parent="." unique_id=230292206 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("7_jxqej")
+initial_state = NodePath("IdleState")
+metadata/_custom_type_script = "uid://ctwtyolwfxgp"
+
+[node name="IdleState" type="Node" parent="StateMachine" unique_id=2021647563 node_paths=PackedStringArray("pawn", "controller", "sprite", "facing")]
+script = ExtResource("8_cvi11")
+pawn = NodePath("../..")
+controller = NodePath("../../InputController")
+sprite = NodePath("../../AnimatedSprite2D")
+facing = NodePath("../../Facing")
+
+[node name="WalkState" type="Node" parent="StateMachine" unique_id=306727837 node_paths=PackedStringArray("pawn", "controller", "sprite", "facing")]
+script = ExtResource("9_ye4ru")
+pawn = NodePath("../..")
+controller = NodePath("../../InputController")
+sprite = NodePath("../../AnimatedSprite2D")
+facing = NodePath("../../Facing")
+
+[node name="AimState" type="Node" parent="StateMachine" unique_id=272267513 node_paths=PackedStringArray("pawn", "controller", "sprite", "facing")]
+script = ExtResource("10_rbbum")
+pawn = NodePath("../..")
+controller = NodePath("../../InputController")
+sprite = NodePath("../../AnimatedSprite2D")
+facing = NodePath("../../Facing")
+
+[node name="ShootState" type="Node" parent="StateMachine" unique_id=969144783 node_paths=PackedStringArray("pawn", "controller", "sprite", "facing")]
+script = ExtResource("11_4g33i")
+pawn = NodePath("../..")
+controller = NodePath("../../InputController")
+sprite = NodePath("../../AnimatedSprite2D")
+facing = NodePath("../../Facing")
+
+[node name="HurtState" type="Node" parent="StateMachine" unique_id=1397996807 node_paths=PackedStringArray("pawn", "controller", "sprite", "facing")]
+script = ExtResource("12_sfg1d")
+pawn = NodePath("../..")
+controller = NodePath("../../InputController")
+sprite = NodePath("../../AnimatedSprite2D")
+facing = NodePath("../../Facing")
+
+[node name="DieState" type="Node" parent="StateMachine" unique_id=289661740 node_paths=PackedStringArray("pawn", "controller", "sprite", "facing")]
+script = ExtResource("13_r1aym")
+pawn = NodePath("../..")
+controller = NodePath("../../InputController")
+sprite = NodePath("../../AnimatedSprite2D")
+facing = NodePath("../../Facing")
+
+[node name="ReloadState" type="Node" parent="StateMachine" unique_id=96954027 node_paths=PackedStringArray("pawn", "controller", "sprite", "facing")]
+script = ExtResource("14_hmeia")
+pawn = NodePath("../..")
+controller = NodePath("../../InputController")
+sprite = NodePath("../../AnimatedSprite2D")
+facing = NodePath("../../Facing")

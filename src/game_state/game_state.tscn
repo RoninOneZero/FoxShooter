@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bxt16tonj1dhc"]
+
+[ext_resource type="Script" uid="uid://dusgmoi2t10wt" path="res://src/game_state/game_state.gd" id="1_rriys"]
+[ext_resource type="Script" uid="uid://g74v21xbywv2" path="res://src/game_state/combat.gd" id="2_0knwr"]
+[ext_resource type="Script" uid="uid://dqywqdvebwus7" path="res://src/game_state/map.gd" id="3_a2tqg"]
+[ext_resource type="Script" uid="uid://djhchkge6hh1h" path="res://src/game_state/inventory.gd" id="4_4okyj"]
+[ext_resource type="Script" uid="uid://cxjw7qjt2vrxk" path="res://src/game_state/random.gd" id="5_72hun"]
+
+[node name="GameState" type="Node" unique_id=332061152]
+script = ExtResource("1_rriys")
+
+[node name="Combat" type="Node" parent="." unique_id=1951919882]
+script = ExtResource("2_0knwr")
+
+[node name="Map" type="Node" parent="." unique_id=275601799]
+script = ExtResource("3_a2tqg")
+
+[node name="Inventory" type="Node" parent="." unique_id=958633449]
+script = ExtResource("4_4okyj")
+
+[node name="Random" type="Node" parent="." unique_id=1290520489]
+script = ExtResource("5_72hun")

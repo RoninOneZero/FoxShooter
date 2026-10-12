@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://b1hre8bens0me"]
+
+[ext_resource type="Script" uid="uid://pohq6sfr4fb4" path="res://src/main/Main.gd" id="1_4gxt3"]
+[ext_resource type="PackedScene" uid="uid://bxt16tonj1dhc" path="res://src/game_state/game_state.tscn" id="2_834u0"]
+[ext_resource type="Script" uid="uid://b3nbnotacc4ik" path="res://src/main/cursor.gd" id="7_dewna"]
+[ext_resource type="Script" uid="uid://cyddffj530f76" path="res://src/main/save.gd" id="8_74yfu"]
+[ext_resource type="Script" uid="uid://bd85aig7ghuu2" path="res://src/main/debug.gd" id="9_bc0i0"]
+
+[node name="Main" type="Node" unique_id=761495018]
+process_mode = 3
+script = ExtResource("1_4gxt3")
+
+[node name="GameState" parent="." unique_id=332061152 instance=ExtResource("2_834u0")]
+
+[node name="Cursor" type="Node" parent="." unique_id=316310921]
+script = ExtResource("7_dewna")
+
+[node name="Save" type="Node" parent="." unique_id=404129314]
+script = ExtResource("8_74yfu")
+
+[node name="UserInterface" type="CanvasLayer" parent="." unique_id=897527193]
+
+[node name="Debug" type="CanvasLayer" parent="." unique_id=268334845]
+visible = false
+script = ExtResource("9_bc0i0")
