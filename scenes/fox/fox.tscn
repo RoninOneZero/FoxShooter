@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://d1ab03x8dacfb" path="res://scenes/fox/weapon.gd" id="3_tolq4"]
 [ext_resource type="Texture2D" uid="uid://c733g2uejw0i6" path="res://assets/textures/Sprite-0003.png" id="3_vemp1"]
 [ext_resource type="Script" uid="uid://b6d0w8n24pt1x" path="res://src/pawn/input_controller.gd" id="4_46bbx"]
+[ext_resource type="Script" uid="uid://b8kkov3krvwgp" path="res://src/gameplay/combat/hurt_box2d.gd" id="4_rbbum"]
 [ext_resource type="Script" uid="uid://ctwtyolwfxgp" path="res://src/gameplay/finite_state_machine/finite_state_machine.gd" id="7_jxqej"]
 [ext_resource type="Script" uid="uid://bkldy3n0oo6kj" path="res://scenes/fox/idle_state.gd" id="8_cvi11"]
 [ext_resource type="Script" uid="uid://djdd8p733srqh" path="res://scenes/fox/walk_state.gd" id="9_ye4ru"]
@@ -15,9 +16,8 @@
 [ext_resource type="Script" uid="uid://6raksy1dnjw5" path="res://scenes/fox/die_state.gd" id="13_r1aym"]
 [ext_resource type="Script" uid="uid://016fiiavb5sm" path="res://scenes/fox/reload_state.gd" id="14_hmeia"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q8uhx"]
-radius = 32.0
-height = 192.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w7c3h"]
+size = Vector2(32, 104)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6702g"]
 atlas = ExtResource("3_vemp1")
@@ -35,9 +35,17 @@ region = Rect2(64, 384, 64, 128)
 atlas = ExtResource("3_vemp1")
 region = Rect2(128, 384, 64, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jxqej"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_8hymu"]
 atlas = ExtResource("3_vemp1")
 region = Rect2(0, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o8wqq"]
+atlas = ExtResource("3_vemp1")
+region = Rect2(64, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dmnom"]
+atlas = ExtResource("3_vemp1")
+region = Rect2(128, 0, 64, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pgjlv"]
 atlas = ExtResource("3_vemp1")
@@ -97,7 +105,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jxqej")
+"texture": SubResource("AtlasTexture_8hymu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o8wqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dmnom")
 }],
 "loop": 1,
 "name": &"idle",
@@ -132,27 +146,85 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="Fox" type="CharacterBody2D" unique_id=458270211 node_paths=PackedStringArray("facing")]
+[sub_resource type="Animation" id="Animation_4g33i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rbbum"]
+resource_name = "invulnerability"
+length = 0.33333668405152855
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4g33i"]
+_data = {
+&"RESET": SubResource("Animation_4g33i"),
+&"invulnerability": SubResource("Animation_rbbum")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ceijg"]
+size = Vector2(64, 98)
+
+[node name="Fox" type="CharacterBody2D" unique_id=458270211]
+collision_layer = 2
 script = ExtResource("1_cmr24")
-facing = NodePath("Facing")
-walk_speed = 200.0
+walk_speed = 150.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1239253769]
-position = Vector2(0, 24)
-shape = SubResource("CapsuleShape2D_q8uhx")
+position = Vector2(0, 36)
+shape = SubResource("RectangleShape2D_w7c3h")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1430646362]
-scale = Vector2(2, 2)
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_46bbx")
-animation = &"shoot"
-frame = 2
-frame_progress = 1.0
+animation = &"idle"
+offset = Vector2(0, -2)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=714089143]
+libraries/ = SubResource("AnimationLibrary_4g33i")
+
+[node name="HurtBox2D" type="Area2D" parent="." unique_id=1515160241]
+collision_layer = 32
+collision_mask = 64
+script = ExtResource("4_rbbum")
+metadata/_custom_type_script = "uid://b8kkov3krvwgp"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox2D" unique_id=894535563]
+position = Vector2(0, 39)
+shape = SubResource("RectangleShape2D_ceijg")
+debug_color = Color(0, 1, 0, 0.41960785)
 
 [node name="Weapon" type="Node2D" parent="." unique_id=312978189]
 script = ExtResource("3_tolq4")
 
 [node name="RayCast2D" type="RayCast2D" parent="Weapon" unique_id=1589498772]
 target_position = Vector2(1000, 0)
+collision_mask = 64
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
 
 [node name="FirePoint" type="Marker2D" parent="Weapon" unique_id=701722621]
 position = Vector2(32, 0)
@@ -169,6 +241,10 @@ metadata/_custom_type_script = "uid://b15viop4pc36g"
 [node name="InputController" type="Node" parent="." unique_id=1756526721 node_paths=PackedStringArray("state_machine")]
 script = ExtResource("4_46bbx")
 state_machine = NodePath("../StateMachine")
+
+[node name="InvulnerabilityTimer" type="Timer" parent="." unique_id=671551754]
+wait_time = 2.0
+one_shot = true
 
 [node name="StateMachine" type="Node" parent="." unique_id=230292206 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("7_jxqej")
@@ -196,19 +272,22 @@ controller = NodePath("../../InputController")
 sprite = NodePath("../../AnimatedSprite2D")
 facing = NodePath("../../Facing")
 
-[node name="ShootState" type="Node" parent="StateMachine" unique_id=969144783 node_paths=PackedStringArray("pawn", "controller", "sprite", "facing")]
+[node name="ShootState" type="Node" parent="StateMachine" unique_id=969144783 node_paths=PackedStringArray("pawn", "controller", "sprite", "facing", "weapon")]
 script = ExtResource("11_4g33i")
 pawn = NodePath("../..")
 controller = NodePath("../../InputController")
 sprite = NodePath("../../AnimatedSprite2D")
 facing = NodePath("../../Facing")
+weapon = NodePath("../../Weapon")
 
-[node name="HurtState" type="Node" parent="StateMachine" unique_id=1397996807 node_paths=PackedStringArray("pawn", "controller", "sprite", "facing")]
+[node name="HurtState" type="Node" parent="StateMachine" unique_id=1397996807 node_paths=PackedStringArray("pawn", "controller", "sprite", "facing", "hurt_box", "invulnerability_timer")]
 script = ExtResource("12_sfg1d")
 pawn = NodePath("../..")
 controller = NodePath("../../InputController")
 sprite = NodePath("../../AnimatedSprite2D")
 facing = NodePath("../../Facing")
+hurt_box = NodePath("../../HurtBox2D")
+invulnerability_timer = NodePath("../../InvulnerabilityTimer")
 
 [node name="DieState" type="Node" parent="StateMachine" unique_id=289661740 node_paths=PackedStringArray("pawn", "controller", "sprite", "facing")]
 script = ExtResource("13_r1aym")
@@ -223,3 +302,6 @@ pawn = NodePath("../..")
 controller = NodePath("../../InputController")
 sprite = NodePath("../../AnimatedSprite2D")
 facing = NodePath("../../Facing")
+
+[connection signal="damage_taken" from="HurtBox2D" to="." method="_on_hurt_box_2d_damage_taken"]
+[connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]

@@ -1,6 +1,6 @@
 extends State
 
-@export var pawn: Fox
+@export var pawn: Pawn2D
 @export var controller: Controller
 @export var sprite: AnimatedSprite2D
 @export var facing: Facing

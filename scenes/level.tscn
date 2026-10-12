@@ -1,16 +1,27 @@
 [gd_scene format=3 uid="uid://bhh5dxyouuo7t"]
 
+[ext_resource type="Script" uid="uid://cn6w6v78ymuml" path="res://scenes/level.gd" id="1_mx8sn"]
 [ext_resource type="Texture2D" uid="uid://ce6m3g5vexbo5" path="res://assets/textures/environment/background.png" id="1_w7c3h"]
 [ext_resource type="PackedScene" uid="uid://do3slqiquyb0a" path="res://scenes/fox/fox.tscn" id="2_w7c3h"]
+[ext_resource type="PackedScene" uid="uid://ckpp7m7aodavq" path="res://scenes/lizardman/lizardman.tscn" id="3_w8frs"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_w7c3h"]
 
-[node name="Level" type="Node2D" unique_id=897164410]
+[node name="Level" type="Node2D" unique_id=897164410 node_paths=PackedStringArray("player")]
+script = ExtResource("1_mx8sn")
+player = NodePath("Fox")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=2107738027]
 texture = ExtResource("1_w7c3h")
 centered = false
 metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2005475372]
+position = Vector2(416, 176)
+limit_left = 0
+limit_top = 0
+limit_right = 640
+limit_bottom = 360
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=826674550]
 position = Vector2(0, 300)
@@ -28,7 +39,7 @@ metadata/_edit_group_ = true
 shape = SubResource("WorldBoundaryShape2D_w7c3h")
 
 [node name="WallRight" type="StaticBody2D" parent="." unique_id=1906543497]
-position = Vector2(1920, 300)
+position = Vector2(640, 304)
 rotation = -1.5707964
 metadata/_edit_group_ = true
 
@@ -36,12 +47,7 @@ metadata/_edit_group_ = true
 shape = SubResource("WorldBoundaryShape2D_w7c3h")
 
 [node name="Fox" parent="." unique_id=458270211 instance=ExtResource("2_w7c3h")]
-position = Vector2(416, 240)
+position = Vector2(120, 210)
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=2005475372]
-position = Vector2(416, 176)
-limit_left = 0
-limit_top = 0
-limit_right = 1920
-limit_bottom = 360
-limit_smoothed = true
+[node name="Lizardman" parent="." unique_id=1555829717 instance=ExtResource("3_w8frs")]
+position = Vector2(431, 210)

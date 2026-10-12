@@ -6,7 +6,7 @@ signal facing_changed(direction: Vector2)
 @export var pawn: Node
 @export var controller: Controller
 @export var sprite: AnimatedSprite2D
-@export var hit_box: HitBox
+@export var hit_box: HitBox2D
 @export var weapon_ray_cast: RayCast2D
 @export var fire_point: Node2D
 

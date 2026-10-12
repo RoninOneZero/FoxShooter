@@ -4,12 +4,13 @@ extends State
 @export var controller: Controller
 @export var sprite: AnimatedSprite2D
 @export var facing: Facing
-# @export var animation_player: AnimationPlayer
-
+@export var weapon: Weapon
 
 func enter() -> void:
 	sprite.play("shoot")
 	pawn.movement_enabled = false
+
+	weapon.activate()
 
 	await sprite.animation_finished
 	if is_active:

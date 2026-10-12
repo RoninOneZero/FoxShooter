@@ -21,7 +21,7 @@ window/size/viewport_width=640
 window/size/viewport_height=360
 window/size/window_width_override=1600
 window/size/window_height_override=900
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 
 [file_customization]
 
@@ -30,6 +30,10 @@ folder_colors={
 "res://assets/": "green",
 "res://src/": "gray"
 }
+
+[global_group]
+
+Enemies=""
 
 [input]
 
@@ -54,7 +58,16 @@ interact={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="world_collision"
+2d_physics/layer_2="player_collision"
+2d_physics/layer_3="enemy_collision"
+2d_physics/layer_6="player_combat"
+2d_physics/layer_7="enemy_combat"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
 2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true

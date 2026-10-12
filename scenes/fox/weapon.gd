@@ -1,4 +1,4 @@
-extends Node2D
+class_name Weapon extends Node2D
 
 signal reloaded
 signal activated
@@ -10,19 +10,19 @@ enum FiringMode{
 	AUTOMATIC,
 }
 
-@export var damage: int = 10
+@export var damage_data: DamageData = DamageData.new()
 @export var firing_mode: FiringMode = FiringMode.SINGLE
-@export var magazine_size: int = 10
+@export var magazine_size: int = -1
 ## The firing rate in rounds per minute.
 @export_range(100, 2000, 100, "suffix:rpm") var fire_rate: int = 1500
 @export var reload_time: float = 1.0
 @export var optimal_range: float = 100.0
-@export_range(0.0, 1.0) var critical_hit_change: float = 0.10
+@export_range(0.0, 1.0) var critical_hit_chance: float = 0.10
 
 var _reload_timer: Timer
 var _rounds: int = 0
 
-
+@onready var ray_cast: RayCast2D = $RayCast2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -33,10 +33,17 @@ func _ready() -> void:
 
 
 func activate() -> void:
-	if _rounds > 0:
+	if _rounds > 0 or magazine_size < 0:
 		_rounds -= 1
+
+		if ray_cast.is_colliding():
+			var collider := ray_cast.get_collider()
+			if collider is HurtBox2D:
+				collider.take_damage(damage_data)
+		print("Pyew!")
 		activated.emit()
 	else:
+		print("No bullets!")
 		failed_to_activate.emit()
 
 
