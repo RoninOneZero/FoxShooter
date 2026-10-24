@@ -15,7 +15,7 @@ func enter() -> void:
 	sprite.offset = Vector2(0.0, 30.0)
 
 	hit_box.disable()
-	hurt_box.enabled = false
+	hurt_box.process_mode = Node.PROCESS_MODE_DISABLED
 
 
 

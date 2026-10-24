@@ -22,8 +22,12 @@ func pause_game() -> void:
     get_tree().paused = true
     pause_menu.show()
 
-
+#TODO move these to game state
 func _on_game_lost() -> void:
+    game_over.show()
+
+
+func _on_round_ended() -> void:
     game_over.show()
 
 

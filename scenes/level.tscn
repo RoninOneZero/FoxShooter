@@ -58,8 +58,10 @@ _data = {
 &"new_animation": SubResource("Animation_ppgk2")
 }
 
-[node name="Level" type="Node2D" unique_id=897164410 node_paths=PackedStringArray("player")]
+[node name="Level" type="Node2D" unique_id=897164410 node_paths=PackedStringArray("enemy_spawn_point", "player")]
 script = ExtResource("1_mx8sn")
+packed_enemy_scene = ExtResource("3_w8frs")
+enemy_spawn_point = NodePath("EnemySpawnPoint")
 player = NodePath("Fox")
 
 [node name="Space" type="Sprite2D" parent="." unique_id=1394275410]
@@ -116,9 +118,6 @@ shape = SubResource("WorldBoundaryShape2D_w7c3h")
 [node name="Fox" parent="." unique_id=458270211 instance=ExtResource("2_w7c3h")]
 position = Vector2(120, 232)
 
-[node name="Lizardman" parent="." unique_id=1555829717 instance=ExtResource("3_w8frs")]
-position = Vector2(431, 232)
-
 [node name="SubViewport" type="SubViewport" parent="." unique_id=17565127]
 transparent_bg = true
 size = Vector2i(640, 360)
@@ -144,3 +143,12 @@ material = SubResource("StandardMaterial3D_ceijg")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport" unique_id=1867852668]
 libraries/ = SubResource("AnimationLibrary_2r41h")
 autoplay = &"new_animation"
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=1872382679]
+wait_time = 3.0
+autostart = true
+
+[node name="EnemySpawnPoint" type="Marker2D" parent="." unique_id=1653752704]
+position = Vector2(455, 232)
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
