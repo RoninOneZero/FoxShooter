@@ -1,18 +1,81 @@
 [gd_scene format=3 uid="uid://bhh5dxyouuo7t"]
 
 [ext_resource type="Script" uid="uid://cn6w6v78ymuml" path="res://scenes/level.gd" id="1_mx8sn"]
-[ext_resource type="Texture2D" uid="uid://ce6m3g5vexbo5" path="res://assets/textures/environment/background.png" id="1_w7c3h"]
+[ext_resource type="Texture2D" uid="uid://1dxhn84ihjfy" path="res://resources/white_squares.tres" id="2_2r41h"]
+[ext_resource type="Texture2D" uid="uid://f1oyfaky45ay" path="res://assets/textures/environment/window_background.png" id="2_mx8sn"]
 [ext_resource type="PackedScene" uid="uid://do3slqiquyb0a" path="res://scenes/fox/fox.tscn" id="2_w7c3h"]
 [ext_resource type="PackedScene" uid="uid://ckpp7m7aodavq" path="res://scenes/lizardman/lizardman.tscn" id="3_w8frs"]
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_ceijg"]
+viewport_path = NodePath("SubViewport")
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_w7c3h"]
+
+[sub_resource type="Environment" id="Environment_ceijg"]
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ceijg"]
+shading_mode = 2
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="Animation" id="Animation_2r41h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CSGSphere3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ppgk2"]
+resource_name = "new_animation"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CSGSphere3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.2831855, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2r41h"]
+_data = {
+&"RESET": SubResource("Animation_2r41h"),
+&"new_animation": SubResource("Animation_ppgk2")
+}
 
 [node name="Level" type="Node2D" unique_id=897164410 node_paths=PackedStringArray("player")]
 script = ExtResource("1_mx8sn")
 player = NodePath("Fox")
 
+[node name="Space" type="Sprite2D" parent="." unique_id=1394275410]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(10, 5.625)
+texture = ExtResource("2_2r41h")
+centered = false
+
+[node name="PlanetView" type="Sprite2D" parent="." unique_id=1121816960]
+position = Vector2(443, 324.99997)
+rotation = 0.5235988
+scale = Vector2(1.2416667, 1.2416667)
+texture = SubResource("ViewportTexture_ceijg")
+
 [node name="Background" type="Sprite2D" parent="." unique_id=2107738027]
-texture = ExtResource("1_w7c3h")
+texture = ExtResource("2_mx8sn")
 centered = false
 metadata/_edit_lock_ = true
 
@@ -24,7 +87,7 @@ limit_right = 640
 limit_bottom = 360
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=826674550]
-position = Vector2(0, 300)
+position = Vector2(288, 320)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=478146821]
@@ -47,7 +110,33 @@ metadata/_edit_group_ = true
 shape = SubResource("WorldBoundaryShape2D_w7c3h")
 
 [node name="Fox" parent="." unique_id=458270211 instance=ExtResource("2_w7c3h")]
-position = Vector2(120, 210)
+position = Vector2(120, 232)
 
 [node name="Lizardman" parent="." unique_id=1555829717 instance=ExtResource("3_w8frs")]
-position = Vector2(431, 210)
+position = Vector2(431, 232)
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=17565127]
+transparent_bg = true
+size = Vector2i(640, 360)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewport" unique_id=214120163]
+environment = SubResource("Environment_ceijg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewport" unique_id=1945477265]
+transform = Transform3D(-0.120411925, 0.34724844, -0.9300105, -0.22880398, 0.90189683, 0.36637542, 0.9659968, 0.25690606, -0.029147312, -24.341381, 6.877072, 0)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport" unique_id=285347690]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.777548)
+projection = 1
+current = true
+size = 1.1514302
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="SubViewport" unique_id=2061364962]
+radial_segments = 8
+rings = 5
+smooth_faces = false
+material = SubResource("StandardMaterial3D_ceijg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport" unique_id=1867852668]
+libraries/ = SubResource("AnimationLibrary_2r41h")
+autoplay = &"new_animation"

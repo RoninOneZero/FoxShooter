@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="xWaveShooter"
-run/main_scene="uid://bhh5dxyouuo7t"
+run/main_scene="uid://xx26ch21g3a8"
 config/features=PackedStringArray("4.7")
 config/icon="res://assets/icon.svg"
 

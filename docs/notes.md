@@ -25,6 +25,9 @@ Weapons have a penetration chance. Pistol starts at 0.5
 
 Whole number values indicate a guarantee to penetrate that many enemies. Remaining decimal value indicates chance to penetrate 1 additional time
 
+# Audio
+reference: https://youtu.be/YIbZgecFGkg
+
 # Future Ideas
 gun range
 expanded reloading. eject mag, clear chaber, reload magazine

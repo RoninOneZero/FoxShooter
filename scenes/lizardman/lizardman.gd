@@ -10,8 +10,8 @@ func _on_hurt_box_2d_damage_taken(data: DamageData) -> void:
 
 
 func _on_hurt_state_entered() -> void:
-    print("yeow!")
     $HitBox2D.disable()
+
 
 func _on_idle_state_entered() -> void:
     $HitBox2D.trigger()
