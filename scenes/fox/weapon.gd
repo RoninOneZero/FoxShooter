@@ -40,7 +40,6 @@ func activate() -> void:
 			var collider := ray_cast.get_collider()
 			if collider is HurtBox2D:
 				collider.take_damage(damage_data)
-		print("Pyew!")
 		activated.emit()
 	else:
 		print("No bullets!")

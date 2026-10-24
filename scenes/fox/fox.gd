@@ -10,7 +10,9 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_hurt_box_2d_damage_taken(data: DamageData) -> void:
-	print("Ouch!")
+	var health: Health = get_node("Health")
+	health.current_health -= 1
+	
 	$AnimationPlayer.play("invulnerability")
 	state_machine.change_state("hurt_state")
 	

@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://jh13at0ah2x1"]
+
+[ext_resource type="Script" uid="uid://bpx88lo7iqa7a" path="res://scenes/hud/hud.gd" id="1_48c2t"]
+
+[node name="HUD" type="Control" unique_id=1996295604 node_paths=PackedStringArray("health_bar", "kill_count")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_48c2t")
+health_bar = NodePath("HealthVBox/ProgressBar")
+kill_count = NodePath("KillCount")
+
+[node name="HealthVBox" type="VBoxContainer" parent="." unique_id=577523793]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 8.0
+offset_right = 280.0
+offset_bottom = 62.0
+
+[node name="Label" type="Label" parent="HealthVBox" unique_id=1531169570]
+layout_mode = 2
+text = "HEALTH"
+
+[node name="ProgressBar" type="ProgressBar" parent="HealthVBox" unique_id=515574504]
+layout_mode = 2
+
+[node name="KillCount" type="Label" parent="." unique_id=356834215]
+layout_mode = 0
+offset_left = 528.0
+offset_top = 24.0
+offset_right = 597.0
+offset_bottom = 47.0
+text = "KILLS: 00"

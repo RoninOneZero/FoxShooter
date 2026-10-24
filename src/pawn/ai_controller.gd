@@ -21,7 +21,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-    if target == null:
+    if target == null or state_machine.current_state.name == "DeadState":
         current_mood = Mood.IDLE
     else:
         current_mood = Mood.CHASE
@@ -52,7 +52,7 @@ func _get_linear_direction_to(_position: Vector2) -> Vector2:
 
 
 func _idle_process(_delta) -> void:
-    return
+    pawn.input_direction = Vector2.ZERO
 
 
 func _chase_process(_delta) -> void:

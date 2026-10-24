@@ -2,6 +2,7 @@
 class_name Health extends Node
 
 signal health_changed(amount:int)
+signal depleted
 
 @export var max_health := 5
 
@@ -22,6 +23,9 @@ func set_current_health(value:int) -> void:
 
     current_health = value
     health_changed.emit(value)
+
+    if value <= 0:
+        depleted.emit()
     
     
 

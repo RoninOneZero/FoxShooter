@@ -64,17 +64,21 @@ player = NodePath("Fox")
 
 [node name="Space" type="Sprite2D" parent="." unique_id=1394275410]
 modulate = Color(0, 0, 0, 1)
+z_index = -10
+position = Vector2(-0.14923096, 0.22335815)
 scale = Vector2(10, 5.625)
 texture = ExtResource("2_2r41h")
 centered = false
 
 [node name="PlanetView" type="Sprite2D" parent="." unique_id=1121816960]
-position = Vector2(443, 324.99997)
+z_index = -10
+position = Vector2(442.85077, 325.22333)
 rotation = 0.5235988
 scale = Vector2(1.2416667, 1.2416667)
 texture = SubResource("ViewportTexture_ceijg")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=2107738027]
+z_index = -10
 texture = ExtResource("2_mx8sn")
 centered = false
 metadata/_edit_lock_ = true

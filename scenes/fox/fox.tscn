@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://bw7nieib55dp1" path="res://scenes/fox/hurt_state.gd" id="12_sfg1d"]
 [ext_resource type="Script" uid="uid://6raksy1dnjw5" path="res://scenes/fox/die_state.gd" id="13_r1aym"]
 [ext_resource type="Script" uid="uid://016fiiavb5sm" path="res://scenes/fox/reload_state.gd" id="14_hmeia"]
+[ext_resource type="Script" uid="uid://d4m6ppgju316w" path="res://src/gameplay/combat/health.gd" id="16_4g33i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w7c3h"]
 size = Vector2(32, 104)
@@ -302,6 +303,11 @@ pawn = NodePath("../..")
 controller = NodePath("../../InputController")
 sprite = NodePath("../../AnimatedSprite2D")
 facing = NodePath("../../Facing")
+
+[node name="Health" type="Node" parent="." unique_id=1601939173]
+script = ExtResource("16_4g33i")
+max_health = 6
+metadata/_custom_type_script = "uid://d4m6ppgju316w"
 
 [connection signal="damage_taken" from="HurtBox2D" to="." method="_on_hurt_box_2d_damage_taken"]
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]

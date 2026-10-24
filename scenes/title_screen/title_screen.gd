@@ -5,6 +5,8 @@ extends Control
 @export var quit_game_button: Button
 
 func _ready() -> void:
+	$VBoxContainer/StartGame.grab_focus()
+
 	if OS.get_name() == "Web":
 		quit_game_button.hide()
 
