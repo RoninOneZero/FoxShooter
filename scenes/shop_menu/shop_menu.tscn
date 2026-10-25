@@ -1,0 +1,123 @@
+[gd_scene format=3 uid="uid://bjids5ta1obei"]
+
+[ext_resource type="Script" uid="uid://cpflndqp2lusi" path="res://scenes/shop_menu/shop_menu.gd" id="1_aco41"]
+
+[node name="ShopMenu" type="Control" unique_id=1613396732 node_paths=PackedStringArray("cash_label", "damage_button", "critical_chance_button", "knock_back_button", "damage_rank_counter", "critical_chance_rank_counter", "knock_back_rank_counter")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aco41")
+cash_label = NodePath("CashLabel")
+damage_button = NodePath("VBoxContainer/HBoxContainer/Button")
+critical_chance_button = NodePath("VBoxContainer/HBoxContainer2/Button")
+knock_back_button = NodePath("VBoxContainer/HBoxContainer3/Button")
+damage_rank_counter = NodePath("VBoxContainer/HBoxContainer/Label2")
+critical_chance_rank_counter = NodePath("VBoxContainer/HBoxContainer2/Label2")
+knock_back_rank_counter = NodePath("VBoxContainer/HBoxContainer3/Label2")
+
+[node name="Panel" type="Panel" parent="." unique_id=1399013775]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="." unique_id=98032104]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 37.0
+offset_right = 130.0
+offset_bottom = 82.0
+theme_override_font_sizes/font_size = 32
+text = "SHOP"
+
+[node name="CashLabel" type="Label" parent="." unique_id=1574472660]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 80.0
+offset_right = 130.0
+offset_bottom = 125.0
+theme_override_font_sizes/font_size = 32
+text = "CASH: 0000"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=917998821]
+layout_mode = 0
+offset_left = 73.0
+offset_top = 136.0
+offset_right = 590.0
+offset_bottom = 271.0
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1902825829]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=852438043]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "DAMAGE"
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=774969229]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Rank 1"
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=398234035]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "BUY: 500"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=1829454323]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=2039268490]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "CRIT CHANCE"
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=139709419]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Rank 1"
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer2" unique_id=765886818]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "BUY: 500"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer" unique_id=527464329]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3" unique_id=1047585354]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "KNOCK BACK"
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer3" unique_id=742045208]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Rank 1"
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer3" unique_id=1749312634]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "BUY: 500"
+
+[node name="ContinueButton" type="Button" parent="." unique_id=365918565]
+layout_mode = 0
+offset_left = 482.0
+offset_top = 298.0
+offset_right = 573.0
+offset_bottom = 329.0
+text = "CONTINUE"
+
+[connection signal="button_down" from="ContinueButton" to="." method="_on_continue_button_button_down"]

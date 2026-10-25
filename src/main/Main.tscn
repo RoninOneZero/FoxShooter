@@ -6,23 +6,25 @@
 [ext_resource type="PackedScene" uid="uid://bwngh3qw0wdnb" path="res://scenes/game_over/game_over.tscn" id="6_txx0u"]
 [ext_resource type="PackedScene" uid="uid://rgv33jp8ysqp" path="res://scenes/pause_menu/pause_menu.tscn" id="7_74yfu"]
 [ext_resource type="Script" uid="uid://b3nbnotacc4ik" path="res://src/main/cursor.gd" id="7_dewna"]
-[ext_resource type="Script" uid="uid://cyddffj530f76" path="res://src/main/save.gd" id="8_74yfu"]
+[ext_resource type="Script" uid="uid://cyddffj530f76" path="res://src/main/save_load.gd" id="8_74yfu"]
+[ext_resource type="PackedScene" uid="uid://bjids5ta1obei" path="res://scenes/shop_menu/shop_menu.tscn" id="8_bc0i0"]
 [ext_resource type="Script" uid="uid://bd85aig7ghuu2" path="res://src/main/debug.gd" id="9_bc0i0"]
 
-[node name="Main" type="Node" unique_id=761495018 node_paths=PackedStringArray("hud", "game_over", "pause_menu")]
+[node name="Main" type="Node" unique_id=761495018 node_paths=PackedStringArray("hud", "game_over", "pause_menu", "shop_menu")]
 process_mode = 3
 script = ExtResource("1_4gxt3")
 title_screen_file_path = "uid://xx26ch21g3a8"
 hud = NodePath("UserInterface/HUD")
 game_over = NodePath("UserInterface/GameOver")
 pause_menu = NodePath("UserInterface/PauseMenu")
+shop_menu = NodePath("UserInterface/ShopMenu")
 
 [node name="GameState" parent="." unique_id=332061152 instance=ExtResource("2_834u0")]
 
 [node name="Cursor" type="Node" parent="." unique_id=316310921]
 script = ExtResource("7_dewna")
 
-[node name="Save" type="Node" parent="." unique_id=404129314]
+[node name="SaveLoad" type="Node" parent="." unique_id=404129314]
 script = ExtResource("8_74yfu")
 
 [node name="UserInterface" type="CanvasLayer" parent="." unique_id=897527193]
@@ -35,6 +37,8 @@ visible = false
 
 [node name="PauseMenu" parent="UserInterface" unique_id=534439807 instance=ExtResource("7_74yfu")]
 visible = false
+
+[node name="ShopMenu" parent="UserInterface" unique_id=1613396732 instance=ExtResource("8_bc0i0")]
 
 [node name="Debug" type="CanvasLayer" parent="." unique_id=268334845]
 visible = false

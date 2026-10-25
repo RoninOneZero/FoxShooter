@@ -1,9 +1,7 @@
 extends Node2D
 
 signal game_lost
-signal round_ended
-
-const ENEMIES_GROUP := "Enemies"
+signal round_ended(bounty_value: int)
 
 @export var round_time := 60.0
 @export var packed_enemy_scene: PackedScene
@@ -42,7 +40,7 @@ func _process(delta: float) -> void:
 
 	if time_remaining <= 0.0:
 		get_tree().paused = true
-		round_ended.emit()
+		round_ended.emit(kills)
 
 
 func initalize_hud() -> void:
