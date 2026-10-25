@@ -26,6 +26,10 @@ var _rounds: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	var inventory: Inventory = Main.get_node("GameState/Inventory")
+	damage_data = inventory.get_damage_data()
+
+
 	_reload_timer = Timer.new()
 	add_child(_reload_timer)
 

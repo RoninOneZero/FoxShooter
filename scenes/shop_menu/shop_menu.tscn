@@ -1,8 +1,69 @@
 [gd_scene format=3 uid="uid://bjids5ta1obei"]
 
 [ext_resource type="Script" uid="uid://cpflndqp2lusi" path="res://scenes/shop_menu/shop_menu.gd" id="1_aco41"]
+[ext_resource type="Texture2D" uid="uid://d4ie40rxr7qi5" path="res://assets/textures/user_interface/iDroid-MGSV-Front-2-v1.png" id="2_vsaxo"]
 
-[node name="ShopMenu" type="Control" unique_id=1613396732 node_paths=PackedStringArray("cash_label", "damage_button", "critical_chance_button", "knock_back_button", "damage_rank_counter", "critical_chance_rank_counter", "knock_back_rank_counter")]
+[sub_resource type="Animation" id="Animation_fb2vq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PhoneTexture:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 153)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer/Panel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vsaxo"]
+resource_name = "open_phone"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PhoneTexture:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0009999999, 0.5, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 359), Vector2(0, 357), Vector2(0, 50), Vector2(0, 153)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer/Panel:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.8, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fb2vq"]
+_data = {
+&"RESET": SubResource("Animation_fb2vq"),
+&"open_phone": SubResource("Animation_vsaxo")
+}
+
+[node name="ShopMenu" type="Control" unique_id=1613396732 node_paths=PackedStringArray("cash_label", "panel", "damage_button", "critical_chance_button", "knock_back_button", "damage_rank_counter", "critical_chance_rank_counter", "knock_back_rank_counter")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,114 +71,141 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_aco41")
-cash_label = NodePath("CashLabel")
-damage_button = NodePath("VBoxContainer/HBoxContainer/Button")
-critical_chance_button = NodePath("VBoxContainer/HBoxContainer2/Button")
-knock_back_button = NodePath("VBoxContainer/HBoxContainer3/Button")
-damage_rank_counter = NodePath("VBoxContainer/HBoxContainer/Label2")
-critical_chance_rank_counter = NodePath("VBoxContainer/HBoxContainer2/Label2")
-knock_back_rank_counter = NodePath("VBoxContainer/HBoxContainer3/Label2")
+cash_label = NodePath("MarginContainer/Panel/CashLabel")
+panel = NodePath("MarginContainer/Panel")
+damage_button = NodePath("MarginContainer/Panel/VBoxContainer/HBoxContainer/Button")
+critical_chance_button = NodePath("MarginContainer/Panel/VBoxContainer/HBoxContainer2/Button")
+knock_back_button = NodePath("MarginContainer/Panel/VBoxContainer/HBoxContainer3/Button")
+damage_rank_counter = NodePath("MarginContainer/Panel/VBoxContainer/HBoxContainer/Label2")
+critical_chance_rank_counter = NodePath("MarginContainer/Panel/VBoxContainer/HBoxContainer2/Label2")
+knock_back_rank_counter = NodePath("MarginContainer/Panel/VBoxContainer/HBoxContainer3/Label2")
 
-[node name="Panel" type="Panel" parent="." unique_id=1399013775]
+[node name="PhoneTexture" type="TextureRect" parent="." unique_id=321128744]
+layout_mode = 0
+offset_top = 153.0
+offset_right = 640.0
+offset_bottom = 436.33435
+texture = ExtResource("2_vsaxo")
+expand_mode = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1811240958]
+libraries/ = SubResource("AnimationLibrary_fb2vq")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1012944135]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 30
 
-[node name="Label" type="Label" parent="." unique_id=98032104]
+[node name="Panel" type="Panel" parent="MarginContainer" unique_id=1399013775]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/Panel" unique_id=98032104]
 layout_mode = 0
-offset_left = 43.0
-offset_top = 37.0
-offset_right = 130.0
-offset_bottom = 82.0
+offset_left = 20.0
+offset_top = 12.0
+offset_right = 107.0
+offset_bottom = 57.0
 theme_override_font_sizes/font_size = 32
 text = "SHOP"
 
-[node name="CashLabel" type="Label" parent="." unique_id=1574472660]
+[node name="CashLabel" type="Label" parent="MarginContainer/Panel" unique_id=1574472660]
 layout_mode = 0
-offset_left = 43.0
-offset_top = 80.0
-offset_right = 130.0
-offset_bottom = 125.0
+offset_left = 268.0
+offset_top = 12.0
+offset_right = 442.0
+offset_bottom = 57.0
 theme_override_font_sizes/font_size = 32
 text = "CASH: 0000"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=917998821]
-layout_mode = 0
-offset_left = 73.0
-offset_top = 136.0
-offset_right = 590.0
-offset_bottom = 271.0
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel" unique_id=917998821]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -201.5
+offset_top = -50.5
+offset_right = 201.5
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1902825829]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/VBoxContainer" unique_id=1902825829]
 layout_mode = 2
 theme_override_constants/separation = 32
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=852438043]
+[node name="Label" type="Label" parent="MarginContainer/Panel/VBoxContainer/HBoxContainer" unique_id=852438043]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "DAMAGE"
 
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=774969229]
+[node name="Label2" type="Label" parent="MarginContainer/Panel/VBoxContainer/HBoxContainer" unique_id=774969229]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 text = "Rank 1"
 
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=398234035]
+[node name="Button" type="Button" parent="MarginContainer/Panel/VBoxContainer/HBoxContainer" unique_id=398234035]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "BUY: 500"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=1829454323]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/Panel/VBoxContainer" unique_id=1829454323]
 layout_mode = 2
 theme_override_constants/separation = 32
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=2039268490]
+[node name="Label" type="Label" parent="MarginContainer/Panel/VBoxContainer/HBoxContainer2" unique_id=2039268490]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "CRIT CHANCE"
 
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=139709419]
+[node name="Label2" type="Label" parent="MarginContainer/Panel/VBoxContainer/HBoxContainer2" unique_id=139709419]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 text = "Rank 1"
 
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer2" unique_id=765886818]
+[node name="Button" type="Button" parent="MarginContainer/Panel/VBoxContainer/HBoxContainer2" unique_id=765886818]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "BUY: 500"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer" unique_id=527464329]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/Panel/VBoxContainer" unique_id=527464329]
 layout_mode = 2
 theme_override_constants/separation = 32
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3" unique_id=1047585354]
+[node name="Label" type="Label" parent="MarginContainer/Panel/VBoxContainer/HBoxContainer3" unique_id=1047585354]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "KNOCK BACK"
 
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer3" unique_id=742045208]
+[node name="Label2" type="Label" parent="MarginContainer/Panel/VBoxContainer/HBoxContainer3" unique_id=742045208]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 text = "Rank 1"
 
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer3" unique_id=1749312634]
+[node name="Button" type="Button" parent="MarginContainer/Panel/VBoxContainer/HBoxContainer3" unique_id=1749312634]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "BUY: 500"
 
-[node name="ContinueButton" type="Button" parent="." unique_id=365918565]
+[node name="ContinueButton" type="Button" parent="MarginContainer/Panel" unique_id=365918565]
 layout_mode = 0
-offset_left = 482.0
-offset_top = 298.0
-offset_right = 573.0
-offset_bottom = 329.0
+offset_left = 415.0
+offset_top = 248.0
+offset_right = 506.0
+offset_bottom = 279.0
 text = "CONTINUE"
 
-[connection signal="button_down" from="ContinueButton" to="." method="_on_continue_button_button_down"]
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="button_down" from="MarginContainer/Panel/ContinueButton" to="." method="_on_continue_button_button_down"]

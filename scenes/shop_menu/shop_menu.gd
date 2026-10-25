@@ -3,6 +3,7 @@ extends Control
 signal continue_requested
 
 @export var cash_label: Label
+@export var panel: Panel
 
 @export var damage_button: Button
 @export var critical_chance_button: Button
@@ -36,6 +37,16 @@ func update_shop() -> void:
 	knock_back_button.disabled = !inventory.can_afford(500)
 
 
+func close() -> void:
+	panel.process_mode = Node.PROCESS_MODE_DISABLED
+
+	var anim: AnimationPlayer = $AnimationPlayer
+
+	anim.play_backwards("open_phone")
+	await anim.animation_finished
+
+	hide()
+	panel.process_mode = Node.PROCESS_MODE_INHERIT
 
 func _on_damage_button_pressed() -> void:
 	var inventory: Inventory = Main.get_node("GameState/Inventory")
@@ -65,4 +76,13 @@ func _knock_back_button_pressed() -> void:
 
 
 func _on_continue_button_button_down() -> void:
+	await close()
 	continue_requested.emit()
+
+
+func _on_visibility_changed() -> void:
+	if visible:
+		panel.process_mode = PROCESS_MODE_DISABLED
+		$AnimationPlayer.play("open_phone")
+		await $AnimationPlayer.animation_finished
+		panel.process_mode = PROCESS_MODE_INHERIT

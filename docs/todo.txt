@@ -1,6 +1,8 @@
+redo shop class
+redo damage amounts
 wave counter that is saved to high scores
-cash value that is rewarded for each enemy killed
-between rounds screen that displays current stats
 robusted combat mechanics
 redo spawning mechanics
 make some 3D renders for drawing reference
+x cash value that is rewarded for each enemy killed
+x between rounds screen that displays current stats
