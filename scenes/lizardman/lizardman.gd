@@ -5,7 +5,7 @@ class_name Lizardman extends Pawn2D
 @onready var health: Health = $Health
 
 func _on_hurt_box_2d_damage_taken(data: DamageData) -> void:
-    health.current_health -= 1
+    health.current_health -= data.amount
 
     if health.current_health > 0:
         # knocback based on damage knockback

@@ -6,10 +6,13 @@ const BASE_DAMAGE = 1
 @export var starting_cash := 0
 @export var cash_per_bounty := 50
 
+## Contains upgrade name as a string as keys, and the number of purchased upgrades as values.
+var upgrades: Dictionary[StringName, int] = {
+    "damage": 0,
+    "critical_chance": 0,
+    "knockback": 0,
+}
 
-var damage_upgrades := 0
-var critical_chance_upgrades := 0
-var knock_back_upgrades := 0
 
 @onready var cash := starting_cash
 
@@ -26,10 +29,3 @@ func spend_cash(amount: int):
     if can_afford(amount):
         cash -= amount
 
-
-func get_damage_data() -> DamageData:
-    var damage_data := DamageData.new()
-
-    damage_data.amount = BASE_DAMAGE + (damage_upgrades * 1)
-
-    return damage_data

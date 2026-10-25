@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bp3pms2pv0nud"]
+
+[ext_resource type="Script" uid="uid://rwsppne14a1p" path="res://scenes/shop_menu/shop_item.gd" id="1_3mes3"]
+
+[node name="ShopItem" type="HBoxContainer" unique_id=1739831362 node_paths=PackedStringArray("button")]
+offset_right = 640.0
+offset_bottom = 31.0
+size_flags_horizontal = 3
+theme_override_constants/separation = 32
+alignment = 1
+script = ExtResource("1_3mes3")
+button = NodePath("Button")
+
+[node name="Name" type="Label" parent="." unique_id=272637657]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "DAMAGE"
+
+[node name="Rank" type="Label" parent="." unique_id=1594309598]
+layout_mode = 2
+text = "Rank 1"
+
+[node name="Cost" type="Label" parent="." unique_id=2014007507]
+layout_mode = 2
+text = "Cost: 5000"
+
+[node name="Button" type="Button" parent="." unique_id=1649405288]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "BUY"
