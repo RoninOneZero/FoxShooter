@@ -1,4 +1,4 @@
-class_name DamageData extends Resource
+class_name DamageData extends RefCounted
 
 enum Strength{
     LIGHT,

@@ -1,13 +1,5 @@
 extends Control
 
-"""
-ShopItem:
-	item_name
-	button
-	rank
-	cost
-"""
-
 signal continue_requested
 
 @export var purchasable_upgrades: Array[StringName]
@@ -69,7 +61,6 @@ func _on_shop_item_button_pressed(shop_item: ShopItem) -> void:
 	cash_label.text = "Cash: %s" % inventory.cash
 	_update_shop_item_buttons()
 
-	print(inventory.upgrades)
 
 	
 func _update_shop_item_buttons() -> void:
@@ -81,36 +72,11 @@ func _update_shop_item_buttons() -> void:
 	for shop_item in shop_items:
 		shop_item.button.disabled = !inventory.can_afford(shop_item.cost)
 
-# func _on_damage_button_pressed() -> void:
-# 	var inventory: Inventory = Main.get_node("GameState/Inventory")
-	
-# 	inventory.spend_cash(500)
-# 	inventory.damage_upgrades += 1
-
-# 	update_shop()
 
 
-# func _on_critical_chance_button_pressed() -> void:
-# 	var inventory: Inventory = Main.get_node("GameState/Inventory")
-	
-# 	inventory.spend_cash(500)
-# 	inventory.critical_chance_upgrades += 1
-
-# 	update_shop()
-
-
-# func _knock_back_button_pressed() -> void:
-# 	var inventory: Inventory = Main.get_node("GameState/Inventory")
-	
-# 	inventory.spend_cash(500)
-# 	inventory.knock_back_upgrades += 1
-
-# 	update_shop()
-
-
-# func _on_continue_button_button_down() -> void:
-# 	await close()
-# 	continue_requested.emit()
+func _on_continue_button_button_down() -> void:
+	await close()
+	continue_requested.emit()
 
 
 func _on_visibility_changed() -> void:

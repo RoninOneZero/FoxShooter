@@ -244,7 +244,7 @@ hurt_box = NodePath("../../HurtBox2D")
 
 [node name="Health" type="Node" parent="." unique_id=2032708463]
 script = ExtResource("14_qrbxa")
-max_health = 2
+max_health = 150
 metadata/_custom_type_script = "uid://d4m6ppgju316w"
 
 [connection signal="damage_taken" from="HurtBox2D" to="." method="_on_hurt_box_2d_damage_taken"]

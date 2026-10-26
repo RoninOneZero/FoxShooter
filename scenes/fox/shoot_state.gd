@@ -10,8 +10,6 @@ func enter() -> void:
 	sprite.play("shoot")
 	pawn.movement_enabled = false
 
-	weapon.activate()
-
 	await sprite.animation_finished
 	if is_active:
 		state_machine.change_state("aim_state")
@@ -29,5 +27,9 @@ func enter() -> void:
 #     pass
 
 
-# func receive_event(_event: String) -> void:
-#     pass
+func receive_event(_event: String) -> void:
+	match _event:
+		"attack": 
+			var did_activate := weapon.activate()
+			if did_activate:
+				state_machine.change_state("shoot_state", true)

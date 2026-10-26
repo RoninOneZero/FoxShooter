@@ -33,7 +33,6 @@ func _on_game_lost() -> void:
 func _on_round_ended(bounty_value: int) -> void:
 	var inventory: Inventory = get_node("GameState/Inventory")
 	inventory.add_cash_from_bounty(bounty_value)
-	shop_menu.update_shop()
 	shop_menu.show()
 
 

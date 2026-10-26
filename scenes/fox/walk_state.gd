@@ -5,7 +5,7 @@ extends State
 @export var sprite: AnimatedSprite2D
 @export var facing: Facing
 # @export var animation_player: AnimationPlayer
-
+@export var weapon: Weapon
 
 func enter() -> void:
 	sprite.play("walk")
@@ -30,4 +30,7 @@ func physics_update(_delta: float) -> void:
 
 func receive_event(_event: String) -> void:
 	match _event:
-		"attack": state_machine.change_state("shoot_state")
+		"attack": 
+			var did_activate := weapon.activate()
+			if did_activate:
+				state_machine.change_state("shoot_state", true)

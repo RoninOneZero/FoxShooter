@@ -2,7 +2,7 @@ class_name Weapon extends Node2D
 
 signal reloaded
 signal activated
-signal failed_to_activate
+signal fired
 
 enum FiringMode{
 	SINGLE,
@@ -10,7 +10,8 @@ enum FiringMode{
 	AUTOMATIC,
 }
 
-@export var damage_data: DamageData = DamageData.new()
+@export var base_damage: int = 100
+@export var damage_per_upgrade: int = 15
 @export var firing_mode: FiringMode = FiringMode.SINGLE
 @export var magazine_size: int = -1
 ## The firing rate in rounds per minute.
@@ -19,36 +20,39 @@ enum FiringMode{
 @export var optimal_range: float = 100.0
 @export_range(0.0, 1.0) var critical_hit_chance: float = 0.10
 
-var _reload_timer: Timer
 var _rounds: int = 0
 
 @onready var ray_cast: RayCast2D = $RayCast2D
+@onready var refire_timer: Timer = $RefireTimer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# var inventory: Inventory = Main.get_node("GameState/Inventory")
-	# damage_data = inventory.get_damage_data()
 
-
-	_reload_timer = Timer.new()
-	add_child(_reload_timer)
 
 	reload()
 
+## Attempts to activate the weapon. Returns true if successful, false if not.
+func activate() -> bool:
+	if refire_timer.time_left > 0:
+		return false
+	
+	if ray_cast.is_colliding():
+		var collider := ray_cast.get_collider()
+	
+		if collider is HurtBox2D:
+			var damage_data := DamageData.new()
+			var inventory: Inventory = Main.get_node("GameState/Inventory")
+			damage_data.amount = base_damage + (inventory.upgrades[&"damage"] * damage_per_upgrade)
+			collider.take_damage(damage_data)
+			print("Damage: ", damage_data.amount)
+				
+	var refire_delay: float = 60.0 / fire_rate
+	refire_timer.start(refire_delay)
 
-func activate() -> void:
-	if _rounds > 0 or magazine_size < 0:
-		_rounds -= 1
+	activated.emit()
+	return true
 
-		if ray_cast.is_colliding():
-			var collider := ray_cast.get_collider()
-			if collider is HurtBox2D:
-				collider.take_damage(damage_data)
-				print("Damage: ", damage_data.amount)
-		activated.emit()
-	else:
-		print("No bullets!")
-		failed_to_activate.emit()
+
 
 
 func reload() -> void:
