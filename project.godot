@@ -76,11 +76,11 @@ debug_3={
 
 [layer_names]
 
-2d_physics/layer_1="world_collision"
-2d_physics/layer_2="player_collision"
-2d_physics/layer_3="enemy_collision"
-2d_physics/layer_6="player_combat"
-2d_physics/layer_7="enemy_combat"
+2d_physics/layer_1="world"
+2d_physics/layer_2="player"
+2d_physics/layer_3="enemy"
+2d_physics/layer_6="player_blocking"
+2d_physics/layer_7="enemy_blocking"
 
 [rendering]
 

@@ -5,11 +5,11 @@ signal round_ended(bounty_value: int)
 
 @export var round_time := 60.0
 @export var packed_enemy_scene: PackedScene
-@export var enemy_spawn_point: Marker2D
+@export var enemy_spawn_points: Array[Node2D] = []
 @export var player: Pawn2D
 
 var kills := 0
-
+var last_used_spawn: Node2D
 
 @onready var time_remaining := round_time
 
@@ -67,9 +67,19 @@ func spawn_enemy() -> void:
 	health.depleted.connect(_on_enemy_killed)
 
 
-	enemy.global_position = enemy_spawn_point.global_position
+	enemy.global_position = get_spawn_point()
 	add_child(enemy)
 
+
+func get_spawn_point() -> Vector2:
+	var modified_list = enemy_spawn_points.duplicate()
+
+	if last_used_spawn != null:
+		modified_list.erase(last_used_spawn)
+
+	last_used_spawn = modified_list.pick_random()
+
+	return last_used_spawn.global_position
 
 
 func _on_player_defeated() -> void:

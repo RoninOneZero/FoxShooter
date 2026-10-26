@@ -18,6 +18,14 @@ func enter() -> void:
 	hurt_box.process_mode = Node.PROCESS_MODE_DISABLED
 
 
+	var tween := create_tween()
+
+	tween.tween_property(sprite, "modulate:a", 0.0, 3.0)
+
+	await tween.finished
+	if is_active:
+		_on_tween_finished()
+
 
 func exit() -> void:
 	sprite.offset = Vector2.ZERO
@@ -33,3 +41,7 @@ func exit() -> void:
 
 # func receive_event(_event: String) -> void:
 #     pass
+
+
+func _on_tween_finished() -> void:
+	pawn.queue_free()

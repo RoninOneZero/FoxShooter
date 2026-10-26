@@ -58,11 +58,11 @@ _data = {
 &"new_animation": SubResource("Animation_ppgk2")
 }
 
-[node name="Level" type="Node2D" unique_id=897164410 node_paths=PackedStringArray("enemy_spawn_point", "player")]
+[node name="Level" type="Node2D" unique_id=897164410 node_paths=PackedStringArray("enemy_spawn_points", "player")]
 script = ExtResource("1_mx8sn")
 round_time = 30.0
 packed_enemy_scene = ExtResource("3_w8frs")
-enemy_spawn_point = NodePath("EnemySpawnPoint")
+enemy_spawn_points = [NodePath("EnemySpawnPoint"), NodePath("EnemySpawnPoint2")]
 player = NodePath("Fox")
 
 [node name="Space" type="Sprite2D" parent="." unique_id=1394275410]
@@ -95,6 +95,7 @@ limit_bottom = 360
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=826674550]
 position = Vector2(288, 320)
+collision_mask = 7
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=478146821]
@@ -103,6 +104,8 @@ shape = SubResource("WorldBoundaryShape2D_w7c3h")
 [node name="WallLeft" type="StaticBody2D" parent="." unique_id=23098270]
 position = Vector2(0, 300)
 rotation = 1.5707964
+collision_layer = 32
+collision_mask = 2
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallLeft" unique_id=66554253]
@@ -111,6 +114,8 @@ shape = SubResource("WorldBoundaryShape2D_w7c3h")
 [node name="WallRight" type="StaticBody2D" parent="." unique_id=1906543497]
 position = Vector2(640, 304)
 rotation = -1.5707964
+collision_layer = 32
+collision_mask = 2
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallRight" unique_id=1714083507]
@@ -150,6 +155,9 @@ wait_time = 3.0
 autostart = true
 
 [node name="EnemySpawnPoint" type="Marker2D" parent="." unique_id=1653752704]
-position = Vector2(455, 232)
+position = Vector2(699, 232)
+
+[node name="EnemySpawnPoint2" type="Marker2D" parent="." unique_id=993196571]
+position = Vector2(-61, 232)
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

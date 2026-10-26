@@ -1,7 +1,7 @@
-redo spawning mechanics
 robusted combat mechanics
 make some 3D renders for drawing reference
 wave counter that is saved to high scores
+x redo spawning mechanics
 x redo damage amounts
 x redo shop class
 x cash value that is rewarded for each enemy killed

@@ -2,7 +2,6 @@ class_name Weapon extends Node2D
 
 signal reloaded
 signal activated
-signal fired
 
 enum FiringMode{
 	SINGLE,
