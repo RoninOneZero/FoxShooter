@@ -23,15 +23,15 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += _get_gravity() * delta
 
-	if not movement_enabled:
-		input_direction = Vector2.ZERO
-	var move_direction := input_direction.normalized()
-
-	if move_direction: 
-		velocity.x = move_direction.x * walk_speed
-	else:
-		if is_on_floor():
-			velocity.x = move_toward(velocity.x, 0.0, walk_speed)
+	# TODO this sucks, redo it
+	if movement_enabled:
+		var move_direction := input_direction.normalized()
+		if move_direction: 
+			velocity.x = move_direction.x * walk_speed
+		elif is_on_floor:
+			velocity.x = move_toward(velocity.x, 0.0, walk_speed * 0.2)
+	elif is_on_floor:
+		velocity.x = move_toward(velocity.x, 0.0, walk_speed * 0.2)
 
 
 	move_and_slide()

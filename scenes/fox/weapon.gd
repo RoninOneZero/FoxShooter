@@ -10,6 +10,7 @@ enum FiringMode{
 }
 
 @export var base_damage: int = 100
+@export var base_knockback: float = 10.0
 @export var damage_per_upgrade: int = 15
 @export var firing_mode: FiringMode = FiringMode.SINGLE
 @export var magazine_size: int = -1
@@ -51,8 +52,11 @@ func activate() -> bool:
 			var damage_data := DamageData.new()
 			var inventory: Inventory = Main.get_node("GameState/Inventory")
 			damage_data.amount = base_damage + (inventory.upgrades[&"damage"] * damage_per_upgrade)
+			damage_data.direction = Vector2.RIGHT if ray_cast.target_position.x > 0 else Vector2.LEFT
+			damage_data.knockback = base_knockback
 			collider.take_damage(damage_data)
-			print("Damage: ", damage_data.amount)
+			# print("Damage: ", damage_data.amount)
+			# print("Knockback: ", damage_data.knockback)
 			
 	_draw_tracer(tracer_end_point)
 	var refire_delay: float = 60.0 / fire_rate

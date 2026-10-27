@@ -22,11 +22,12 @@ enum Reaction{
 @export var hit_stun: int = 10
 ## The strength level of the attack
 @export var strength: Strength = Strength.LIGHT
-
+## The knockback velocity of the attack
+@export var knockback: float = 0.0
 ## What direction is the attack coming from
-var direction: Vector3
+var direction: Vector2
 
-func _init(_direction:=Vector3.ZERO, _amount:int=1, _reaction:Reaction=Reaction.KNOCK_BACK) -> void:
+func _init(_direction:=Vector2.ZERO, _amount:int=1, _reaction:Reaction=Reaction.KNOCK_BACK) -> void:
     amount = _amount
     reaction = _reaction
     direction = _direction

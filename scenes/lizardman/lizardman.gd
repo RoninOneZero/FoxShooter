@@ -15,6 +15,10 @@ func _on_hurt_box_2d_damage_taken(data: DamageData) -> void:
 		# knocback based on damage knockback
 		# if stagger chance succeedes, go to hurt state
 		state_machine.change_state("hurt_state", true)
+		var knockback_velocity := data.direction.x * data.knockback
+		print(knockback_velocity)
+		velocity.x = knockback_velocity
+
 	else:
 		state_machine.change_state("dead_state")
 		_on_health_depleted()
