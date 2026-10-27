@@ -27,6 +27,4 @@ func update(_delta: float) -> void:
 func receive_event(_event: String) -> void:
 	match _event:
 		"attack": 
-			var did_activate := weapon.activate()
-			if did_activate:
-				state_machine.change_state("shoot_state")
+				state_machine.change_state("aim_state")

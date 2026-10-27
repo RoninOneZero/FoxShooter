@@ -33,4 +33,4 @@ func receive_event(_event: String) -> void:
 		"attack": 
 			var did_activate := weapon.activate()
 			if did_activate:
-				state_machine.change_state("shoot_state", true)
+				state_machine.change_state("aim_state")

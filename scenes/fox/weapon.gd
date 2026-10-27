@@ -36,9 +36,13 @@ var _rounds: int = 0
 func _ready() -> void:
 	reload()
 
+
+func can_activate() -> bool:
+	return refire_timer.time_left <= 0
+
 ## Attempts to activate the weapon. Returns true if successful, false if not.
 func activate() -> bool:
-	if refire_timer.time_left > 0:
+	if not can_activate():
 		return false
 	
 	# Purely visual randomization of bullet tracer

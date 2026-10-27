@@ -7,6 +7,8 @@ class_name InputController extends Controller
 func _process(_delta: float) -> void:
     direction.x = Input.get_axis("move_left", "move_right")
 
+    attack_pressed = Input.is_action_pressed("attack")
+
 
 func _unhandled_input(event: InputEvent) -> void:
     if not state_machine:
