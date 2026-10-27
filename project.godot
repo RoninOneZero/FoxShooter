@@ -18,6 +18,7 @@ config/icon="res://assets/icon.svg"
 [autoload]
 
 Main="*uid://b1hre8bens0me"
+UiSoundManager="*uid://d17ifevmf058i"
 
 [display]
 

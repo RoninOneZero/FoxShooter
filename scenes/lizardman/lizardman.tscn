@@ -139,7 +139,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fd70g"]
-size = Vector2(48, 106)
+size = Vector2(48, 136)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ceijg"]
 size = Vector2(64, 104)
@@ -162,13 +162,13 @@ sprite_frames = SubResource("SpriteFrames_hyxq3")
 animation = &"aim"
 
 [node name="HurtBox2D" type="Area2D" parent="." unique_id=1276949715]
-collision_layer = 64
-collision_mask = 32
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("4_h8l8o")
 metadata/_custom_type_script = "uid://b8kkov3krvwgp"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox2D" unique_id=56495678]
-position = Vector2(0, 35)
+position = Vector2(0, 20)
 shape = SubResource("RectangleShape2D_fd70g")
 debug_color = Color(0, 1, 0, 0.41960785)
 
@@ -186,6 +186,7 @@ shape = SubResource("RectangleShape2D_ceijg")
 debug_color = Color(0.9843137, 0, 0, 0.41960785)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=223777270]
+rect = Rect2(-8, -10, 16, 20)
 
 [node name="Facing" type="Node" parent="." unique_id=2070224251 node_paths=PackedStringArray("pawn", "controller", "sprite", "hit_box")]
 script = ExtResource("3_rbbdn")

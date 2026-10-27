@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://d17ifevmf058i"]
+
+[ext_resource type="Script" uid="uid://cvxrigrjsmce4" path="res://src/ui_sound_manager/ui_sound_manager.gd" id="1_gg5ix"]
+[ext_resource type="AudioStream" uid="uid://b6wvl3alk12j4" path="res://assets/audio/weapon_sounds/zoom.wav" id="1_jr4ry"]
+[ext_resource type="AudioStream" uid="uid://b8kfsa13t0r3i" path="res://assets/audio/weapon_sounds/slideback1.wav" id="3_xqp3h"]
+
+[node name="UISoundManager" type="Node" unique_id=1148527028]
+script = ExtResource("1_gg5ix")
+
+[node name="ButtonPressed" type="AudioStreamPlayer" parent="." unique_id=594324655]
+stream = ExtResource("1_jr4ry")
+max_polyphony = 3
+
+[node name="ButtonSelected" type="AudioStreamPlayer" parent="." unique_id=1078926426]
+stream = ExtResource("3_xqp3h")
+max_polyphony = 3

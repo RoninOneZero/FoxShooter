@@ -16,7 +16,7 @@
 [ext_resource type="Script" uid="uid://6raksy1dnjw5" path="res://scenes/fox/die_state.gd" id="13_r1aym"]
 [ext_resource type="Script" uid="uid://016fiiavb5sm" path="res://scenes/fox/reload_state.gd" id="14_hmeia"]
 [ext_resource type="Script" uid="uid://d4m6ppgju316w" path="res://src/gameplay/combat/health.gd" id="16_4g33i"]
-[ext_resource type="AudioStream" uid="uid://cwbjkkfsjddtg" path="res://assets/audio/tick_001.wav" id="17_sfg1d"]
+[ext_resource type="AudioStream" uid="uid://p80o8hetcjn0" path="res://assets/audio/weapon_sounds/usp2.wav" id="17_sfg1d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w7c3h"]
 size = Vector2(32, 104)
@@ -202,15 +202,15 @@ shape = SubResource("RectangleShape2D_w7c3h")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1430646362]
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_46bbx")
-animation = &"idle"
+animation = &"aim"
 offset = Vector2(0, -2)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=714089143]
 libraries/ = SubResource("AnimationLibrary_4g33i")
 
 [node name="HurtBox2D" type="Area2D" parent="." unique_id=1515160241]
-collision_layer = 32
-collision_mask = 64
+collision_layer = 2
+collision_mask = 4
 script = ExtResource("4_rbbum")
 metadata/_custom_type_script = "uid://b8kkov3krvwgp"
 
@@ -220,18 +220,19 @@ shape = SubResource("RectangleShape2D_ceijg")
 debug_color = Color(0, 1, 0, 0.41960785)
 
 [node name="Weapon" type="Node2D" parent="." unique_id=312978189]
+position = Vector2(0, -24)
 script = ExtResource("3_tolq4")
 fire_rate = 200
 
 [node name="RayCast2D" type="RayCast2D" parent="Weapon" unique_id=1589498772]
 target_position = Vector2(1000, 0)
-collision_mask = 64
+collision_mask = 4
 hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
 
 [node name="FirePoint" type="Marker2D" parent="Weapon" unique_id=701722621]
-position = Vector2(32, 0)
+position = Vector2(46, 3)
 
 [node name="RefireTimer" type="Timer" parent="Weapon" unique_id=239504948]
 one_shot = true
@@ -326,7 +327,6 @@ metadata/_custom_type_script = "uid://d4m6ppgju316w"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=611931988]
 stream = ExtResource("17_sfg1d")
-pitch_scale = 0.24
 max_polyphony = 6
 
 [connection signal="damage_taken" from="HurtBox2D" to="." method="_on_hurt_box_2d_damage_taken"]

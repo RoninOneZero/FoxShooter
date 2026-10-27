@@ -33,6 +33,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_vsaxo"]
 resource_name = "open_phone"
+length = 1.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -57,6 +58,20 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.2509804), Color(1, 1, 1, 0), Color(1, 1, 1, 0.34117648), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"select_continue_button"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fb2vq"]
 _data = {
@@ -64,7 +79,7 @@ _data = {
 &"open_phone": SubResource("Animation_vsaxo")
 }
 
-[node name="ShopMenu" type="Control" unique_id=1613396732 node_paths=PackedStringArray("cash_label", "panel", "shop_item_container")]
+[node name="ShopMenu" type="Control" unique_id=1613396732 node_paths=PackedStringArray("cash_label", "panel", "shop_item_container", "continue_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -77,6 +92,7 @@ packed_shop_item = ExtResource("3_fb2vq")
 cash_label = NodePath("MarginContainer/Panel/CashLabel")
 panel = NodePath("MarginContainer/Panel")
 shop_item_container = NodePath("MarginContainer/Panel/ScrollContainer/ShopItems")
+continue_button = NodePath("MarginContainer/Panel/ContinueButton")
 
 [node name="PhoneTexture" type="TextureRect" parent="." unique_id=321128744]
 layout_mode = 0

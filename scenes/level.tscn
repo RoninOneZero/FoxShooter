@@ -155,9 +155,9 @@ wait_time = 3.0
 autostart = true
 
 [node name="EnemySpawnPoint" type="Marker2D" parent="." unique_id=1653752704]
-position = Vector2(699, 232)
+position = Vector2(699, 234)
 
 [node name="EnemySpawnPoint2" type="Marker2D" parent="." unique_id=993196571]
-position = Vector2(-61, 232)
+position = Vector2(-61, 234)
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

@@ -8,7 +8,7 @@ signal continue_requested
 @export var cash_label: Label
 @export var panel: Panel
 @export var shop_item_container: Container
-
+@export var continue_button: Button
 
 func _ready() -> void:
 	update_shop()
@@ -45,6 +45,10 @@ func close() -> void:
 	hide()
 	panel.process_mode = Node.PROCESS_MODE_INHERIT
 
+
+func select_continue_button() -> void:
+	if visible:
+		continue_button.grab_focus.call_deferred()
 
 
 func _on_shop_item_button_pressed(shop_item: ShopItem) -> void:

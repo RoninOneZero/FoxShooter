@@ -7,6 +7,7 @@ extends State
 @export var weapon: Weapon
 
 func enter() -> void:
+	sprite.stop()
 	sprite.play("shoot")
 	pawn.movement_enabled = false
 
