@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c733g2uejw0i6" path="res://assets/textures/Sprite-0003.png" id="3_vemp1"]
 [ext_resource type="Script" uid="uid://b6d0w8n24pt1x" path="res://src/pawn/input_controller.gd" id="4_46bbx"]
 [ext_resource type="Script" uid="uid://b8kkov3krvwgp" path="res://src/gameplay/combat/hurt_box2d.gd" id="4_rbbum"]
+[ext_resource type="Texture2D" uid="uid://1dxhn84ihjfy" path="res://resources/white_squares.tres" id="6_r1aym"]
 [ext_resource type="Script" uid="uid://ctwtyolwfxgp" path="res://src/gameplay/finite_state_machine/finite_state_machine.gd" id="7_jxqej"]
 [ext_resource type="Script" uid="uid://bkldy3n0oo6kj" path="res://scenes/fox/idle_state.gd" id="8_cvi11"]
 [ext_resource type="Script" uid="uid://djdd8p733srqh" path="res://scenes/fox/walk_state.gd" id="9_ye4ru"]
@@ -189,6 +190,43 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ceijg"]
 size = Vector2(64, 98)
 
+[sub_resource type="Animation" id="Animation_hmeia"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_r1aym"]
+resource_name = "crit"
+length = 0.19999999999999998
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hmeia"]
+_data = {
+&"RESET": SubResource("Animation_hmeia"),
+&"crit": SubResource("Animation_r1aym")
+}
+
 [node name="Fox" type="CharacterBody2D" unique_id=458270211]
 collision_layer = 2
 collision_mask = 33
@@ -219,12 +257,15 @@ position = Vector2(0, 39)
 shape = SubResource("RectangleShape2D_ceijg")
 debug_color = Color(0, 1, 0, 0.41960785)
 
-[node name="Weapon" type="Node2D" parent="." unique_id=312978189]
+[node name="Weapon" type="Node2D" parent="." unique_id=312978189 node_paths=PackedStringArray("crit_animation")]
 process_mode = 3
 position = Vector2(0, -24)
 script = ExtResource("3_tolq4")
-base_knockback = 200.0
+base_damage = 50
+damage_per_upgrade = 10
+base_knockback = 100.0
 fire_rate = 200
+crit_animation = NodePath("FirePoint/CritSprite/AnimationPlayer")
 
 [node name="RayCast2D" type="RayCast2D" parent="Weapon" unique_id=1589498772]
 target_position = Vector2(1000, 0)
@@ -235,6 +276,15 @@ collide_with_bodies = false
 
 [node name="FirePoint" type="Marker2D" parent="Weapon" unique_id=701722621]
 position = Vector2(46, 3)
+
+[node name="CritSprite" type="Sprite2D" parent="Weapon/FirePoint" unique_id=743147545]
+modulate = Color(1, 0, 0, 0)
+rotation = -0.7853982
+scale = Vector2(0.15625, 0.15625)
+texture = ExtResource("6_r1aym")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Weapon/FirePoint/CritSprite" unique_id=1855349736]
+libraries/ = SubResource("AnimationLibrary_hmeia")
 
 [node name="RefireTimer" type="Timer" parent="Weapon" unique_id=239504948]
 one_shot = true

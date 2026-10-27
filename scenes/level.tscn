@@ -62,6 +62,7 @@ _data = {
 [node name="Level" type="Node2D" unique_id=897164410 node_paths=PackedStringArray("enemy_spawn_points", "player")]
 script = ExtResource("1_mx8sn")
 round_time = 30.0
+enemy_spawn_delay = 2.0
 packed_enemy_scene = ExtResource("3_w8frs")
 packed_stronger_enemy_scene = ExtResource("3_2r41h")
 enemy_spawn_points = [NodePath("EnemySpawnPoint"), NodePath("EnemySpawnPoint2")]

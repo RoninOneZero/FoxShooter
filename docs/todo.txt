@@ -1,10 +1,11 @@
-robusted combat mechanics
-add knockback to hits instead of stun
-add chance to stun
-add critical hits
+hold to fire
 add aiming and steady shot
+robusted combat mechanics
+add chance to stun
 make some 3D renders for drawing reference
 wave counter that is saved to high scores
+x add critical hits
+x add knockback to hits instead of stun
 x redo spawning mechanics
 x redo damage amounts
 x redo shop class

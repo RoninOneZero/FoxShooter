@@ -28,7 +28,6 @@ func initalize_shop() -> void:
 		new_shop_item.set_rank(1)
 		new_shop_item.button.pressed.connect(_on_shop_item_button_pressed.bind(new_shop_item))
 
-
 		if not inventory.can_afford(new_shop_item.cost):
 			new_shop_item.button.disabled = true
 

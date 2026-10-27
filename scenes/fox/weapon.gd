@@ -10,8 +10,9 @@ enum FiringMode{
 }
 
 @export var base_damage: int = 100
-@export var base_knockback: float = 10.0
 @export var damage_per_upgrade: int = 15
+@export var base_knockback: float = 10.0
+@export var knockback_per_upgrade: float = 10.0
 @export var firing_mode: FiringMode = FiringMode.SINGLE
 @export var magazine_size: int = -1
 ## The firing rate in rounds per minute.
@@ -19,9 +20,11 @@ enum FiringMode{
 @export var reload_time: float = 1.0
 @export var optimal_range: float = 100.0
 @export_range(0.0, 1.0) var critical_hit_chance: float = 0.10
-
-
+@export var critical_chance_per_upgrade := 0.10
+@export var critical_damage_modifier: float = 1.5
 @export var tracer_height_variance: float = 4.0
+
+@export var crit_animation: AnimationPlayer
 
 
 var _rounds: int = 0
@@ -31,7 +34,6 @@ var _rounds: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-
 	reload()
 
 ## Attempts to activate the weapon. Returns true if successful, false if not.
@@ -49,12 +51,8 @@ func activate() -> bool:
 	
 		if collider is HurtBox2D:
 			tracer_end_point.x = collider.global_position.x
-			var damage_data := DamageData.new()
-			var inventory: Inventory = Main.get_node("GameState/Inventory")
-			damage_data.amount = base_damage + (inventory.upgrades[&"damage"] * damage_per_upgrade)
-			damage_data.direction = Vector2.RIGHT if ray_cast.target_position.x > 0 else Vector2.LEFT
-			damage_data.knockback = base_knockback
-			collider.take_damage(damage_data)
+
+			collider.take_damage(_get_damage_data())
 			# print("Damage: ", damage_data.amount)
 			# print("Knockback: ", damage_data.knockback)
 			
@@ -64,6 +62,24 @@ func activate() -> bool:
 
 	activated.emit()
 	return true
+
+func _get_damage_data() -> DamageData:
+	var damage_data := DamageData.new()
+	var inventory: Inventory = Main.get_node("GameState/Inventory")
+
+	# Roll for crit
+	var damage := base_damage + (inventory.upgrades[&"damage"] * damage_per_upgrade)
+	var modified_crit = critical_hit_chance + (inventory.upgrades[&"critical_chance"] * critical_chance_per_upgrade)
+	if randf() <= modified_crit:
+		damage = floor(damage * critical_damage_modifier)
+		crit_animation.play("crit")
+		print("Crit!")
+
+	damage_data.amount = damage
+	damage_data.direction = Vector2.RIGHT if ray_cast.target_position.x > 0 else Vector2.LEFT
+	damage_data.knockback = base_knockback + (inventory.upgrades[&"knockback"] * knockback_per_upgrade)
+
+	return damage_data
 
 
 func _draw_tracer(end_point: Vector2) -> void:
