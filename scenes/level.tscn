@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://1dxhn84ihjfy" path="res://resources/white_squares.tres" id="2_2r41h"]
 [ext_resource type="Texture2D" uid="uid://f1oyfaky45ay" path="res://assets/textures/environment/window_background.png" id="2_mx8sn"]
 [ext_resource type="PackedScene" uid="uid://do3slqiquyb0a" path="res://scenes/fox/fox.tscn" id="2_w7c3h"]
+[ext_resource type="PackedScene" uid="uid://ci2388pbsc45s" path="res://scenes/lizardman/lizardman_elite.tscn" id="3_2r41h"]
 [ext_resource type="PackedScene" uid="uid://ckpp7m7aodavq" path="res://scenes/lizardman/lizardman.tscn" id="3_w8frs"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ceijg"]
@@ -62,6 +63,7 @@ _data = {
 script = ExtResource("1_mx8sn")
 round_time = 30.0
 packed_enemy_scene = ExtResource("3_w8frs")
+packed_stronger_enemy_scene = ExtResource("3_2r41h")
 enemy_spawn_points = [NodePath("EnemySpawnPoint"), NodePath("EnemySpawnPoint2")]
 player = NodePath("Fox")
 
@@ -151,8 +153,6 @@ libraries/ = SubResource("AnimationLibrary_2r41h")
 autoplay = &"new_animation"
 
 [node name="SpawnTimer" type="Timer" parent="." unique_id=1872382679]
-wait_time = 3.0
-autostart = true
 
 [node name="EnemySpawnPoint" type="Marker2D" parent="." unique_id=1653752704]
 position = Vector2(699, 234)

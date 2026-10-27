@@ -1,4 +1,8 @@
 robusted combat mechanics
+add knockback to hits instead of stun
+add chance to stun
+add critical hits
+add aiming and steady shot
 make some 3D renders for drawing reference
 wave counter that is saved to high scores
 x redo spawning mechanics

@@ -17,7 +17,6 @@ script = ExtResource("3_a2tqg")
 
 [node name="Inventory" type="Node" parent="." unique_id=958633449]
 script = ExtResource("4_4okyj")
-starting_cash = 5000
 
 [node name="Random" type="Node" parent="." unique_id=1290520489]
 script = ExtResource("5_72hun")

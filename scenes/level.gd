@@ -4,7 +4,10 @@ signal game_lost
 signal round_ended(bounty_value: int)
 
 @export var round_time := 60.0
+@export var enemy_spawn_delay := 1.0
 @export var packed_enemy_scene: PackedScene
+@export var packed_stronger_enemy_scene: PackedScene
+
 @export var enemy_spawn_points: Array[Node2D] = []
 @export var player: Pawn2D
 
@@ -22,7 +25,7 @@ func _ready() -> void:
 
 	initalize_hud()
 
-	spawn_enemy()
+	$SpawnTimer.start(enemy_spawn_delay)
 
 
 func _input(event: InputEvent) -> void:
@@ -58,8 +61,11 @@ func initalize_hud() -> void:
 
 
 func spawn_enemy() -> void:
-	var enemy: Pawn2D = packed_enemy_scene.instantiate()
+	var game_state: GameState = Main.get_node("GameState")
+	var stronger_enemy_chance: float = game_state.current_wave * 0.1
+	var random_enemy: PackedScene = packed_enemy_scene if randf() > stronger_enemy_chance else packed_stronger_enemy_scene
 
+	var enemy: Pawn2D = random_enemy.instantiate()
 	var controller := enemy.get_node("AIController") as AIController
 	controller.target = player
 	controller.face_target()

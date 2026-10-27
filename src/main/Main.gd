@@ -10,6 +10,8 @@ extends Node
 
 
 func _ready() -> void:
+	var game_state: GameState = get_node("GameState")
+	hud.set_wave(game_state.current_wave)
 	hud.hide()
 	game_over.hide()
 	pause_menu.hide()
@@ -47,11 +49,14 @@ func _on_title_screen_requested() -> void:
 
 func _on_continue_requested() -> void:
 	pause_menu.hide()
-
 	get_tree().paused = false
 
 
 func _on_shop_exited() -> void:
+	var game_state:GameState = get_node("GameState")
+	game_state.current_wave += 1
+	hud.set_wave(game_state.current_wave)
+
 	shop_menu.hide()
 	get_tree().reload_current_scene()
 	get_tree().paused = false
