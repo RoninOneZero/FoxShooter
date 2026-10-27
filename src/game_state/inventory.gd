@@ -17,7 +17,9 @@ var upgrades: Dictionary[StringName, int] = {
 @onready var cash := starting_cash
 
 func add_cash_from_bounty(bounty_value: int) -> void:
-    cash += cash_per_bounty * bounty_value
+    var cash_to_add := cash_per_bounty * bounty_value
+    cash += cash_to_add
+    print("Cash awarded: %s | Total: %s" % [cash_to_add, cash])
 
 
 func can_afford(amount: int) -> bool:

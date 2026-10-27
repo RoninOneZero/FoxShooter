@@ -11,10 +11,10 @@ signal continue_requested
 @export var continue_button: Button
 
 func _ready() -> void:
-	update_shop()
+	initalize_shop()
 
 
-func update_shop() -> void:
+func initalize_shop() -> void:
 	var inventory: Inventory = Main.get_node("GameState/Inventory")
 
 	cash_label.text = "Cash: %s" % inventory.cash
@@ -31,6 +31,14 @@ func update_shop() -> void:
 
 		if not inventory.can_afford(new_shop_item.cost):
 			new_shop_item.button.disabled = true
+
+
+func update_shop() -> void:
+	var inventory: Inventory = Main.get_node("GameState/Inventory")
+
+	cash_label.text = "Cash: %s" % inventory.cash
+
+	_update_shop_item_buttons()
 
 
 
@@ -62,8 +70,7 @@ func _on_shop_item_button_pressed(shop_item: ShopItem) -> void:
 	inventory.upgrades[shop_item.upgrade] = shop_item.rank
 	shop_item.set_rank(shop_item.rank + 1)
 
-	cash_label.text = "Cash: %s" % inventory.cash
-	_update_shop_item_buttons()
+	update_shop()
 
 
 	
@@ -85,6 +92,7 @@ func _on_continue_button_button_down() -> void:
 
 func _on_visibility_changed() -> void:
 	if visible:
+		update_shop()
 		panel.process_mode = PROCESS_MODE_DISABLED
 		$AnimationPlayer.play("open_phone")
 		await $AnimationPlayer.animation_finished
