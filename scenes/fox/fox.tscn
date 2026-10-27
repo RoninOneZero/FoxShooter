@@ -224,6 +224,7 @@ process_mode = 3
 position = Vector2(0, -24)
 script = ExtResource("3_tolq4")
 fire_rate = 200
+tracer_height_variance = 10.0
 
 [node name="RayCast2D" type="RayCast2D" parent="Weapon" unique_id=1589498772]
 target_position = Vector2(1000, 0)

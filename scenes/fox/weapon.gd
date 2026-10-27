@@ -19,6 +19,10 @@ enum FiringMode{
 @export var optimal_range: float = 100.0
 @export_range(0.0, 1.0) var critical_hit_chance: float = 0.10
 
+
+@export var tracer_height_variance: float = 4.0
+
+
 var _rounds: int = 0
 
 @onready var ray_cast: RayCast2D = $RayCast2D
@@ -34,13 +38,16 @@ func activate() -> bool:
 	if refire_timer.time_left > 0:
 		return false
 	
+	# Purely visual randomization of bullet tracer
 	var tracer_end_point := to_global(ray_cast.target_position)
+	var height_modifier: float = randf_range(-tracer_height_variance, tracer_height_variance)
+	tracer_end_point.y += height_modifier
 
 	if ray_cast.is_colliding():
 		var collider := ray_cast.get_collider()
 	
 		if collider is HurtBox2D:
-			tracer_end_point = collider.global_position
+			tracer_end_point.x = collider.global_position.x
 			var damage_data := DamageData.new()
 			var inventory: Inventory = Main.get_node("GameState/Inventory")
 			damage_data.amount = base_damage + (inventory.upgrades[&"damage"] * damage_per_upgrade)
