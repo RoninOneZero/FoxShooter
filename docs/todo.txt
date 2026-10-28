@@ -1,3 +1,4 @@
+game feel
 weapon class redo
 add chance to stun
 add penetration chance

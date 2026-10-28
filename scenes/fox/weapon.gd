@@ -9,6 +9,18 @@ enum FiringMode{
 	AUTOMATIC,
 }
 
+enum WeaponAttribute{
+	DAMAGE,
+	KNOCKBACK,
+	CRITICAL_CHANCE,
+	CRITICAL_BONUS,
+	MAGAZINE_SIZE,
+	FIRE_RATE,
+	RELOAD_TIME,
+	STUN,
+}
+
+
 @export var base_damage: int = 100
 @export var damage_per_upgrade: int = 15
 @export var base_knockback: float = 10.0
