@@ -1,9 +1,14 @@
-hold to fire
-add aiming and steady shot
-robusted combat mechanics
+weapon class redo
 add chance to stun
-make some 3D renders for drawing reference
+add penetration chance
+add knife attack
+make movement acceleration based
+make weapon upgrades progressive, more are unlocked sequentially
+robusted combat mechanics
+add aiming and steady shot
 wave counter that is saved to high scores
+x make some 3D renders for drawing reference
+x hold to fire
 x add critical hits
 x add knockback to hits instead of stun
 x redo spawning mechanics
