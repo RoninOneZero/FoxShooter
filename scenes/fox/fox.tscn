@@ -396,10 +396,12 @@ script = ExtResource("16_4g33i")
 max_health = 6
 metadata/_custom_type_script = "uid://d4m6ppgju316w"
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=611931988]
+[node name="GunShot" type="AudioStreamPlayer2D" parent="." unique_id=611931988]
 stream = ExtResource("17_sfg1d")
+volume_db = 3.0
 max_polyphony = 6
+bus = &"SoundEffects"
 
 [connection signal="damage_taken" from="HurtBox2D" to="." method="_on_hurt_box_2d_damage_taken"]
-[connection signal="activated" from="Weapon" to="AudioStreamPlayer2D" method="play"]
+[connection signal="activated" from="Weapon" to="GunShot" method="play"]
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]

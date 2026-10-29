@@ -1,11 +1,15 @@
 [gd_scene format=3 uid="uid://xx26ch21g3a8"]
 
 [ext_resource type="Script" uid="uid://b4hevh7hbf7an" path="res://scenes/title_screen/title_screen.gd" id="1_5df70"]
+[ext_resource type="AudioStream" uid="uid://crbqtb0s5mpmi" path="res://assets/audio/music/bensound-keepitreal.mp3" id="2_5uxxq"]
+[ext_resource type="Texture2D" uid="uid://t6c82h1hm0a" path="res://assets/textures/environment/space_background.png" id="2_ri6bm"]
+[ext_resource type="PackedScene" uid="uid://bkpo0lhn2qcy5" path="res://scenes/credits/credits.tscn" id="2_vuv2h"]
+[ext_resource type="PackedScene" uid="uid://b5s3oj04yjr52" path="res://scenes/options_menu/options_menu.tscn" id="4_d6x3v"]
 
 [sub_resource type="Theme" id="Theme_xawky"]
 default_font_size = 16
 
-[node name="TitleScreen" type="Control" unique_id=1552792289 node_paths=PackedStringArray("quit_game_button")]
+[node name="TitleScreen" type="Control" unique_id=1552792289 node_paths=PackedStringArray("credits_node", "options_node", "start_game", "quit_game_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,7 +19,17 @@ grow_vertical = 2
 theme = SubResource("Theme_xawky")
 script = ExtResource("1_5df70")
 starting_level_path = "uid://bhh5dxyouuo7t"
-quit_game_button = NodePath("VBoxContainer/QuitGame")
+music = ExtResource("2_5uxxq")
+credits_node = NodePath("Credits")
+options_node = NodePath("OptionsMenu")
+start_game = NodePath("MenuButtons/StartGame")
+quit_game_button = NodePath("MenuButtons/QuitGame")
+
+[node name="Background" type="TextureRect" parent="." unique_id=603333251]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+texture = ExtResource("2_ri6bm")
 
 [node name="Label" type="Label" parent="." unique_id=790845871]
 layout_mode = 1
@@ -31,37 +45,47 @@ theme_override_font_sizes/font_size = 64
 text = "Fox Shooter"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=235234334]
+[node name="MenuButtons" type="VBoxContainer" parent="." unique_id=235234334]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -91.0
+offset_left = -244.0
 offset_top = -63.0
-offset_right = 91.0
+offset_right = -62.0
 offset_bottom = 161.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="StartGame" type="Button" parent="VBoxContainer" unique_id=1065325218]
+[node name="StartGame" type="Button" parent="MenuButtons" unique_id=1065325218]
 layout_mode = 2
 text = "Start Game"
 
-[node name="Credits" type="Button" parent="VBoxContainer" unique_id=533032303]
-layout_mode = 2
-text = "Credits"
-
-[node name="Options" type="Button" parent="VBoxContainer" unique_id=1178170838]
+[node name="Options" type="Button" parent="MenuButtons" unique_id=1178170838]
 layout_mode = 2
 text = "Options"
 
-[node name="QuitGame" type="Button" parent="VBoxContainer" unique_id=1012838527]
+[node name="Credits" type="Button" parent="MenuButtons" unique_id=533032303]
+layout_mode = 2
+text = "Credits"
+
+[node name="QuitGame" type="Button" parent="MenuButtons" unique_id=1012838527]
 layout_mode = 2
 text = "Quit Game"
 
-[connection signal="pressed" from="VBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
-[connection signal="pressed" from="VBoxContainer/QuitGame" to="." method="_on_quit_game_pressed"]
+[node name="Credits" parent="." unique_id=211722187 instance=ExtResource("2_vuv2h")]
+visible = false
+layout_mode = 1
+
+[node name="OptionsMenu" parent="." unique_id=1407421618 instance=ExtResource("4_d6x3v")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="MenuButtons/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="MenuButtons/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="MenuButtons/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="MenuButtons/QuitGame" to="." method="_on_quit_game_pressed"]

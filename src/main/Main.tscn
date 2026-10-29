@@ -10,11 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://bjids5ta1obei" path="res://scenes/shop_menu/shop_menu.tscn" id="8_bc0i0"]
 [ext_resource type="Script" uid="uid://bd85aig7ghuu2" path="res://src/main/debug.gd" id="9_bc0i0"]
 
-[node name="Main" type="Node" unique_id=761495018 node_paths=PackedStringArray("hud", "game_over", "pause_menu", "shop_menu")]
+[node name="Main" type="Node" unique_id=761495018 node_paths=PackedStringArray("hud", "music_player", "game_over", "pause_menu", "shop_menu")]
 process_mode = 3
 script = ExtResource("1_4gxt3")
 title_screen_file_path = "uid://xx26ch21g3a8"
 hud = NodePath("UserInterface/HUD")
+music_player = NodePath("MusicPlayer")
 game_over = NodePath("UserInterface/GameOver")
 pause_menu = NodePath("UserInterface/PauseMenu")
 shop_menu = NodePath("UserInterface/ShopMenu")
@@ -39,7 +40,11 @@ visible = false
 visible = false
 
 [node name="ShopMenu" parent="UserInterface" unique_id=1613396732 instance=ExtResource("8_bc0i0")]
+visible = false
 
 [node name="Debug" type="CanvasLayer" parent="." unique_id=268334845]
 visible = false
 script = ExtResource("9_bc0i0")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=66950446]
+bus = &"Music"

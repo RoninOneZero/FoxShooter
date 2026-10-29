@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://bkpo0lhn2qcy5"]
+
+[ext_resource type="Script" uid="uid://c4ubig3x2wv53" path="res://scenes/credits/credits.gd" id="1_dr3ri"]
+
+[node name="Credits" type="Control" unique_id=211722187 node_paths=PackedStringArray("return_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dr3ri")
+return_button = NodePath("Return")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1594156940]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 50
+
+[node name="Panel" type="Panel" parent="MarginContainer" unique_id=615270166]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer" unique_id=1913534265]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/ScrollContainer" unique_id=2025592250]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Art - Gnawli
+Programming - Ronin.IO 
+
+Made with Godot Engine
+
+Music I Use: Bensound.com/royalty-free-music
+License code: FSV2PGCHMOBNJTE8
+Artist: : Nick Petrov
+
+SFX from CounterStrike1.6"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Return" type="Button" parent="." unique_id=2145698523]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 319.0
+offset_right = 143.0
+offset_bottom = 350.0
+text = "Return
+"

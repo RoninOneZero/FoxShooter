@@ -4,6 +4,7 @@ extends Node
 @export_file("*.tscn") var title_screen_file_path
 
 @export var hud: HUD
+@export var music_player: AudioStreamPlayer
 @export var game_over: GameOver
 @export var pause_menu: PauseMenu
 @export var shop_menu: Control
@@ -21,6 +22,14 @@ func _ready() -> void:
 	pause_menu.title_screen_requested.connect(_on_title_screen_requested)
 	pause_menu.continue_requested.connect(_on_continue_requested)
 	shop_menu.continue_requested.connect(_on_shop_exited)
+
+
+func play_music(music_stream: AudioStream) -> void:
+	if music_player.stream == music_stream:
+		return
+
+	music_player.stream = music_stream
+	music_player.play()
 
 
 func pause_game() -> void:

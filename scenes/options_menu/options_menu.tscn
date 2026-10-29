@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://b5s3oj04yjr52"]
+
+[ext_resource type="Script" uid="uid://nxv4vqsnde2k" path="res://scenes/options_menu/options_menu.gd" id="1_sglii"]
+
+[node name="OptionsMenu" type="Control" unique_id=1407421618 node_paths=PackedStringArray("fullscreen_toggle", "audio_slider")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sglii")
+fullscreen_toggle = NodePath("VBoxContainer/FullscreenToggle")
+audio_slider = NodePath("VBoxContainer/AudioSlider")
+
+[node name="Label" type="Label" parent="." unique_id=1902661645]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.5
+offset_top = -138.0
+offset_right = 70.5
+offset_bottom = -93.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "OPTIONS"
+
+[node name="Panel" type="Panel" parent="." unique_id=1098385440]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -176.0
+offset_top = -75.0
+offset_right = 176.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1444528299]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -89.0
+offset_top = -39.0
+offset_right = 89.0
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FullscreenToggle" type="CheckButton" parent="VBoxContainer" unique_id=2045072789]
+layout_mode = 2
+button_pressed = true
+text = "Fullscreen"
+
+[node name="AudioLabel" type="Label" parent="VBoxContainer" unique_id=177200255]
+layout_mode = 2
+text = "Audio"
+
+[node name="AudioSlider" type="HSlider" parent="VBoxContainer" unique_id=73129027]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+
+[node name="ReturnButton" type="Button" parent="." unique_id=1586232406]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 293.0
+offset_right = 115.0
+offset_bottom = 324.0
+text = "Return"
+
+[connection signal="toggled" from="VBoxContainer/FullscreenToggle" to="." method="_on_fullscreen_toggle_toggled"]
+[connection signal="value_changed" from="VBoxContainer/AudioSlider" to="." method="_on_audio_slider_value_changed"]
+[connection signal="pressed" from="ReturnButton" to="." method="_on_return_button_pressed"]

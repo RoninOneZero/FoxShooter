@@ -44,6 +44,7 @@ func update_shop() -> void:
 func close() -> void:
 	panel.process_mode = Node.PROCESS_MODE_DISABLED
 
+	_remove_effect_from_music()
 	var anim: AnimationPlayer = $AnimationPlayer
 
 	anim.play_backwards("open_phone")
@@ -53,9 +54,20 @@ func close() -> void:
 	panel.process_mode = Node.PROCESS_MODE_INHERIT
 
 
+
 func select_continue_button() -> void:
 	if visible:
 		continue_button.grab_focus.call_deferred()
+
+
+func _add_effect_to_music() -> void:
+	var music_index := AudioServer.get_bus_index("Music")
+	AudioServer.set_bus_effect_enabled(music_index, 0, true)
+
+
+func _remove_effect_from_music() -> void:
+	var music_index := AudioServer.get_bus_index("Music")
+	AudioServer.set_bus_effect_enabled(music_index, 0, false)
 
 
 func _on_shop_item_button_pressed(shop_item: ShopItem) -> void:
@@ -93,6 +105,7 @@ func _on_visibility_changed() -> void:
 	if visible:
 		update_shop()
 		panel.process_mode = PROCESS_MODE_DISABLED
+		_add_effect_to_music()
 		$AnimationPlayer.play("open_phone")
 		await $AnimationPlayer.animation_finished
 		panel.process_mode = PROCESS_MODE_INHERIT

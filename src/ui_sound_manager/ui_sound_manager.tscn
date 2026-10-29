@@ -10,7 +10,10 @@ script = ExtResource("1_gg5ix")
 [node name="ButtonPressed" type="AudioStreamPlayer" parent="." unique_id=594324655]
 stream = ExtResource("1_jr4ry")
 max_polyphony = 3
+bus = &"SoundEffects"
 
 [node name="ButtonSelected" type="AudioStreamPlayer" parent="." unique_id=1078926426]
 stream = ExtResource("3_xqp3h")
+volume_db = -6.0
 max_polyphony = 3
+bus = &"SoundEffects"
