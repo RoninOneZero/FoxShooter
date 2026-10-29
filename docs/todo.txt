@@ -1,3 +1,4 @@
+turn speed delay
 game feel
 weapon class redo
 add chance to stun
