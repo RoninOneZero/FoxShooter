@@ -1,3 +1,7 @@
+make weapon scenes with different stats each for testing
+combat manager with wave variation
+make fire also select
+increase crit bonus to 4x
 turn speed delay
 game feel
 weapon class redo
@@ -8,6 +12,7 @@ make movement acceleration based
 make weapon upgrades progressive, more are unlocked sequentially
 robusted combat mechanics
 add aiming and steady shot
+placeable mines
 wave counter that is saved to high scores
 x make some 3D renders for drawing reference
 x hold to fire

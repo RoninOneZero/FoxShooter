@@ -2,12 +2,122 @@
 
 [ext_resource type="Script" uid="uid://b4hevh7hbf7an" path="res://scenes/title_screen/title_screen.gd" id="1_5df70"]
 [ext_resource type="AudioStream" uid="uid://crbqtb0s5mpmi" path="res://assets/audio/music/bensound-keepitreal.mp3" id="2_5uxxq"]
-[ext_resource type="Texture2D" uid="uid://t6c82h1hm0a" path="res://assets/textures/environment/space_background.png" id="2_ri6bm"]
 [ext_resource type="PackedScene" uid="uid://bkpo0lhn2qcy5" path="res://scenes/credits/credits.tscn" id="2_vuv2h"]
+[ext_resource type="Texture2D" uid="uid://cw0ga630g1fc6" path="res://assets/textures/user_interface/title_screen/titlescreen_space.png" id="3_j12ko"]
 [ext_resource type="PackedScene" uid="uid://b5s3oj04yjr52" path="res://scenes/options_menu/options_menu.tscn" id="4_d6x3v"]
+[ext_resource type="Texture2D" uid="uid://cish1ksy75ruw" path="res://assets/textures/user_interface/title_screen/titlescreen_planet.png" id="4_yegqs"]
+[ext_resource type="Texture2D" uid="uid://tvdm7qgmqbu4" path="res://assets/textures/user_interface/title_screen/title_character.png" id="5_xoykc"]
 
 [sub_resource type="Theme" id="Theme_xawky"]
 default_font_size = 16
+
+[sub_resource type="Animation" id="Animation_yegqs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node/Character:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Node/Character:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MenuButtons:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_j12ko"]
+resource_name = "intro"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node/Character:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.26666668, 0.43333334, 0.6666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-469, 0), Vector2(50, 0), Vector2(-20, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.66666657, 0.83333325),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Node/Character:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6666667, 0.83333325),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MenuButtons:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.8333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yegqs"]
+_data = {
+&"RESET": SubResource("Animation_yegqs"),
+&"intro": SubResource("Animation_j12ko")
+}
 
 [node name="TitleScreen" type="Control" unique_id=1552792289 node_paths=PackedStringArray("credits_node", "options_node", "start_game", "quit_game_button")]
 layout_mode = 3
@@ -25,37 +135,60 @@ options_node = NodePath("OptionsMenu")
 start_game = NodePath("MenuButtons/StartGame")
 quit_game_button = NodePath("MenuButtons/QuitGame")
 
-[node name="Background" type="TextureRect" parent="." unique_id=603333251]
+[node name="Node" type="Control" parent="." unique_id=1242270022]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Space" type="TextureRect" parent="Node" unique_id=603333251]
 layout_mode = 0
 offset_right = 640.0
 offset_bottom = 360.0
-texture = ExtResource("2_ri6bm")
+texture = ExtResource("3_j12ko")
+
+[node name="Planet" type="TextureRect" parent="Node" unique_id=1443384750]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+texture = ExtResource("4_yegqs")
+
+[node name="Character" type="TextureRect" parent="Node" unique_id=2064266735]
+layout_mode = 0
+offset_right = 454.00006
+offset_bottom = 360.0
+texture = ExtResource("5_xoykc")
+stretch_mode = 2
 
 [node name="Label" type="Label" parent="." unique_id=790845871]
 layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -156.0
-offset_bottom = -68.0
-grow_horizontal = 2
-grow_vertical = 2
+anchor_bottom = 1.0
+offset_left = -382.0
+offset_top = -89.0
+offset_right = -14.0
+offset_bottom = -1.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/outline_size = 12
 theme_override_font_sizes/font_size = 64
 text = "Fox Shooter"
 horizontal_alignment = 1
 
 [node name="MenuButtons" type="VBoxContainer" parent="." unique_id=235234334]
+modulate = Color(0, 1, 1, 1)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -244.0
-offset_top = -63.0
-offset_right = -62.0
-offset_bottom = 161.0
+offset_left = 122.0
+offset_top = -98.0
+offset_right = 304.0
+offset_bottom = 126.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 8
@@ -84,6 +217,9 @@ layout_mode = 1
 [node name="OptionsMenu" parent="." unique_id=1407421618 instance=ExtResource("4_d6x3v")]
 visible = false
 layout_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1992855275]
+libraries/ = SubResource("AnimationLibrary_yegqs")
 
 [connection signal="pressed" from="MenuButtons/StartGame" to="." method="_on_start_game_pressed"]
 [connection signal="pressed" from="MenuButtons/Options" to="." method="_on_options_pressed"]

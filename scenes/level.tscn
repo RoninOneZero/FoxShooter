@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bhh5dxyouuo7t"]
 
 [ext_resource type="Script" uid="uid://cn6w6v78ymuml" path="res://scenes/level.gd" id="1_mx8sn"]
-[ext_resource type="Texture2D" uid="uid://1dxhn84ihjfy" path="res://resources/white_squares.tres" id="2_2r41h"]
 [ext_resource type="PackedScene" uid="uid://do3slqiquyb0a" path="res://scenes/fox/fox.tscn" id="2_w7c3h"]
 [ext_resource type="PackedScene" uid="uid://ci2388pbsc45s" path="res://scenes/lizardman/lizardman_elite.tscn" id="3_2r41h"]
 [ext_resource type="PackedScene" uid="uid://ckpp7m7aodavq" path="res://scenes/lizardman/lizardman.tscn" id="3_w8frs"]
@@ -18,15 +17,6 @@ packed_enemy_scene = ExtResource("3_w8frs")
 packed_stronger_enemy_scene = ExtResource("3_2r41h")
 enemy_spawn_points = [NodePath("EnemySpawnPoint"), NodePath("EnemySpawnPoint2")]
 player = NodePath("Fox")
-
-[node name="Space" type="Sprite2D" parent="." unique_id=1394275410]
-visible = false
-modulate = Color(0, 0, 0, 1)
-z_index = -10
-position = Vector2(-0.14923096, 0.22335815)
-scale = Vector2(10, 5.625)
-texture = ExtResource("2_2r41h")
-centered = false
 
 [node name="PlanetView" type="Sprite2D" parent="." unique_id=1121816960]
 z_index = -10

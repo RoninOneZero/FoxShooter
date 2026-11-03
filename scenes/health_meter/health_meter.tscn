@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cjc3mnljwf6ns"]
+
+[ext_resource type="Texture2D" uid="uid://d2r0ygf101v0v" path="res://assets/textures/user_interface/health_meter_background.png" id="1_xlqor"]
+[ext_resource type="Texture2D" uid="uid://d3u0dyp5oadu7" path="res://assets/textures/user_interface/health_meter_progress.png" id="2_oeqfi"]
+
+[node name="HealthMeter" type="TextureProgressBar" unique_id=685980817]
+offset_right = 238.73958
+offset_bottom = 43.0
+max_value = 6.0
+value = 6.0
+nine_patch_stretch = true
+texture_under = ExtResource("1_xlqor")
+texture_progress = ExtResource("2_oeqfi")
+tint_progress = Color(1, 0, 0, 1)
