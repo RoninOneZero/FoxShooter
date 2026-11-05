@@ -31,3 +31,7 @@ func _init(_direction:=Vector2.ZERO, _amount:int=1, _reaction:Reaction=Reaction.
     amount = _amount
     reaction = _reaction
     direction = _direction
+
+
+func _to_string() -> String:
+    return "Amount %s" % amount

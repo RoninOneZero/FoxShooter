@@ -7,8 +7,7 @@ signal facing_changed(direction: Vector2)
 @export var controller: Controller
 @export var sprite: AnimatedSprite2D
 @export var hit_box: HitBox2D
-@export var weapon_ray_cast: RayCast2D
-@export var fire_point: Node2D
+@export var weapon: Weapon
 
 var direction := Vector2.RIGHT
 
@@ -33,15 +32,8 @@ func set_facing(_direction: Vector2) -> void:
 	if hit_box:
 		hit_box.position.x = abs(hit_box.position.x) * _direction.x
 
-	if weapon_ray_cast:
-		var target_position := weapon_ray_cast.target_position
-		target_position.x = abs(target_position.x) * direction.x
-		weapon_ray_cast.target_position = target_position
-	
-	if fire_point:
-		var position = fire_point.position
-		position = abs(position) * direction.x
-		fire_point.position = position
+	if weapon:
+		weapon.scale.x = direction.x
 
 
 	facing_changed.emit(direction)

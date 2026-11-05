@@ -11,8 +11,8 @@ extends Node
 
 
 func _ready() -> void:
-	var game_state: GameState = get_node("GameState")
-	hud.set_wave(game_state.current_wave)
+	var combat: CombatManager = get_node("GameState/Combat")
+	hud.set_wave(combat.current_wave)
 	hud.hide()
 	game_over.hide()
 	pause_menu.hide()
@@ -36,14 +36,24 @@ func pause_game() -> void:
 	get_tree().paused = true
 	pause_menu.show()
 
+
+func quit() -> void:
+	var combat: CombatManager = get_node("GameState/Combat")
+	print(combat.combat_log)
+	print("Exiting game!")
+	await get_tree().create_timer(0.1).timeout
+	get_tree().quit()
+	
+
 #TODO move these to game state
 func _on_game_lost() -> void:
 	game_over.show()
 
 
-func _on_round_ended(bounty_value: int) -> void:
+func _on_round_ended() -> void:
 	var inventory: Inventory = get_node("GameState/Inventory")
-	inventory.add_cash_from_bounty(bounty_value)
+	var combat: CombatManager = get_node("GameState/Combat")
+	inventory.add_cash_from_bounty(combat.current_bounty)
 	shop_menu.show()
 
 
@@ -62,9 +72,9 @@ func _on_continue_requested() -> void:
 
 
 func _on_shop_exited() -> void:
-	var game_state:GameState = get_node("GameState")
-	game_state.current_wave += 1
-	hud.set_wave(game_state.current_wave)
+	var combat: CombatManager = get_node("GameState/Combat")
+	combat.current_wave += 1
+	hud.set_wave(combat.current_wave)
 
 	shop_menu.hide()
 	get_tree().reload_current_scene()

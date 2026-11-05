@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bhh5dxyouuo7t"]
 
 [ext_resource type="Script" uid="uid://cn6w6v78ymuml" path="res://scenes/level.gd" id="1_mx8sn"]
+[ext_resource type="AudioStream" uid="uid://boswkdirel78h" path="res://assets/audio/music/Electronic Soundtrack/Fractal.mp3" id="2_klq6b"]
 [ext_resource type="PackedScene" uid="uid://do3slqiquyb0a" path="res://scenes/fox/fox.tscn" id="2_w7c3h"]
 [ext_resource type="PackedScene" uid="uid://ci2388pbsc45s" path="res://scenes/lizardman/lizardman_elite.tscn" id="3_2r41h"]
 [ext_resource type="PackedScene" uid="uid://ckpp7m7aodavq" path="res://scenes/lizardman/lizardman.tscn" id="3_w8frs"]
@@ -9,12 +10,15 @@
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_w7c3h"]
 
-[node name="Level" type="Node2D" unique_id=897164410 node_paths=PackedStringArray("enemy_spawn_points", "player")]
+[node name="Level" type="Node2D" unique_id=897164410 node_paths=PackedStringArray("spawn_delay_timer", "enemy_spawn_points", "player")]
 script = ExtResource("1_mx8sn")
+music = ExtResource("2_klq6b")
 round_time = 30.0
 enemy_spawn_delay = 2.0
 packed_enemy_scene = ExtResource("3_w8frs")
 packed_stronger_enemy_scene = ExtResource("3_2r41h")
+spawn_delay_timer = NodePath("SpawnTimer")
+horde_spawn_delay = 0.8
 enemy_spawn_points = [NodePath("EnemySpawnPoint"), NodePath("EnemySpawnPoint2")]
 player = NodePath("Fox")
 

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://xx26ch21g3a8"]
 
 [ext_resource type="Script" uid="uid://b4hevh7hbf7an" path="res://scenes/title_screen/title_screen.gd" id="1_5df70"]
-[ext_resource type="AudioStream" uid="uid://crbqtb0s5mpmi" path="res://assets/audio/music/bensound-keepitreal.mp3" id="2_5uxxq"]
+[ext_resource type="AudioStream" uid="uid://3w5qosfhvcp4" path="res://assets/audio/music/Electronic Soundtrack/System Shock.mp3" id="2_j12ko"]
 [ext_resource type="PackedScene" uid="uid://bkpo0lhn2qcy5" path="res://scenes/credits/credits.tscn" id="2_vuv2h"]
 [ext_resource type="Texture2D" uid="uid://cw0ga630g1fc6" path="res://assets/textures/user_interface/title_screen/titlescreen_space.png" id="3_j12ko"]
 [ext_resource type="PackedScene" uid="uid://b5s3oj04yjr52" path="res://scenes/options_menu/options_menu.tscn" id="4_d6x3v"]
@@ -61,9 +61,106 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Node/Planet:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Node/Planet:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Node/Space:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Node/Space2:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 360)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Node/Character:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Node/CharacterOutline:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Node/CharacterOutline:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("PanelContainer:modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_j12ko"]
 resource_name = "intro"
+length = 8.833333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -71,7 +168,7 @@ tracks/0/path = NodePath("Node/Character:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.26666668, 0.43333334, 0.6666667),
+"times": PackedFloat32Array(7.633333, 7.8333335, 8.166667, 8.466666),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(-469, 0), Vector2(50, 0), Vector2(-20, 0), Vector2(0, 0)]
@@ -83,19 +180,19 @@ tracks/1/path = NodePath("Label:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.66666657, 0.83333325),
+"times": PackedFloat32Array(0, 8.533333, 8.833333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, false, true]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/path = NodePath("Node/Character:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.6666667, 0.83333325),
+"times": PackedFloat32Array(7.633333, 8.666666, 8.833333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
@@ -107,10 +204,106 @@ tracks/3/path = NodePath("MenuButtons:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.8333334),
+"times": PackedFloat32Array(0, 8.833333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Node/Planet:modulate")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(4.133333, 7.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Node/Planet:position")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(-0.0333333, 7.5666666),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 500), Vector2(0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Node/Space:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 7.5333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -360), Vector2(0, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Node/Space2:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 7.5497947),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 360)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Node/Character:modulate")
+tracks/8/interp = 2
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(7.4000006, 8.166667, 8.566667, 8.666667, 8.833333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.5882353), Color(1, 1, 1, 0.5882353), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Node/CharacterOutline:position")
+tracks/9/interp = 2
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 7.4666667, 7.6666665, 7.8333335, 7.9666667, 8.1, 8.233333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-495, 0), Vector2(-544.985, -500), Vector2(171, 8), Vector2(-469, 0), Vector2(50, 0), Vector2(-20, 0), Vector2(0, 0)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Node/CharacterOutline:scale")
+tracks/10/interp = 2
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(7.4666667, 7.9666667, 8.333333, 8.6, 8.733334, 8.833333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.3, 1.3), Vector2(1, 1), Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("PanelContainer:modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.7666667, 2.8333333, 3.6666665),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yegqs"]
@@ -129,16 +322,19 @@ grow_vertical = 2
 theme = SubResource("Theme_xawky")
 script = ExtResource("1_5df70")
 starting_level_path = "uid://bhh5dxyouuo7t"
-music = ExtResource("2_5uxxq")
+music = ExtResource("2_j12ko")
 credits_node = NodePath("Credits")
 options_node = NodePath("OptionsMenu")
 start_game = NodePath("MenuButtons/StartGame")
 quit_game_button = NodePath("MenuButtons/QuitGame")
 
 [node name="Node" type="Control" parent="." unique_id=1242270022]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Space" type="TextureRect" parent="Node" unique_id=603333251]
 layout_mode = 0
@@ -146,15 +342,30 @@ offset_right = 640.0
 offset_bottom = 360.0
 texture = ExtResource("3_j12ko")
 
+[node name="Space2" type="TextureRect" parent="Node" unique_id=841011060]
+layout_mode = 0
+offset_top = 360.0
+offset_right = 640.0
+offset_bottom = 720.0
+texture = ExtResource("3_j12ko")
+
 [node name="Planet" type="TextureRect" parent="Node" unique_id=1443384750]
+layout_mode = 0
+offset_right = 640.0001
+offset_bottom = 360.00058
+texture = ExtResource("4_yegqs")
+
+[node name="CharacterOutline" type="TextureRect" parent="Node" unique_id=1344058422]
+modulate = Color(18.610441, 7.2009463, 2.9752073, 1)
 layout_mode = 0
 offset_right = 640.0
 offset_bottom = 360.0
-texture = ExtResource("4_yegqs")
+texture = ExtResource("5_xoykc")
+stretch_mode = 2
 
 [node name="Character" type="TextureRect" parent="Node" unique_id=2064266735]
 layout_mode = 0
-offset_right = 454.00006
+offset_right = 640.0
 offset_bottom = 360.0
 texture = ExtResource("5_xoykc")
 stretch_mode = 2
@@ -220,6 +431,29 @@ layout_mode = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1992855275]
 libraries/ = SubResource("AnimationLibrary_yegqs")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1948371576]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -79.5
+offset_top = -57.0
+offset_right = 79.5
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="PanelContainer" unique_id=1364247482]
+layout_mode = 2
+text = "A game by:
+Ronin.IO
+Gnawli"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="MenuButtons/StartGame" to="." method="_on_start_game_pressed"]
 [connection signal="pressed" from="MenuButtons/Options" to="." method="_on_options_pressed"]

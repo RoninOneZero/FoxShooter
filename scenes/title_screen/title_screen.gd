@@ -21,23 +21,35 @@ func _ready() -> void:
 	
 	var anim: AnimationPlayer = $AnimationPlayer
 	anim.play("intro")
-	await anim.animation_finished
 
 	if music:
 		Main.play_music(music)
 	
+	await anim.animation_finished
+
 	start_game.grab_focus()
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_accept") or \
+		event.is_action_pressed("ui_cancel"):
+		var anim: AnimationPlayer = $AnimationPlayer
+		if anim.is_playing():
+			anim.play("RESET")
+
 
 func _on_start_game_pressed() -> void:
 	if starting_level_path == null:
 		printerr("No starting level was set!")
 		return
 
+	var combat: CombatManager = Main.get_node("GameState/Combat")
+	combat.current_wave = 1
 	get_tree().change_scene_to_file(starting_level_path)
 
 
 func _on_quit_game_pressed() -> void:
-	get_tree().quit()
+	Main.quit()
 
 
 func _on_options_pressed() -> void:

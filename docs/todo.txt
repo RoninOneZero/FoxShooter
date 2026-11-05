@@ -1,3 +1,4 @@
+add score system a la DMC
 make weapon scenes with different stats each for testing
 combat manager with wave variation
 make fire also select

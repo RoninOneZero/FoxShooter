@@ -28,7 +28,7 @@ enum WeaponAttribute{
 @export var firing_mode: FiringMode = FiringMode.SINGLE
 @export var magazine_size: int = -1
 ## The firing rate in rounds per minute.
-@export_range(100, 2000, 100, "suffix:rpm") var fire_rate: int = 1500
+@export_range(10, 2000, 10, "suffix:rpm") var fire_rate: int = 1500
 @export var reload_time: float = 1.0
 @export var optimal_range: float = 100.0
 @export_range(0.0, 1.0) var critical_hit_chance: float = 0.10
@@ -92,7 +92,11 @@ func _get_damage_data() -> DamageData:
 		print("Crit!")
 
 	damage_data.amount = damage
-	damage_data.direction = Vector2.RIGHT if ray_cast.target_position.x > 0 else Vector2.LEFT
+
+	
+	damage_data.direction = Vector2.RIGHT if scale.x > 0 else Vector2.LEFT
+	
+	
 	damage_data.knockback = base_knockback + (inventory.upgrades[&"knockback"] * knockback_per_upgrade)
 
 	return damage_data

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://3w5qosfhvcp4"
+path="res://.godot/imported/System Shock.mp3-96bfb803cfbd45fd03fb12ef3be10bf5.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/music/Electronic Soundtrack/System Shock.mp3"
+dest_files=["res://.godot/imported/System Shock.mp3-96bfb803cfbd45fd03fb12ef3be10bf5.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
