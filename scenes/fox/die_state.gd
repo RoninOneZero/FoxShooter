@@ -1,18 +1,34 @@
 extends State
 
-@export var pawn: Fox
+@export var pawn: Pawn2D
 @export var controller: Controller
 @export var sprite: AnimatedSprite2D
 @export var facing: Facing
 # @export var animation_player: AnimationPlayer
+@export var hit_box: HitBox2D
+@export var hurt_box: HurtBox2D
 
 
 func enter() -> void:
 	sprite.play("die")
+	#TODO remvoe offset when sprite is updated
+	sprite.offset = Vector2(0.0, 30.0)
+
+	hit_box.disable()
+	hurt_box.queue_free()
 
 
-# func exit() -> void:
-#     pass
+	var tween := create_tween()
+
+	tween.tween_property(sprite, "modulate:a", 0.0, 3.0)
+
+	await tween.finished
+	if is_active:
+		_on_tween_finished()
+
+
+func exit() -> void:
+	sprite.offset = Vector2.ZERO
 
 
 # func update(_delta: float) -> void:
@@ -25,3 +41,7 @@ func enter() -> void:
 
 # func receive_event(_event: String) -> void:
 #     pass
+
+
+func _on_tween_finished() -> void:
+	pawn.queue_free()

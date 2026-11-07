@@ -1,0 +1,25 @@
+game feel
+weapon class redo
+add chance to stun
+add penetration chance
+add knife attack
+make movement acceleration based
+make weapon upgrades progressive, more are unlocked sequentially
+robusted combat mechanics
+add aiming and steady shot
+placeable mines
+wave counter that is saved to high scores
+add score system a la DMC
+x make weapon scenes with different stats each for testing
+x combat manager with wave variation
+x increase crit bonus to 4x
+x make fire also select
+x make some 3D renders for drawing reference
+x hold to fire
+x add critical hits
+x add knockback to hits instead of stun
+x redo spawning mechanics
+x redo damage amounts
+x redo shop class
+x cash value that is rewarded for each enemy killed
+x between rounds screen that displays current stats

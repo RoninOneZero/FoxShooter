@@ -63,5 +63,6 @@ func change_state(new_state_name:String, force_re_entry:bool=false) -> void:
 	current_state = _states[key]
 	current_state.enter()
 	current_state.is_active = true
+	current_state.entered.emit()
 
 	state_changed.emit(new_state_name)

@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://xmw21lcealtd"]
+
+[ext_resource type="Texture2D" uid="uid://caynsktp7der4" path="res://assets/models/kenney_planets/Parts/sphere1.png" id="1_xff4n"]
+[ext_resource type="Texture2D" uid="uid://bbywvlttl5hwe" path="res://assets/models/kenney_planets/Parts/noise16.png" id="2_7mah3"]
+[ext_resource type="Texture2D" uid="uid://dlb7ydogas2cv" path="res://assets/models/kenney_planets/Parts/noise14.png" id="3_6v6b1"]
+
+[node name="Planet2D" type="Node2D" unique_id=105253453]
+
+[node name="Water" type="Sprite2D" parent="." unique_id=1917973878]
+modulate = Color(0, 0, 1, 1)
+texture = ExtResource("1_xff4n")
+
+[node name="Land" type="Sprite2D" parent="." unique_id=1789635412]
+modulate = Color(0, 1, 0, 1)
+texture = ExtResource("2_7mah3")
+
+[node name="Cloud" type="Sprite2D" parent="." unique_id=1468673424]
+modulate = Color(1, 1, 1, 0.45490196)
+texture = ExtResource("3_6v6b1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1819786430]
+modulate = Color(1, 1, 1, 0.29411766)

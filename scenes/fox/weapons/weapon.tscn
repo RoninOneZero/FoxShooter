@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://1hvartqh6avp"]
+
+[ext_resource type="Script" uid="uid://d1ab03x8dacfb" path="res://scenes/fox/weapon.gd" id="1_277vt"]
+
+[sub_resource type="Animation" id="Animation_hmeia"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_r1aym"]
+resource_name = "crit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hmeia"]
+_data = {
+&"RESET": SubResource("Animation_hmeia"),
+&"crit": SubResource("Animation_r1aym")
+}
+
+[node name="Weapon" type="Node2D" unique_id=716932389 node_paths=PackedStringArray("crit_animation")]
+process_mode = 3
+script = ExtResource("1_277vt")
+base_damage = 20
+damage_per_upgrade = 10
+base_knockback = 50.0
+knockback_per_upgrade = 5.0
+fire_rate = 200
+critical_hit_chance = 0.05
+critical_damage_modifier = 4.0
+crit_animation = NodePath("FirePoint/CritSprite/AnimationPlayer")
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=25436035]
+target_position = Vector2(1000, 0)
+collision_mask = 4
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="FirePoint" type="Marker2D" parent="." unique_id=277889043]
+position = Vector2(46, 0)
+
+[node name="CritSprite" type="Sprite2D" parent="FirePoint" unique_id=1754427909]
+modulate = Color(1, 0, 0, 0)
+rotation = -0.7853982
+scale = Vector2(0.15625, 0.15625)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FirePoint/CritSprite" unique_id=1367493268]
+libraries/ = SubResource("AnimationLibrary_hmeia")
+
+[node name="RefireTimer" type="Timer" parent="." unique_id=101339470]
+one_shot = true
+
+[node name="ReloadTimer" type="Timer" parent="." unique_id=1954044993]
+one_shot = true
+
+[node name="AimTimer" type="Timer" parent="." unique_id=2022989137]
+one_shot = true

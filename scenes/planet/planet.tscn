@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://dwavhoxadxdk2"]
+
+[sub_resource type="Environment" id="Environment_ceijg"]
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ceijg"]
+shading_mode = 2
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="Animation" id="Animation_2r41h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Planet/CSGSphere3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ppgk2"]
+resource_name = "new_animation"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Planet/CSGSphere3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.2831855, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2r41h"]
+_data = {
+&"RESET": SubResource("Animation_2r41h"),
+&"new_animation": SubResource("Animation_ppgk2")
+}
+
+[node name="Planet" type="Node3D" unique_id=1622150916]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2000342470]
+environment = SubResource("Environment_ceijg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1459811750]
+transform = Transform3D(-0.120411925, 0.34724844, -0.9300105, -0.22880398, 0.90189683, 0.36637542, 0.9659968, 0.25690606, -0.02914731, -24.341381, 6.877072, 0)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1439658163]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.777548)
+projection = 1
+current = true
+size = 1.1514302
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="." unique_id=1436751154]
+radial_segments = 8
+rings = 5
+smooth_faces = false
+material = SubResource("StandardMaterial3D_ceijg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1449010315]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_2r41h")
+autoplay = &"new_animation"

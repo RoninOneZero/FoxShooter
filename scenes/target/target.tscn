@@ -1,0 +1,159 @@
+[gd_scene format=3 uid="uid://62oxlt65h2ir"]
+
+[ext_resource type="Script" uid="uid://bq1kyk7ia7ub5" path="res://scenes/target/target.gd" id="1_6e4og"]
+[ext_resource type="Script" uid="uid://b8kkov3krvwgp" path="res://src/gameplay/combat/hurt_box2d.gd" id="1_v2bc8"]
+[ext_resource type="Texture2D" uid="uid://c733g2uejw0i6" path="res://assets/textures/Sprite-0003.png" id="2_andhk"]
+[ext_resource type="Texture2D" uid="uid://iyxspt54jlxv" path="res://assets/textures/character_sprites/platformerDefense/sprite/dead.png" id="3_6e4og"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ceijg"]
+size = Vector2(48, 106)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6702g"]
+atlas = ExtResource("2_andhk")
+region = Rect2(128, 128, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfg1d"]
+atlas = ExtResource("2_andhk")
+region = Rect2(0, 384, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r1aym"]
+atlas = ExtResource("2_andhk")
+region = Rect2(64, 384, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hmeia"]
+atlas = ExtResource("2_andhk")
+region = Rect2(128, 384, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8hymu"]
+atlas = ExtResource("2_andhk")
+region = Rect2(0, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o8wqq"]
+atlas = ExtResource("2_andhk")
+region = Rect2(64, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dmnom"]
+atlas = ExtResource("2_andhk")
+region = Rect2(128, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgjlv"]
+atlas = ExtResource("2_andhk")
+region = Rect2(0, 256, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3lwp7"]
+atlas = ExtResource("2_andhk")
+region = Rect2(64, 256, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46l0p"]
+atlas = ExtResource("2_andhk")
+region = Rect2(128, 256, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ye4ru"]
+atlas = ExtResource("2_andhk")
+region = Rect2(0, 512, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbbum"]
+atlas = ExtResource("2_andhk")
+region = Rect2(64, 512, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4g33i"]
+atlas = ExtResource("2_andhk")
+region = Rect2(128, 512, 64, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1d0a0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6702g")
+}],
+"loop": 0,
+"name": &"aim",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_6e4og")
+}],
+"loop": 1,
+"name": &"dead",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sfg1d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r1aym")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hmeia")
+}],
+"loop": 0,
+"name": &"hurt",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8hymu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o8wqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dmnom")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pgjlv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3lwp7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46l0p")
+}],
+"loop": 0,
+"name": &"shoot",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ye4ru")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbbum")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4g33i")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 12.0
+}]
+
+[node name="Target" type="Node2D" unique_id=722693654]
+script = ExtResource("1_6e4og")
+
+[node name="HurtBox2D" type="Area2D" parent="." unique_id=1631549987]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_v2bc8")
+metadata/_custom_type_script = "uid://b8kkov3krvwgp"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox2D" unique_id=1849499896]
+position = Vector2(0, 35)
+shape = SubResource("RectangleShape2D_ceijg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=385147826]
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_1d0a0")
+animation = &"idle"
+offset = Vector2(0, -2)
+flip_h = true
+
+[connection signal="damage_taken" from="HurtBox2D" to="." method="_on_hurt_box_2d_damage_taken"]

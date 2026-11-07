@@ -1,0 +1,29 @@
+Scarlet (200 x 200):
+    Idle
+    Walk
+    Aim
+    Shoot
+    Knife Attack
+    Hurt
+    Knocked Out
+    Reload*
+
+
+Lizardman (200 x 200):
+    Idle
+    Walk
+    Stab
+    Knocked Out
+
+
+Level (1280 x 340):
+    Level Background
+    Parallax Layers*
+
+
+User Interface (640 x 340):
+    Walkie Talkie
+    Combat HUD
+    Menu Items
+
+*Low priority, can be ignored.

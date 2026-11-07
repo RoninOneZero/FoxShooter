@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c1vo4p2gsgu6i"]
+
+[ext_resource type="PackedScene" uid="uid://1hvartqh6avp" path="res://scenes/fox/weapons/weapon.tscn" id="1_y54qg"]
+
+[node name="MAXDamage" unique_id=716932389 instance=ExtResource("1_y54qg")]
+base_damage = 999
+fire_rate = 100

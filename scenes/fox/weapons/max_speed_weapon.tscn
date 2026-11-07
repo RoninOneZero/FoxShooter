@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://b467g00ouonbo"]
+
+[ext_resource type="PackedScene" uid="uid://1hvartqh6avp" path="res://scenes/fox/weapons/weapon.tscn" id="1_0vln0"]
+
+[node name="MAXSpeed" unique_id=716932389 instance=ExtResource("1_0vln0")]
+base_damage = 999
+fire_rate = 100
