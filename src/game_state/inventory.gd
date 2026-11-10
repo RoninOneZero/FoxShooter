@@ -3,16 +3,13 @@ class_name Inventory extends Node
 
 const BASE_DAMAGE = 1
 
+@export var current_weapon_base: WeaponData
+@export var weapon: WeaponData
 @export var starting_cash := 0
 @export var cash_per_bounty := 50
 
 ## Contains upgrade name as a string as keys, and the number of purchased upgrades as values.
-var upgrades: Dictionary[StringName, int] = {
-    "damage": 0,
-    "critical_chance": 0,
-    "knockback": 0,
-}
-
+var upgrades: Dictionary[Weapon.WeaponAttribute, int] = {}
 
 @onready var cash := starting_cash
 
@@ -30,4 +27,10 @@ func can_afford(amount: int) -> bool:
 func spend_cash(amount: int):
     if can_afford(amount):
         cash -= amount
+
+
+func get_upgraded_weapon_data() -> WeaponData:
+    var upgraded_weapon_data := current_weapon_base
+
+    return upgraded_weapon_data
 

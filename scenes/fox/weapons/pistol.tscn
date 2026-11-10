@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bo6qbadfwqfn3"]
 
 [ext_resource type="PackedScene" uid="uid://1hvartqh6avp" path="res://scenes/fox/weapons/weapon.tscn" id="1_cwik2"]
+[ext_resource type="Resource" uid="uid://yqx7o3r2cmyb" path="res://resources/weapon_data/pistol.tres" id="2_kr68w"]
 
 [node name="Pistol" unique_id=716932389 instance=ExtResource("1_cwik2")]
-damage_per_upgrade = 20
-fire_rate = 100
+data = ExtResource("2_kr68w")

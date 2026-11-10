@@ -2,7 +2,6 @@ extends Control
 
 signal continue_requested
 
-@export var purchasable_upgrades: Array[StringName]
 
 @export var packed_shop_item: PackedScene
 @export var cash_label: Label
@@ -10,35 +9,54 @@ signal continue_requested
 @export var shop_item_container: Container
 @export var continue_button: Button
 
-func _ready() -> void:
-	initalize_shop()
+@onready var shop: Shop = Main.get_node("GameState/Shop")
+@onready var inventory: Inventory = Main.get_node("GameState/Inventory")
 
 
 func initalize_shop() -> void:
-	var inventory: Inventory = Main.get_node("GameState/Inventory")
-
 	cash_label.text = "Cash: %s" % inventory.cash
 
-	for upgrade in purchasable_upgrades:
-		var new_shop_item: ShopItem = packed_shop_item.instantiate()
-		shop_item_container.add_child(new_shop_item)
+	var available_items = shop.get_available_items()
 
-		new_shop_item.set_upgrade(upgrade)
-		new_shop_item.set_cost(500)
-		new_shop_item.set_rank(1)
+	if available_items.is_empty():
+		print("Shop has no available items!")
+		return
+
+	var current_items := shop_item_container.get_children()
+	for item in current_items:
+		item.queue_free()
+
+
+	for item in available_items:
+		var new_shop_item: ShopItemContainer = packed_shop_item.instantiate()
+		shop_item_container.add_child(new_shop_item)
+		
+		var item_name := ""
+
+		match item:
+			Weapon.WeaponAttribute.DAMAGE: item_name = "Damage"
+			Weapon.WeaponAttribute.CRITICAL_CHANCE: item_name = "Critical Chance"
+			Weapon.WeaponAttribute.KNOCKBACK: item_name = "Knockback"
+
+		var item_attribute: Weapon.WeaponAttribute = item
+		var item_rank: int = inventory.upgrades.get_or_add(item, -1) + 1
+		var item_cost: int = shop.attribute_costs[item][item_rank]
+
+		new_shop_item.set_shop_item(item_name, item_attribute, item_rank, item_cost)
 		new_shop_item.button.pressed.connect(_on_shop_item_button_pressed.bind(new_shop_item))
 
-		if not inventory.can_afford(new_shop_item.cost):
+		if not inventory.can_afford(item_cost):
 			new_shop_item.button.disabled = true
 
 
-func update_shop() -> void:
-	var inventory: Inventory = Main.get_node("GameState/Inventory")
+func buy_item(shop_item: ShopItemContainer) -> void:
+	if not inventory.can_afford(shop_item.cost):
+		return
 
-	cash_label.text = "Cash: %s" % inventory.cash
+	inventory.spend_cash(shop_item.cost)
+	inventory.upgrades[shop_item.item_attribute] = shop_item.rank
 
-	_update_shop_item_buttons()
-
+	initalize_shop()
 
 
 func close() -> void:
@@ -70,30 +88,9 @@ func _remove_effect_from_music() -> void:
 	AudioServer.set_bus_effect_enabled(music_index, 0, false)
 
 
-func _on_shop_item_button_pressed(shop_item: ShopItem) -> void:
-	var inventory: Inventory = Main.get_node("GameState/Inventory")
 
-	if not inventory.can_afford(shop_item.cost):
-		return
-
-	inventory.spend_cash(shop_item.cost)
-
-	inventory.upgrades[shop_item.upgrade] = shop_item.rank
-	shop_item.set_rank(shop_item.rank + 1)
-
-	update_shop()
-
-
-	
-func _update_shop_item_buttons() -> void:
-	var inventory: Inventory = Main.get_node("GameState/Inventory")
-	
-	var shop_items: Array[ShopItem] 
-	shop_items.assign(shop_item_container.get_children())
-
-	for shop_item in shop_items:
-		shop_item.button.disabled = !inventory.can_afford(shop_item.cost)
-
+func _on_shop_item_button_pressed(shop_item: ShopItemContainer) -> void:
+	buy_item(shop_item)
 
 
 func _on_continue_button_button_down() -> void:
@@ -103,7 +100,7 @@ func _on_continue_button_button_down() -> void:
 
 func _on_visibility_changed() -> void:
 	if visible:
-		update_shop()
+		initalize_shop()
 		panel.process_mode = PROCESS_MODE_DISABLED
 		_add_effect_to_music()
 		$AnimationPlayer.play("open_phone")

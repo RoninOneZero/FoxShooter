@@ -21,19 +21,7 @@ enum WeaponAttribute{
 }
 
 
-@export var base_damage: int = 100
-@export var damage_per_upgrade: int = 15
-@export var base_knockback: float = 10.0
-@export var knockback_per_upgrade: float = 10.0
-@export var firing_mode: FiringMode = FiringMode.SINGLE
-@export var magazine_size: int = -1
-## The firing rate in rounds per minute.
-@export_range(10, 2000, 10, "suffix:rpm") var fire_rate: int = 1500
-@export var reload_time: float = 1.0
-@export var optimal_range: float = 100.0
-@export_range(0.0, 1.0) var critical_hit_chance: float = 0.10
-@export var critical_chance_per_upgrade := 0.10
-@export var critical_damage_modifier: float = 1.5
+@export var data: WeaponData
 @export var tracer_height_variance: float = 4.0
 
 @export var crit_animation: AnimationPlayer
@@ -73,7 +61,7 @@ func activate() -> bool:
 			# print("Knockback: ", damage_data.knockback)
 			
 	_draw_tracer(tracer_end_point)
-	var refire_delay: float = 60.0 / fire_rate
+	var refire_delay: float = 60.0 / data.fire_rate
 	refire_timer.start(refire_delay)
 
 	activated.emit()
@@ -81,13 +69,12 @@ func activate() -> bool:
 
 func _get_damage_data() -> DamageData:
 	var damage_data := DamageData.new()
-	var inventory: Inventory = Main.get_node("GameState/Inventory")
 
 	# Roll for crit
-	var damage := base_damage + (inventory.upgrades[&"damage"] * damage_per_upgrade)
-	var modified_crit = critical_hit_chance + (inventory.upgrades[&"critical_chance"] * critical_chance_per_upgrade)
+	var damage := data.damage
+	var modified_crit = data.critical_chance
 	if randf() <= modified_crit:
-		damage = floor(damage * critical_damage_modifier)
+		damage = floor(damage * data.critical_damage_modifier)
 		crit_animation.play("crit")
 		print("Crit!")
 
@@ -97,7 +84,7 @@ func _get_damage_data() -> DamageData:
 	damage_data.direction = Vector2.RIGHT if scale.x > 0 else Vector2.LEFT
 	
 	
-	damage_data.knockback = base_knockback + (inventory.upgrades[&"knockback"] * knockback_per_upgrade)
+	damage_data.knockback = data.knockback
 
 	return damage_data
 
@@ -121,5 +108,5 @@ func _draw_tracer(end_point: Vector2) -> void:
 
 
 func reload() -> void:
-	_rounds = magazine_size
+	_rounds = data.magazine_size
 	reloaded.emit()

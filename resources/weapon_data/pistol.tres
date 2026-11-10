@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://yqx7o3r2cmyb"]
+
+[ext_resource type="Script" uid="uid://eokbm1ubas50" path="res://src/weapon_data.gd" id="1_hsgtw"]
+
+[resource]
+script = ExtResource("1_hsgtw")
+upgrade_ranks = Dictionary[int, Array]({
+0: [40, 60, 80],
+1: [40.0, 60.0, 80.0],
+2: [0.01, 0.05, 0.1]
+})
+metadata/_custom_type_script = "uid://eokbm1ubas50"

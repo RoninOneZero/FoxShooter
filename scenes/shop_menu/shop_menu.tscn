@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cpflndqp2lusi" path="res://scenes/shop_menu/shop_menu.gd" id="1_aco41"]
 [ext_resource type="Texture2D" uid="uid://d4ie40rxr7qi5" path="res://assets/textures/user_interface/iDroid-MGSV-Front-2-v1.png" id="2_vsaxo"]
-[ext_resource type="PackedScene" uid="uid://bp3pms2pv0nud" path="res://scenes/shop_menu/shop_item.tscn" id="3_fb2vq"]
+[ext_resource type="PackedScene" uid="uid://bp3pms2pv0nud" path="res://scenes/shop_menu/shop_item_container.tscn" id="3_fb2vq"]
 
 [sub_resource type="Animation" id="Animation_fb2vq"]
 length = 0.001
@@ -87,7 +87,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_aco41")
-purchasable_upgrades = Array[StringName]([&"damage", &"critical_chance", &"knockback"])
 packed_shop_item = ExtResource("3_fb2vq")
 cash_label = NodePath("MarginContainer/Panel/CashLabel")
 panel = NodePath("MarginContainer/Panel")

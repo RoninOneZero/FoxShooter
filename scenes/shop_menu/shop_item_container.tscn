@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bp3pms2pv0nud"]
 
-[ext_resource type="Script" uid="uid://rwsppne14a1p" path="res://scenes/shop_menu/shop_item.gd" id="1_3mes3"]
+[ext_resource type="Script" uid="uid://rwsppne14a1p" path="res://scenes/shop_menu/shop_item_container.gd" id="1_3mes3"]
 
 [node name="ShopItem" type="HBoxContainer" unique_id=1739831362 node_paths=PackedStringArray("button")]
 offset_right = 640.0
