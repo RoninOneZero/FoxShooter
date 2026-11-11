@@ -1,15 +1,15 @@
+user interface overhaul
 game feel
-weapon class redo
 add chance to stun
 add penetration chance
 add knife attack
 make movement acceleration based
-make weapon upgrades progressive, more are unlocked sequentially
 robusted combat mechanics
 add aiming and steady shot
 placeable mines
 wave counter that is saved to high scores
 add score system a la DMC
+x weapon class redo
 x make weapon scenes with different stats each for testing
 x combat manager with wave variation
 x increase crit bonus to 4x

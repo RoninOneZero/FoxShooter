@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://xx26ch21g3a8"]
 
 [ext_resource type="Script" uid="uid://b4hevh7hbf7an" path="res://scenes/title_screen/title_screen.gd" id="1_5df70"]
+[ext_resource type="FontFile" uid="uid://bdyavvn3wr7th" path="res://assets/textures/user_interface/fonts/kenney_fonts/Fonts/Kenney Future.ttf" id="1_yegqs"]
 [ext_resource type="AudioStream" uid="uid://3w5qosfhvcp4" path="res://assets/audio/music/Electronic Soundtrack/System Shock.mp3" id="2_j12ko"]
 [ext_resource type="PackedScene" uid="uid://bkpo0lhn2qcy5" path="res://scenes/credits/credits.tscn" id="2_vuv2h"]
 [ext_resource type="Texture2D" uid="uid://cw0ga630g1fc6" path="res://assets/textures/user_interface/title_screen/titlescreen_space.png" id="3_j12ko"]
@@ -9,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://tvdm7qgmqbu4" path="res://assets/textures/user_interface/title_screen/title_character.png" id="5_xoykc"]
 
 [sub_resource type="Theme" id="Theme_xawky"]
+default_font = ExtResource("1_yegqs")
 default_font_size = 16
 
 [sub_resource type="Animation" id="Animation_yegqs"]
@@ -28,7 +30,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Label:visible")
+tracks/1/path = NodePath("Title:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -176,7 +178,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Label:visible")
+tracks/1/path = NodePath("Title:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -312,7 +314,7 @@ _data = {
 &"intro": SubResource("Animation_j12ko")
 }
 
-[node name="TitleScreen" type="Control" unique_id=1552792289 node_paths=PackedStringArray("credits_node", "options_node", "start_game", "quit_game_button")]
+[node name="TitleScreen" type="Control" unique_id=1552792289 node_paths=PackedStringArray("title", "credits_node", "options_node", "start_game", "quit_game_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -323,6 +325,7 @@ theme = SubResource("Theme_xawky")
 script = ExtResource("1_5df70")
 starting_level_path = "uid://bhh5dxyouuo7t"
 music = ExtResource("2_j12ko")
+title = NodePath("Title")
 credits_node = NodePath("Credits")
 options_node = NodePath("OptionsMenu")
 start_game = NodePath("MenuButtons/StartGame")
@@ -370,36 +373,32 @@ offset_bottom = 360.0
 texture = ExtResource("5_xoykc")
 stretch_mode = 2
 
-[node name="Label" type="Label" parent="." unique_id=790845871]
+[node name="Title" type="Label" parent="." unique_id=790845871]
 layout_mode = 1
-anchors_preset = 3
+anchors_preset = 1
 anchor_left = 1.0
-anchor_top = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -382.0
-offset_top = -89.0
-offset_right = -14.0
-offset_bottom = -1.0
+offset_left = -378.0
+offset_top = 17.0
+offset_bottom = 53.0
 grow_horizontal = 0
-grow_vertical = 0
 theme_override_constants/outline_size = 12
-theme_override_font_sizes/font_size = 64
-text = "Fox Shooter"
+theme_override_font_sizes/font_size = 32
+text = "Scarlet Star"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MenuButtons" type="VBoxContainer" parent="." unique_id=235234334]
-modulate = Color(0, 1, 1, 1)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 122.0
-offset_top = -98.0
-offset_right = 304.0
-offset_bottom = 126.0
+offset_left = 108.0
+offset_top = -56.0
+offset_right = 290.0
+offset_bottom = 168.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 8
@@ -407,18 +406,22 @@ alignment = 1
 
 [node name="StartGame" type="Button" parent="MenuButtons" unique_id=1065325218]
 layout_mode = 2
-text = "Start Game"
+offset_transform_enabled = true
+text = "Start"
 
 [node name="Options" type="Button" parent="MenuButtons" unique_id=1178170838]
 layout_mode = 2
+offset_transform_enabled = true
 text = "Options"
 
 [node name="Credits" type="Button" parent="MenuButtons" unique_id=533032303]
 layout_mode = 2
+offset_transform_enabled = true
 text = "Credits"
 
 [node name="QuitGame" type="Button" parent="MenuButtons" unique_id=1012838527]
 layout_mode = 2
+offset_transform_enabled = true
 text = "Quit Game"
 
 [node name="Credits" parent="." unique_id=211722187 instance=ExtResource("2_vuv2h")]
