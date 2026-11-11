@@ -28,20 +28,25 @@ func initalize_shop() -> void:
 
 
 	for item in available_items:
-		var new_shop_item: ShopItemContainer = packed_shop_item.instantiate()
-		shop_item_container.add_child(new_shop_item)
 		
 		var item_name := ""
 
 		match item:
-			Weapon.WeaponAttribute.DAMAGE: item_name = "Damage"
-			Weapon.WeaponAttribute.CRITICAL_CHANCE: item_name = "Critical Chance"
-			Weapon.WeaponAttribute.KNOCKBACK: item_name = "Knockback"
+			WeaponData.WeaponAttribute.DAMAGE: item_name = "Damage"
+			WeaponData.WeaponAttribute.CRITICAL_CHANCE: item_name = "Critical Chance"
+			WeaponData.WeaponAttribute.KNOCKBACK: item_name = "Knockback"
 
-		var item_attribute: Weapon.WeaponAttribute = item
-		var item_rank: int = inventory.upgrades.get_or_add(item, -1) + 1
+		var item_attribute: WeaponData.WeaponAttribute = item
+		var item_rank: int = inventory.upgrades.get_or_add(item, 0) + 1
+
+		if not (item_rank < shop.attribute_costs[item].size()):
+			continue
+
+
 		var item_cost: int = shop.attribute_costs[item][item_rank]
 
+		var new_shop_item: ShopItemContainer = packed_shop_item.instantiate()
+		shop_item_container.add_child(new_shop_item)
 		new_shop_item.set_shop_item(item_name, item_attribute, item_rank, item_cost)
 		new_shop_item.button.pressed.connect(_on_shop_item_button_pressed.bind(new_shop_item))
 

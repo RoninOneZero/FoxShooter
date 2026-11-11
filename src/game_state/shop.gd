@@ -1,12 +1,12 @@
 class_name Shop extends Node
 
 
-@export var attribute_costs: Dictionary[Weapon.WeaponAttribute, Array] = {
-	Weapon.WeaponAttribute.DAMAGE: 				[500, 1000, 2000],
-	Weapon.WeaponAttribute.CRITICAL_CHANCE: 	[500, 1000, 2000],
-	Weapon.WeaponAttribute.KNOCKBACK: 			[500, 1000, 2000],
-	#Weapon.WeaponAttribute.DAMAGE: 			[500, 1000, 2000],
-	#Weapon.WeaponAttribute.DAMAGE: 			[500, 1000, 2000],
+@export var attribute_costs: Dictionary[WeaponData.WeaponAttribute, Array] = {
+	WeaponData.WeaponAttribute.DAMAGE: 				[500, 1000, 2000],
+	WeaponData.WeaponAttribute.CRITICAL_CHANCE: 	[500, 1000, 2000],
+	WeaponData.WeaponAttribute.KNOCKBACK: 			[500, 1000, 2000],
+	#WeaponData.WeaponAttribute.DAMAGE: 			[500, 1000, 2000],
+	#WeaponData.WeaponAttribute.DAMAGE: 			[500, 1000, 2000],
 }
 
 
