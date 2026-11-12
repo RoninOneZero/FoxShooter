@@ -5,7 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://iyxspt54jlxv" path="res://assets/textures/character_sprites/platformerDefense/sprite/dead.png" id="3_jxqej"]
 [ext_resource type="Texture2D" uid="uid://c733g2uejw0i6" path="res://assets/textures/Sprite-0003.png" id="3_vemp1"]
 [ext_resource type="Script" uid="uid://b6d0w8n24pt1x" path="res://src/pawn/input_controller.gd" id="4_46bbx"]
+[ext_resource type="Texture2D" uid="uid://cp5x2cq8rqe7c" path="res://assets/textures/character_sprites/platformerDefense/sprite/knife_slash.png" id="4_r1aym"]
 [ext_resource type="Script" uid="uid://b8kkov3krvwgp" path="res://src/gameplay/combat/hurt_box2d.gd" id="4_rbbum"]
+[ext_resource type="Script" uid="uid://cndn410gup7sm" path="res://src/gameplay/combat/hit_box2d.gd" id="6_8hymu"]
 [ext_resource type="Script" uid="uid://ctwtyolwfxgp" path="res://src/gameplay/finite_state_machine/finite_state_machine.gd" id="7_jxqej"]
 [ext_resource type="Script" uid="uid://bkldy3n0oo6kj" path="res://scenes/fox/idle_state.gd" id="8_cvi11"]
 [ext_resource type="Script" uid="uid://djdd8p733srqh" path="res://scenes/fox/walk_state.gd" id="9_ye4ru"]
@@ -15,6 +17,7 @@
 [ext_resource type="Script" uid="uid://6raksy1dnjw5" path="res://scenes/fox/die_state.gd" id="13_r1aym"]
 [ext_resource type="Script" uid="uid://016fiiavb5sm" path="res://scenes/fox/reload_state.gd" id="14_hmeia"]
 [ext_resource type="Script" uid="uid://d4m6ppgju316w" path="res://src/gameplay/combat/health.gd" id="16_4g33i"]
+[ext_resource type="Script" uid="uid://cah0r1dhodmwx" path="res://scenes/fox/slash_state.gd" id="16_hmeia"]
 [ext_resource type="PackedScene" uid="uid://bo6qbadfwqfn3" path="res://scenes/fox/weapons/pistol.tscn" id="17_r1aym"]
 [ext_resource type="AudioStream" uid="uid://p80o8hetcjn0" path="res://assets/audio/weapon_sounds/usp2.wav" id="17_sfg1d"]
 
@@ -68,6 +71,18 @@ region = Rect2(64, 256, 64, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_46l0p"]
 atlas = ExtResource("3_vemp1")
 region = Rect2(128, 256, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dab3v"]
+atlas = ExtResource("4_r1aym")
+region = Rect2(0, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fhsew"]
+atlas = ExtResource("4_r1aym")
+region = Rect2(64, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k1miv"]
+atlas = ExtResource("4_r1aym")
+region = Rect2(128, 0, 64, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ye4ru"]
 atlas = ExtResource("3_vemp1")
@@ -152,6 +167,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_dab3v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fhsew")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k1miv")
+}],
+"loop": 0,
+"name": &"slash",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ye4ru")
 }, {
 "duration": 1.0,
@@ -206,6 +235,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ceijg"]
 size = Vector2(64, 98)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xewka"]
+size = Vector2(87, 20)
+
 [node name="Fox" type="CharacterBody2D" unique_id=458270211]
 collision_layer = 2
 collision_mask = 33
@@ -219,9 +251,7 @@ shape = SubResource("RectangleShape2D_w7c3h")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1430646362]
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_46bbx")
-animation = &"shoot"
-frame = 3
-frame_progress = 1.0
+animation = &"idle"
 offset = Vector2(0, -2)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=714089143]
@@ -238,11 +268,23 @@ position = Vector2(0, 39)
 shape = SubResource("RectangleShape2D_ceijg")
 debug_color = Color(0, 1, 0, 0.41960785)
 
-[node name="Facing" type="Node" parent="." unique_id=1512754974 node_paths=PackedStringArray("pawn", "controller", "sprite", "weapon")]
+[node name="HitBox2D" type="Area2D" parent="." unique_id=1384563466]
+position = Vector2(26, 23)
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("6_8hymu")
+metadata/_custom_type_script = "uid://cndn410gup7sm"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox2D" unique_id=1332671938]
+shape = SubResource("RectangleShape2D_xewka")
+debug_color = Color(0.7, 0, 0.011666489, 0.41960785)
+
+[node name="Facing" type="Node" parent="." unique_id=1512754974 node_paths=PackedStringArray("pawn", "controller", "sprite", "hit_box", "weapon")]
 script = ExtResource("3_jaa0m")
 pawn = NodePath("..")
 controller = NodePath("../InputController")
 sprite = NodePath("../AnimatedSprite2D")
+hit_box = NodePath("../HitBox2D")
 weapon = NodePath("../Pistol")
 metadata/_custom_type_script = "uid://b15viop4pc36g"
 
@@ -252,6 +294,10 @@ state_machine = NodePath("../StateMachine")
 
 [node name="InvulnerabilityTimer" type="Timer" parent="." unique_id=671551754]
 wait_time = 2.0
+one_shot = true
+
+[node name="KnifeRefire" type="Timer" parent="." unique_id=1942572721]
+unique_name_in_owner = true
 one_shot = true
 
 [node name="StateMachine" type="Node" parent="." unique_id=230292206 node_paths=PackedStringArray("initial_state")]
@@ -314,6 +360,14 @@ pawn = NodePath("../..")
 controller = NodePath("../../InputController")
 sprite = NodePath("../../AnimatedSprite2D")
 facing = NodePath("../../Facing")
+
+[node name="SlashState" type="Node" parent="StateMachine" unique_id=1574196028 node_paths=PackedStringArray("pawn", "controller", "sprite", "facing", "hit_box")]
+script = ExtResource("16_hmeia")
+pawn = NodePath("../..")
+controller = NodePath("../../InputController")
+sprite = NodePath("../../AnimatedSprite2D")
+facing = NodePath("../../Facing")
+hit_box = NodePath("../../HitBox2D")
 
 [node name="Health" type="Node" parent="." unique_id=1601939173]
 script = ExtResource("16_4g33i")

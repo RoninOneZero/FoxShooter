@@ -1,14 +1,14 @@
-user interface overhaul
-game feel
+add knife attack
 add chance to stun
 add penetration chance
-add knife attack
 make movement acceleration based
 robusted combat mechanics
 add aiming and steady shot
 placeable mines
 wave counter that is saved to high scores
 add score system a la DMC
+user interface overhaul
+game feel
 x weapon class redo
 x make weapon scenes with different stats each for testing
 x combat manager with wave variation

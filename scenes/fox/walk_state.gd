@@ -32,3 +32,6 @@ func receive_event(_event: String) -> void:
 	match _event:
 		"attack": 
 			state_machine.change_state("aim_state")
+		"melee":
+			if %KnifeRefire.time_left == 0.0:
+				state_machine.change_state("slash_state")

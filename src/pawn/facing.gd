@@ -21,6 +21,9 @@ func _process(_delta: float) -> void:
 
 
 func set_facing(_direction: Vector2) -> void:
+	if direction == _direction:
+		return
+
 	direction = _direction
 
 
@@ -30,7 +33,7 @@ func set_facing(_direction: Vector2) -> void:
 		sprite.flip_h = true
 	
 	if hit_box:
-		hit_box.position.x = abs(hit_box.position.x) * _direction.x
+		hit_box.position.x = abs(hit_box.position.x) * direction.x
 
 	if weapon:
 		weapon.scale.x = direction.x

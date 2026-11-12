@@ -27,4 +27,6 @@ func update(_delta: float) -> void:
 func receive_event(_event: String) -> void:
 	match _event:
 		"attack": 
-				state_machine.change_state("aim_state")
+			state_machine.change_state("aim_state")
+		"melee":
+			state_machine.change_state("slash_state")

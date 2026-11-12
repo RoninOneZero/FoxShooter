@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://rgv33jp8ysqp"]
 
 [ext_resource type="Script" uid="uid://d1sio4raf5dqg" path="res://scenes/pause_menu/pause_menu.gd" id="1_5bgjm"]
-[ext_resource type="Theme" uid="uid://dqh87k8g7jhcc" path="res://themes/menu_buttons_theme.tres" id="2_qcmsd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_5bgjm"]
 font_size = 32
@@ -44,7 +43,6 @@ offset_right = 68.0
 offset_bottom = 39.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("2_qcmsd")
 theme_override_constants/separation = 16
 
 [node name="ContinueButton" type="Button" parent="VBoxContainer" unique_id=879029756]

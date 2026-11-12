@@ -41,5 +41,8 @@ func update(_delta: float) -> void:
 # 		state_machine.change_state("idle_state")
 
 
-# func receive_event(_event: String) -> void:
-# 	pass
+func receive_event(_event: String) -> void:
+	match _event:
+		"melee":
+			if %KnifeRefire.time_left == 0.0:
+				state_machine.change_state("slash_state")
