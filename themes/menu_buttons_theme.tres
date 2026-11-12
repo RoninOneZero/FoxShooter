@@ -1,7 +1,5 @@
 [gd_resource type="Theme" format=3 uid="uid://dqh87k8g7jhcc"]
 
-[ext_resource type="Texture2D" uid="uid://co3tneglx0r8b" path="res://assets/textures/user_interface/kenney_ui-pack-space-expansion/PNG/Extra/Default/bar_shadow_round_large.png" id="1_p4b1l"]
-
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_yegqs"]
 color = Color(0.9999998, 0.5109295, 0.23315656, 1)
 thickness = 6
@@ -15,7 +13,6 @@ vertical = true
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yegqs"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yegqs"]
-texture = ExtResource("1_p4b1l")
 texture_margin_left = 32.0
 texture_margin_right = 32.0
 

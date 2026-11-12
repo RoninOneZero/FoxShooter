@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bkpo0lhn2qcy5"]
 
 [ext_resource type="Script" uid="uid://c4ubig3x2wv53" path="res://scenes/credits/credits.gd" id="1_dr3ri"]
+[ext_resource type="Texture2D" uid="uid://di412gjrxiha1" path="res://assets/textures/user_interface/kenney_ui-pack-space-expansion/PNG/Extra/Default/button_square.png" id="2_8n0nl"]
 
 [node name="Credits" type="Control" unique_id=211722187 node_paths=PackedStringArray("return_button")]
 layout_mode = 3
@@ -26,6 +27,15 @@ theme_override_constants/margin_bottom = 50
 
 [node name="Panel" type="Panel" parent="MarginContainer" unique_id=615270166]
 layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer" unique_id=1621456772]
+modulate = Color(0.29520002, 0.37364665, 0.41, 1)
+layout_mode = 2
+texture = ExtResource("2_8n0nl")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer" unique_id=1913534265]
 layout_mode = 2

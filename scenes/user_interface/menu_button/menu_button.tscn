@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://dbst6pvgwrrj6"]
+
+[ext_resource type="FontFile" uid="uid://bdyavvn3wr7th" path="res://assets/textures/user_interface/fonts/kenney_fonts/Fonts/Kenney Future.ttf" id="1_enw1c"]
+[ext_resource type="Texture2D" uid="uid://eagygqcsg8s0" path="res://assets/textures/user_interface/kenney_ui-pack-space-expansion/PNG/Extra/Default/panel_square_screws.png" id="2_gpt5w"]
+[ext_resource type="Texture2D" uid="uid://bs8tk30kd74ux" path="res://assets/textures/user_interface/kenney_ui-pack-space-expansion/PNG/Extra/Default/button_rectangle_depth.png" id="3_jd6hd"]
+[ext_resource type="Texture2D" uid="uid://5sspn0jth20t" path="res://assets/textures/user_interface/kenney_ui-pack-space-expansion/PNG/Extra/Default/button_rectangle.png" id="4_xqka6"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_enw1c"]
+texture = ExtResource("2_gpt5w")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jd6hd"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_jd6hd"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gpt5w"]
+texture = ExtResource("2_gpt5w")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+modulate_color = Color(0, 0.9666667, 1, 1)
+
+[node name="MenuButton" type="Button" unique_id=1681447401]
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_fonts/font = ExtResource("1_enw1c")
+theme_override_styles/normal = SubResource("StyleBoxTexture_enw1c")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jd6hd")
+theme_override_styles/hover = SubResource("StyleBoxLine_jd6hd")
+theme_override_styles/focus = SubResource("StyleBoxTexture_gpt5w")
+text = "Start Game"
+
+[node name="TextureButton" type="TextureButton" parent="." unique_id=1293974160]
+layout_mode = 0
+offset_top = 126.0
+offset_right = 64.0
+offset_bottom = 190.0
+texture_normal = ExtResource("3_jd6hd")
+texture_pressed = ExtResource("4_xqka6")
+
+[node name="Label" type="Label" parent="TextureButton" unique_id=1011322093]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "START"
+horizontal_alignment = 1
+vertical_alignment = 1

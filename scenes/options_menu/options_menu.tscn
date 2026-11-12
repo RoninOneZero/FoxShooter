@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b5s3oj04yjr52"]
 
 [ext_resource type="Script" uid="uid://nxv4vqsnde2k" path="res://scenes/options_menu/options_menu.gd" id="1_sglii"]
+[ext_resource type="Texture2D" uid="uid://di412gjrxiha1" path="res://assets/textures/user_interface/kenney_ui-pack-space-expansion/PNG/Extra/Default/button_square.png" id="2_yv8em"]
 
 [node name="OptionsMenu" type="Control" unique_id=1407421618 node_paths=PackedStringArray("fullscreen_toggle", "audio_slider")]
 layout_mode = 3
@@ -30,6 +31,7 @@ theme_override_font_sizes/font_size = 32
 text = "OPTIONS"
 
 [node name="Panel" type="Panel" parent="." unique_id=1098385440]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -42,6 +44,26 @@ offset_right = 176.0
 offset_bottom = 75.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1916765891]
+modulate = Color(0.29520002, 0.37364665, 0.41, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -73.0
+offset_right = 180.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_yv8em")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1444528299]
 layout_mode = 1

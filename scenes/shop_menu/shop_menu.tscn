@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cpflndqp2lusi" path="res://scenes/shop_menu/shop_menu.gd" id="1_aco41"]
 [ext_resource type="Texture2D" uid="uid://d4ie40rxr7qi5" path="res://assets/textures/user_interface/iDroid-MGSV-Front-2-v1.png" id="2_vsaxo"]
 [ext_resource type="PackedScene" uid="uid://bp3pms2pv0nud" path="res://scenes/shop_menu/shop_item_container.tscn" id="3_fb2vq"]
+[ext_resource type="Texture2D" uid="uid://cq7xaigtq8gpg" path="res://assets/textures/user_interface/kenney_ui-pack-space-expansion/PNG/Extra/Default/panel_glass.png" id="4_uyksk"]
 
 [sub_resource type="Animation" id="Animation_fb2vq"]
 length = 0.001
@@ -117,7 +118,22 @@ theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 30
 
 [node name="Panel" type="Panel" parent="MarginContainer" unique_id=1399013775]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/Panel" unique_id=210762372]
+modulate = Color(0.29520002, 0.37364665, 0.41, 0.7490196)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_uyksk")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
 
 [node name="Label" type="Label" parent="MarginContainer/Panel" unique_id=98032104]
 layout_mode = 0
