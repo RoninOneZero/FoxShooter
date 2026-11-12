@@ -14,6 +14,8 @@ var _rounds: int = 0
 
 @onready var upgrades : Dictionary[WeaponData.WeaponAttribute, int]
 
+@onready var ray_cast: RayCast2D = $RayCast2D
+@onready var refire_timer: Timer = $RefireTimer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
