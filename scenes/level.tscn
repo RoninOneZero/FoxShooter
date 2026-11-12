@@ -14,7 +14,7 @@
 script = ExtResource("1_mx8sn")
 music = ExtResource("2_klq6b")
 round_time = 30.0
-enemy_spawn_delay = 2.0
+enemy_spawn_delay = 0.5
 packed_enemy_scene = ExtResource("3_w8frs")
 packed_stronger_enemy_scene = ExtResource("3_2r41h")
 spawn_delay_timer = NodePath("SpawnTimer")

@@ -21,6 +21,7 @@ var _enemies: Array[Pawn2D] = []
 @onready var time_remaining := round_time
 @onready var combat: CombatManager = Main.get_node("GameState/Combat")
 
+
 func _ready() -> void:
 	game_lost.connect(Main._on_game_lost)
 	round_ended.connect(Main._on_round_ended)

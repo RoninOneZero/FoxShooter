@@ -4,6 +4,7 @@ extends Control
 
 @export var music: AudioStream
 
+@export var title: Label
 @export var credits_node: Credits
 @export var options_node: OptionsMenu
 @export var start_game: Button
@@ -14,6 +15,8 @@ func _ready() -> void:
 	if OS.get_name() == "Web":
 		quit_game_button.hide()
 	
+	title.text = ProjectSettings.get_setting("application/config/name")
+
 	credits_node.hide()
 	credits_node.return_requested.connect(_on_return_requested.bind(credits_node))
 	options_node.hide()

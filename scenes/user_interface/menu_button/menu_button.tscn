@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://dbst6pvgwrrj6"]
+
+[ext_resource type="FontFile" uid="uid://bdyavvn3wr7th" path="res://assets/fonts/kenney_fonts/Fonts/Kenney Future.ttf" id="1_enw1c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_enw1c"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gpt5w"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 0)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xqka6"]
+bg_color = Color(0.954429, 0.37669984, 9.62615e-07, 1)
+border_width_top = 10
+border_width_bottom = 10
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[node name="MenuButton" type="Button" unique_id=1681447401]
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_enw1c")
+theme_override_styles/normal = SubResource("StyleBoxFlat_enw1c")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_gpt5w")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xqka6")
+theme_override_styles/focus = SubResource("StyleBoxFlat_xqka6")
+text = "Start Game"
