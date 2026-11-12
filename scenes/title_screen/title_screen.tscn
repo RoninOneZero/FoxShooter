@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://xx26ch21g3a8"]
 
 [ext_resource type="Script" uid="uid://b4hevh7hbf7an" path="res://scenes/title_screen/title_screen.gd" id="1_5df70"]
-[ext_resource type="FontFile" uid="uid://bdyavvn3wr7th" path="res://assets/textures/user_interface/fonts/kenney_fonts/Fonts/Kenney Future.ttf" id="1_yegqs"]
+[ext_resource type="FontFile" uid="uid://bdyavvn3wr7th" path="res://assets/fonts/kenney_fonts/Fonts/Kenney Future.ttf" id="1_yegqs"]
 [ext_resource type="AudioStream" uid="uid://3w5qosfhvcp4" path="res://assets/audio/music/Electronic Soundtrack/System Shock.mp3" id="2_j12ko"]
 [ext_resource type="PackedScene" uid="uid://bkpo0lhn2qcy5" path="res://scenes/credits/credits.tscn" id="2_vuv2h"]
 [ext_resource type="Texture2D" uid="uid://cw0ga630g1fc6" path="res://assets/textures/user_interface/title_screen/titlescreen_space.png" id="3_j12ko"]
@@ -396,9 +396,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 108.0
+offset_left = 139.0
 offset_top = -56.0
-offset_right = 290.0
+offset_right = 259.0
 offset_bottom = 168.0
 grow_horizontal = 2
 grow_vertical = 2

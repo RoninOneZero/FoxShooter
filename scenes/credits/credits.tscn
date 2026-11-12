@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c4ubig3x2wv53" path="res://scenes/credits/credits.gd" id="1_dr3ri"]
 [ext_resource type="Texture2D" uid="uid://di412gjrxiha1" path="res://assets/textures/user_interface/kenney_ui-pack-space-expansion/PNG/Extra/Default/button_square.png" id="2_8n0nl"]
+[ext_resource type="Theme" uid="uid://dqh87k8g7jhcc" path="res://themes/menu_buttons_theme.tres" id="3_c8xcy"]
 
 [node name="Credits" type="Control" unique_id=211722187 node_paths=PackedStringArray("return_button")]
 layout_mode = 3
@@ -61,5 +62,6 @@ offset_left = 19.0
 offset_top = 319.0
 offset_right = 143.0
 offset_bottom = 350.0
+theme = ExtResource("3_c8xcy")
 text = "Return
 "

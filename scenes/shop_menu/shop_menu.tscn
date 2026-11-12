@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cpflndqp2lusi" path="res://scenes/shop_menu/shop_menu.gd" id="1_aco41"]
 [ext_resource type="Texture2D" uid="uid://d4ie40rxr7qi5" path="res://assets/textures/user_interface/iDroid-MGSV-Front-2-v1.png" id="2_vsaxo"]
 [ext_resource type="PackedScene" uid="uid://bp3pms2pv0nud" path="res://scenes/shop_menu/shop_item_container.tscn" id="3_fb2vq"]
+[ext_resource type="Theme" uid="uid://dqh87k8g7jhcc" path="res://themes/menu_buttons_theme.tres" id="4_57e7o"]
 [ext_resource type="Texture2D" uid="uid://cq7xaigtq8gpg" path="res://assets/textures/user_interface/kenney_ui-pack-space-expansion/PNG/Extra/Default/panel_glass.png" id="4_uyksk"]
 
 [sub_resource type="Animation" id="Animation_fb2vq"]
@@ -112,6 +113,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("4_57e7o")
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 50
@@ -163,11 +165,12 @@ offset_bottom = 232.0
 [node name="ShopItems" type="VBoxContainer" parent="MarginContainer/Panel/ScrollContainer" unique_id=917998821]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("4_57e7o")
 alignment = 1
 
 [node name="ContinueButton" type="Button" parent="MarginContainer/Panel" unique_id=365918565]
 layout_mode = 0
-offset_left = 415.0
+offset_left = 379.0
 offset_top = 248.0
 offset_right = 506.0
 offset_bottom = 279.0

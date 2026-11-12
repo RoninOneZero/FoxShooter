@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://66vf5yj0q3ts"
-path="res://.godot/imported/Kenney Rocket.ttf-1befd5d15364c8996d5c0f8cccfd938b.fontdata"
+uid="uid://dbqjq70kmfqao"
+path="res://.godot/imported/Kenney Blocks.ttf-cd7807ae4e7e27ca91a96d89b2b5d2c6.fontdata"
 
 [deps]
 
-source_file="res://assets/textures/user_interface/fonts/kenney_fonts/Fonts/Kenney Rocket.ttf"
-dest_files=["res://.godot/imported/Kenney Rocket.ttf-1befd5d15364c8996d5c0f8cccfd938b.fontdata"]
+source_file="res://assets/fonts/kenney_fonts/Fonts/Kenney Blocks.ttf"
+dest_files=["res://.godot/imported/Kenney Blocks.ttf-cd7807ae4e7e27ca91a96d89b2b5d2c6.fontdata"]
 
 [params]
 
