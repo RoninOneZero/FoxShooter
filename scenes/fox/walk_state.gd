@@ -9,11 +9,10 @@ extends State
 
 func enter() -> void:
 	sprite.play("walk")
-	pawn.movement_enabled = true
 
 
-# func exit() -> void:
-#     pass
+func exit() -> void:
+	pawn.input_direction = Vector2.ZERO
 
 
 # func update(_delta: float) -> void:

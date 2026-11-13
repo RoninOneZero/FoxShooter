@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://b6eeccv2jvprv"]
+
+[ext_resource type="Texture2D" uid="uid://bu0six1ufywcx" path="res://assets/textures/user_interface/kenney_ui-pack-space-expansion/PNG/Extra/Default/panel_square.png" id="1_w5q1x"]
+[ext_resource type="PackedScene" uid="uid://do3slqiquyb0a" path="res://scenes/fox/fox.tscn" id="2_78g6y"]
+[ext_resource type="Texture2D" uid="uid://b1wprvnyxbv7v" path="res://assets/icon.svg" id="3_o7tcq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ceijg"]
+size = Vector2(20, 371)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vmn7g"]
+size = Vector2(20, 788.99994)
+
+[node name="TestRoom" type="Node2D" unique_id=1072787834]
+
+[node name="Collision" type="Node2D" parent="." unique_id=1977298615]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Collision" unique_id=1222694994]
+position = Vector2(0, 166)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision/StaticBody2D" unique_id=219833860]
+shape = SubResource("RectangleShape2D_ceijg")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Collision" unique_id=2046365527]
+position = Vector2(642, 166)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision/StaticBody2D2" unique_id=95202661]
+shape = SubResource("RectangleShape2D_ceijg")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Collision" unique_id=850446864]
+position = Vector2(301, 361)
+rotation = 1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision/StaticBody2D3" unique_id=525426333]
+position = Vector2(-1.2020632e-06, -9)
+shape = SubResource("RectangleShape2D_vmn7g")
+
+[node name="Sprite2D" type="Sprite2D" parent="Collision/StaticBody2D3" unique_id=1026974316]
+position = Vector2(21, -33.00002)
+scale = Vector2(1, 10.437498)
+texture = ExtResource("1_w5q1x")
+
+[node name="Fox" parent="." unique_id=458270211 instance=ExtResource("2_78g6y")]
+position = Vector2(256, 264)
+walk_acceleration = 500.0
+ground_friction = 500.0
+
+[node name="Dummy" type="Node2D" parent="." unique_id=128172851]
+position = Vector2(520, 240)
+
+[node name="Sprite2D" type="Sprite2D" parent="Dummy" unique_id=115276121]
+texture = ExtResource("3_o7tcq")

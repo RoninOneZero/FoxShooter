@@ -363,6 +363,7 @@ facing = NodePath("../../Facing")
 
 [node name="SlashState" type="Node" parent="StateMachine" unique_id=1574196028 node_paths=PackedStringArray("pawn", "controller", "sprite", "facing", "hit_box")]
 script = ExtResource("16_hmeia")
+knockback_force = 50.0
 pawn = NodePath("../..")
 controller = NodePath("../../InputController")
 sprite = NodePath("../../AnimatedSprite2D")

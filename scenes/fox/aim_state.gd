@@ -13,7 +13,6 @@ func enter() -> void:
 	sprite.play("aim")
 	ready_to_fire = false
 
-	pawn.movement_enabled = false
 	
 
 	await sprite.animation_finished

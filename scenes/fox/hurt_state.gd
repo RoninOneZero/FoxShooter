@@ -15,7 +15,8 @@ var _time := 0.0
 
 func enter() -> void:
 	sprite.play("hurt")
-	pawn.movement_enabled = false
+
+	pawn.ground_friction_enabled = false
 
 	_time = 0.0
 	if hurt_box:
@@ -24,8 +25,8 @@ func enter() -> void:
 		invulnerability_timer.start()
 
 
-# func exit() -> void:
-#     pass
+func exit() -> void:
+	pawn.ground_friction_enabled = true
 
 
 func update(_delta: float) -> void:

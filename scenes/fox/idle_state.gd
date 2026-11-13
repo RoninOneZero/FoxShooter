@@ -7,9 +7,9 @@ extends State
 # @export var animation_player: AnimationPlayer
 @export var weapon: Weapon
 
+
 func enter() -> void:
 	sprite.play("idle")
-	pawn.movement_enabled = false
 
 
 # func exit() -> void:
@@ -17,8 +17,15 @@ func enter() -> void:
 
 
 func update(_delta: float) -> void:
+	if controller.attack_pressed:
+		state_machine.change_state("aim_state")
+
+	
 	if controller.direction != Vector2.ZERO:
 		state_machine.change_state("walk_state")
+		return
+	
+
 
 # func physics_update(_delta: float) -> void:
 #     pass

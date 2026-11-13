@@ -9,7 +9,6 @@ extends State
 func enter() -> void:
 	sprite.stop()
 	sprite.play("shoot")
-	pawn.movement_enabled = false
 
 	await sprite.animation_finished
 	if is_active:
