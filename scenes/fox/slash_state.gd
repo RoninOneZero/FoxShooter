@@ -11,6 +11,7 @@ extends State
 @export var sprite: AnimatedSprite2D
 @export var facing: Facing
 @export var hit_box: HitBox2D
+@export var aim_state: State
 # @export var animation_player: AnimationPlayer
 
 var _time := 0.0
@@ -38,8 +39,11 @@ func update(_delta: float) -> void:
 	_time += _delta
 
 	if _time >= duration:
-		#TODO: Should jump into "ready to shoot state" at same rate of gun fire rate
-		state_machine.change_state("aim_state")
+		if controller.attack_pressed:
+			state_machine.change_state("aim_state")
+			aim_state.ready_to_fire = true
+		else:
+			state_machine.change_state("idle_state")
 		return
 
 

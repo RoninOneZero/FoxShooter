@@ -361,7 +361,7 @@ controller = NodePath("../../InputController")
 sprite = NodePath("../../AnimatedSprite2D")
 facing = NodePath("../../Facing")
 
-[node name="SlashState" type="Node" parent="StateMachine" unique_id=1574196028 node_paths=PackedStringArray("pawn", "controller", "sprite", "facing", "hit_box")]
+[node name="SlashState" type="Node" parent="StateMachine" unique_id=1574196028 node_paths=PackedStringArray("pawn", "controller", "sprite", "facing", "hit_box", "aim_state")]
 script = ExtResource("16_hmeia")
 knockback_force = 50.0
 pawn = NodePath("../..")
@@ -369,6 +369,7 @@ controller = NodePath("../../InputController")
 sprite = NodePath("../../AnimatedSprite2D")
 facing = NodePath("../../Facing")
 hit_box = NodePath("../../HitBox2D")
+aim_state = NodePath("../AimState")
 
 [node name="Health" type="Node" parent="." unique_id=1601939173]
 script = ExtResource("16_4g33i")
