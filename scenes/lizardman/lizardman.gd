@@ -33,3 +33,4 @@ func _on_hurt_state_entered() -> void:
 
 func _on_idle_state_entered() -> void:
 	$HitBox2D.trigger()
+

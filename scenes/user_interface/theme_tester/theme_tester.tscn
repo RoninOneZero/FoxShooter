@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://du2celngkvqus"]
+
+[ext_resource type="FontFile" uid="uid://cddleaqlg0sp5" path="res://assets/fonts/kenney_fonts/Fonts/Kenney Future Narrow.ttf" id="1_wftpu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wftpu"]
+bg_color = Color(0, 0, 0, 0.1764706)
+border_width_left = 6
+border_color = Color(0, 0.52373624, 0.85718405, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j2reg"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wo0od"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Theme" id="Theme_j2reg"]
+Button/fonts/font = ExtResource("1_wftpu")
+Button/styles/focus = SubResource("StyleBoxFlat_wftpu")
+Button/styles/normal = SubResource("StyleBoxFlat_j2reg")
+Button/styles/pressed = SubResource("StyleBoxFlat_wo0od")
+
+[node name="ThemeTester" type="Control" unique_id=1126541780]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_j2reg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1220084140]
+layout_mode = 0
+offset_left = 237.0
+offset_top = 34.0
+offset_right = 349.0
+offset_bottom = 328.0
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=900692726]
+layout_mode = 2
+text = "BUTTON"
+
+[node name="Button2" type="Button" parent="VBoxContainer" unique_id=1382265574]
+layout_mode = 2
+text = "BUTTON"
+
+[node name="Button3" type="Button" parent="VBoxContainer" unique_id=1292359237]
+layout_mode = 2
+text = "BUTTON"
+
+[node name="Button4" type="Button" parent="VBoxContainer" unique_id=1078699935]
+layout_mode = 2
+text = "BUTTON"
+
+[node name="Button5" type="Button" parent="VBoxContainer" unique_id=2087421108]
+layout_mode = 2
+text = "BUTTON"
+
+[node name="Button6" type="Button" parent="VBoxContainer" unique_id=1913308447]
+layout_mode = 2
+text = "BUTTON"

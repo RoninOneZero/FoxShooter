@@ -1,11 +1,29 @@
 [gd_scene format=3 uid="uid://bp3pms2pv0nud"]
 
 [ext_resource type="Script" uid="uid://rwsppne14a1p" path="res://scenes/shop_menu/shop_item_container.gd" id="1_3mes3"]
+[ext_resource type="FontFile" uid="uid://cddleaqlg0sp5" path="res://assets/fonts/kenney_fonts/Fonts/Kenney Future Narrow.ttf" id="1_n6b5c"]
+[ext_resource type="Theme" uid="uid://dqh87k8g7jhcc" path="res://themes/menu_buttons_theme.tres" id="3_2bc2s"]
+
+[sub_resource type="Theme" id="Theme_qi3qs"]
+default_font = ExtResource("1_n6b5c")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2bc2s"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.16470589)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
 
 [node name="ShopItem" type="HBoxContainer" unique_id=1739831362 node_paths=PackedStringArray("button")]
 offset_right = 640.0
 offset_bottom = 31.0
 size_flags_horizontal = 3
+theme = SubResource("Theme_qi3qs")
 theme_override_constants/separation = 32
 alignment = 1
 script = ExtResource("1_3mes3")
@@ -15,6 +33,7 @@ button = NodePath("Button")
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 text = "DAMAGE"
+clip_text = true
 
 [node name="Rank" type="Label" parent="." unique_id=1594309598]
 layout_mode = 2
@@ -25,6 +44,11 @@ layout_mode = 2
 text = "Cost: 5000"
 
 [node name="Button" type="Button" parent="." unique_id=1649405288]
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("3_2bc2s")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_2bc2s")
 text = "BUY"

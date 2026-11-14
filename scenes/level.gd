@@ -12,6 +12,7 @@ signal round_ended()
 @export var horde_spawn_delay: float
 
 @export var enemy_spawn_points: Array[Node2D] = []
+@export var spawn_target_node: Node2D
 @export var player: Pawn2D
 
 var last_used_spawn: Node2D
@@ -96,9 +97,9 @@ func spawn_enemy(enemy: Pawn2D, location: Vector2) -> void:
 	var health: Health = enemy.get_node("Health")
 	health.depleted.connect(_on_enemy_killed.bind(enemy))
 
-
+	spawn_target_node.add_child(enemy)
 	enemy.global_position = location
-	add_child(enemy)
+
 	_enemies.append(enemy)
 	if _enemies.size() >= combat.get_max_enemies_for_wave():
 		spawn_delay_timer.stop()

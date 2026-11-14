@@ -1,9 +1,13 @@
 [gd_scene format=3 uid="uid://bjids5ta1obei"]
 
 [ext_resource type="Script" uid="uid://cpflndqp2lusi" path="res://scenes/shop_menu/shop_menu.gd" id="1_aco41"]
+[ext_resource type="FontFile" uid="uid://cddleaqlg0sp5" path="res://assets/fonts/kenney_fonts/Fonts/Kenney Future Narrow.ttf" id="1_c26kv"]
 [ext_resource type="Texture2D" uid="uid://d4ie40rxr7qi5" path="res://assets/textures/user_interface/iDroid-MGSV-Front-2-v1.png" id="2_vsaxo"]
 [ext_resource type="PackedScene" uid="uid://bp3pms2pv0nud" path="res://scenes/shop_menu/shop_item_container.tscn" id="3_fb2vq"]
 [ext_resource type="Texture2D" uid="uid://cq7xaigtq8gpg" path="res://assets/textures/user_interface/kenney_ui-pack-space-expansion/PNG/Extra/Default/panel_glass.png" id="4_uyksk"]
+
+[sub_resource type="Theme" id="Theme_klq6b"]
+default_font = ExtResource("1_c26kv")
 
 [sub_resource type="Animation" id="Animation_fb2vq"]
 length = 0.001
@@ -87,6 +91,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_klq6b")
 script = ExtResource("1_aco41")
 packed_shop_item = ExtResource("3_fb2vq")
 cash_label = NodePath("MarginContainer/Panel/CashLabel")

@@ -10,16 +10,32 @@
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_w7c3h"]
 
-[node name="Level" type="Node2D" unique_id=897164410 node_paths=PackedStringArray("spawn_delay_timer", "enemy_spawn_points", "player")]
+[sub_resource type="Gradient" id="Gradient_b121j"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8c41q"]
+gradient = SubResource("Gradient_b121j")
+width = 512
+height = 360
+
+[sub_resource type="Gradient" id="Gradient_klq6b"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 0.6117647)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_klq6b"]
+gradient = SubResource("Gradient_klq6b")
+
+[node name="Level" type="Node2D" unique_id=897164410 node_paths=PackedStringArray("spawn_delay_timer", "enemy_spawn_points", "spawn_target_node", "player")]
 script = ExtResource("1_mx8sn")
 music = ExtResource("2_klq6b")
-round_time = 30.0
 enemy_spawn_delay = 0.5
 packed_enemy_scene = ExtResource("3_w8frs")
 packed_stronger_enemy_scene = ExtResource("3_2r41h")
 spawn_delay_timer = NodePath("SpawnTimer")
 horde_spawn_delay = 0.8
 enemy_spawn_points = [NodePath("EnemySpawnPoint"), NodePath("EnemySpawnPoint2")]
+spawn_target_node = NodePath("Enemies")
 player = NodePath("Fox")
 
 [node name="PlanetView" type="Sprite2D" parent="." unique_id=1121816960]
@@ -49,7 +65,7 @@ metadata/_edit_group_ = true
 shape = SubResource("WorldBoundaryShape2D_w7c3h")
 
 [node name="WallLeft" type="StaticBody2D" parent="." unique_id=23098270]
-position = Vector2(0, 300)
+position = Vector2(64, 296)
 rotation = 1.5707964
 collision_layer = 32
 collision_mask = 2
@@ -59,7 +75,7 @@ metadata/_edit_group_ = true
 shape = SubResource("WorldBoundaryShape2D_w7c3h")
 
 [node name="WallRight" type="StaticBody2D" parent="." unique_id=1906543497]
-position = Vector2(640, 304)
+position = Vector2(576, 304)
 rotation = -1.5707964
 collision_layer = 32
 collision_mask = 2
@@ -69,7 +85,7 @@ metadata/_edit_group_ = true
 shape = SubResource("WorldBoundaryShape2D_w7c3h")
 
 [node name="Fox" parent="." unique_id=458270211 instance=ExtResource("2_w7c3h")]
-position = Vector2(120, 232)
+position = Vector2(304, 232)
 
 [node name="SpawnTimer" type="Timer" parent="." unique_id=1872382679]
 
@@ -78,5 +94,34 @@ position = Vector2(699, 234)
 
 [node name="EnemySpawnPoint2" type="Marker2D" parent="." unique_id=993196571]
 position = Vector2(-61, 234)
+
+[node name="Enemies" type="Sprite2D" parent="." unique_id=1127094376]
+clip_children = 1
+position = Vector2(319.99997, 180)
+texture = SubResource("GradientTexture2D_8c41q")
+
+[node name="Margins" type="CanvasLayer" parent="." unique_id=752739857]
+
+[node name="Control" type="Control" parent="Margins" unique_id=1120219316]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="Margins/Control" unique_id=1855225354]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 360.0
+texture = SubResource("GradientTexture2D_klq6b")
+
+[node name="TextureRect2" type="TextureRect" parent="Margins/Control" unique_id=1130389273]
+layout_mode = 0
+offset_left = 576.0
+offset_right = 640.0
+offset_bottom = 360.0
+texture = SubResource("GradientTexture2D_klq6b")
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

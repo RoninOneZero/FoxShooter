@@ -1,3 +1,5 @@
+add reloading
+add bullet types
 add knife attack
 add chance to stun
 add penetration chance

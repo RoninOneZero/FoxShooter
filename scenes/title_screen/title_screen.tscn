@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b5s3oj04yjr52" path="res://scenes/options_menu/options_menu.tscn" id="4_d6x3v"]
 [ext_resource type="Texture2D" uid="uid://cish1ksy75ruw" path="res://assets/textures/user_interface/title_screen/titlescreen_planet.png" id="4_yegqs"]
 [ext_resource type="Texture2D" uid="uid://tvdm7qgmqbu4" path="res://assets/textures/user_interface/title_screen/title_character.png" id="5_xoykc"]
+[ext_resource type="Theme" uid="uid://dqh87k8g7jhcc" path="res://themes/menu_buttons_theme.tres" id="7_xoykc"]
 
 [sub_resource type="Theme" id="Theme_xawky"]
 default_font = ExtResource("1_yegqs")
@@ -395,12 +396,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 139.0
+offset_left = 123.0
 offset_top = -56.0
-offset_right = 259.0
+offset_right = 275.0
 offset_bottom = 168.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("7_xoykc")
 theme_override_constants/separation = 8
 alignment = 1
 

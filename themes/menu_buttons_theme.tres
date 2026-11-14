@@ -1,5 +1,10 @@
 [gd_resource type="Theme" format=3 uid="uid://dqh87k8g7jhcc"]
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_8hymu"]
+color = Color(0.9658999, 0.32784358, 0, 1)
+thickness = 8
+vertical = true
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xqka6"]
 bg_color = Color(0.954429, 0.37669984, 9.62615e-07, 1)
 border_width_top = 10
@@ -36,7 +41,7 @@ Button/colors/font_focus_color = Color(0, 0, 0, 1)
 Button/colors/font_hover_color = Color(0, 0, 0, 1)
 Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 Button/colors/font_pressed_color = Color(0, 0, 0, 0)
-Button/styles/focus = SubResource("StyleBoxFlat_xqka6")
+Button/styles/focus = SubResource("StyleBoxLine_8hymu")
 Button/styles/hover = SubResource("StyleBoxFlat_xqka6")
 Button/styles/normal = SubResource("StyleBoxFlat_enw1c")
 Button/styles/pressed = SubResource("StyleBoxFlat_gpt5w")

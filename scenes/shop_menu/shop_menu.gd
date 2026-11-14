@@ -33,7 +33,7 @@ func initalize_shop() -> void:
 
 		match item:
 			WeaponData.WeaponAttribute.DAMAGE: item_name = "Damage"
-			WeaponData.WeaponAttribute.CRITICAL_CHANCE: item_name = "Critical Chance"
+			WeaponData.WeaponAttribute.CRITICAL_CHANCE: item_name = "Crit Chance"
 			WeaponData.WeaponAttribute.KNOCKBACK: item_name = "Knockback"
 
 		var item_attribute: WeaponData.WeaponAttribute = item
