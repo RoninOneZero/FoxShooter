@@ -4,6 +4,11 @@ signal continue_requested
 signal title_screen_requested
 
 
+func _input(event: InputEvent) -> void:
+    if event.is_action_pressed("pause"):
+        continue_requested.emit()
+
+
 func _on_continue_button_pressed() -> void:
     continue_requested.emit()
 

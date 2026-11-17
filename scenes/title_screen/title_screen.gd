@@ -11,6 +11,8 @@ extends Control
 @export var quit_game_button: Button
 
 func _ready() -> void:
+	var cursor: Cursor = Main.get_node("Cursor")
+	cursor.hide_cusor()
 
 	if OS.get_name() == "Web":
 		quit_game_button.hide()
@@ -29,8 +31,10 @@ func _ready() -> void:
 		Main.play_music(music)
 	
 	await anim.animation_finished
+	cursor.show_cursor()
 
 	start_game.grab_focus()
+
 
 
 func _input(event: InputEvent) -> void:

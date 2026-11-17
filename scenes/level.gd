@@ -41,8 +41,10 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("pause"):
 		Main.pause_game()
+		get_window().set_input_as_handled()
+	
 
 
 func _process(delta: float) -> void:
@@ -126,9 +128,6 @@ func spawn_horde() -> void:
 	for enemy in horde:
 		spawn_enemy(enemy, spawn_location)
 		await get_tree().create_timer(horde_spawn_delay).timeout
-
-
-
 
 
 

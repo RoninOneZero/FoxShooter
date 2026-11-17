@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://ckpp7m7aodavq"]
 
+[ext_resource type="Shader" uid="uid://7xiajixaej4a" path="res://src/shaders/clip_mask.tres" id="1_17a6k"]
 [ext_resource type="Texture2D" uid="uid://c733g2uejw0i6" path="res://assets/textures/Sprite-0003.png" id="1_bd1po"]
 [ext_resource type="Script" uid="uid://cvbw6vm7vfv1e" path="res://scenes/lizardman/lizardman.gd" id="1_h8l8o"]
 [ext_resource type="Texture2D" uid="uid://iyxspt54jlxv" path="res://assets/textures/character_sprites/platformerDefense/sprite/dead.png" id="2_rbbdn"]
@@ -14,6 +15,9 @@
 [ext_resource type="Script" uid="uid://6raksy1dnjw5" path="res://scenes/fox/die_state.gd" id="10_notbo"]
 [ext_resource type="Script" uid="uid://dik7h3tkyjlcn" path="res://src/pawn/ai_controller.gd" id="11_w74ym"]
 [ext_resource type="Script" uid="uid://d4m6ppgju316w" path="res://src/gameplay/combat/health.gd" id="14_qrbxa"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b121j"]
+shader = ExtResource("1_17a6k")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nmin3"]
 size = Vector2(32, 104)
@@ -145,12 +149,14 @@ size = Vector2(48, 136)
 size = Vector2(64, 104)
 
 [node name="Lizardman" type="CharacterBody2D" unique_id=1555829717 groups=["Enemies"]]
+material = SubResource("ShaderMaterial_b121j")
 collision_layer = 4
 collision_mask = 65
 script = ExtResource("1_h8l8o")
 walk_speed = 50.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1814515239]
+visible = false
 position = Vector2(0, 36)
 shape = SubResource("RectangleShape2D_nmin3")
 
@@ -158,9 +164,10 @@ shape = SubResource("RectangleShape2D_nmin3")
 modulate = Color(0, 1, 0, 1)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_hyxq3")
-animation = &"aim"
+animation = &"idle"
 
 [node name="HurtBox2D" type="Area2D" parent="." unique_id=1276949715]
+visible = false
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("4_h8l8o")
@@ -172,6 +179,7 @@ shape = SubResource("RectangleShape2D_fd70g")
 debug_color = Color(0, 1, 0, 0.41960785)
 
 [node name="HitBox2D" type="Area2D" parent="." unique_id=402380105]
+visible = false
 position = Vector2(8, 0)
 collision_layer = 4
 collision_mask = 2

@@ -27,7 +27,7 @@ func set_facing(_direction: Vector2) -> void:
 	direction = _direction
 
 
-	if direction == Vector2.RIGHT:
+	if direction.x > 0.0:
 		sprite.flip_h = false
 	else:
 		sprite.flip_h = true

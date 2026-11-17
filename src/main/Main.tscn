@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cyddffj530f76" path="res://src/main/save_load.gd" id="8_74yfu"]
 [ext_resource type="PackedScene" uid="uid://bjids5ta1obei" path="res://scenes/shop_menu/shop_menu.tscn" id="8_bc0i0"]
 [ext_resource type="Script" uid="uid://bd85aig7ghuu2" path="res://src/main/debug.gd" id="9_bc0i0"]
+[ext_resource type="Texture2D" uid="uid://o5806o52nonr" path="res://assets/textures/user_interface/kenney_ui-pack-space-expansion/PNG/Extra/Default/crosshair_a.png" id="9_it3ii"]
 
 [node name="Main" type="Node" unique_id=761495018 node_paths=PackedStringArray("hud", "music_player", "game_over", "pause_menu", "shop_menu")]
 process_mode = 3
@@ -22,11 +23,15 @@ shop_menu = NodePath("UserInterface/ShopMenu")
 
 [node name="GameState" parent="." unique_id=332061152 instance=ExtResource("2_834u0")]
 
-[node name="Cursor" type="Node" parent="." unique_id=316310921]
-script = ExtResource("7_dewna")
-
 [node name="SaveLoad" type="Node" parent="." unique_id=404129314]
 script = ExtResource("8_74yfu")
+
+[node name="Cursor" type="Node" parent="." unique_id=1912240291 node_paths=PackedStringArray("debug_label", "cursor_sprite")]
+script = ExtResource("7_dewna")
+speed = 250.0
+debug_label = NodePath("../Debug/Label")
+cursor_sprite = NodePath("../UserInterface/Sprite2D")
+enabled = false
 
 [node name="UserInterface" type="CanvasLayer" parent="." unique_id=897527193]
 
@@ -42,9 +47,18 @@ visible = false
 [node name="ShopMenu" parent="UserInterface" unique_id=1613396732 instance=ExtResource("8_bc0i0")]
 visible = false
 
+[node name="Sprite2D" type="Sprite2D" parent="UserInterface" unique_id=241758956]
+texture = ExtResource("9_it3ii")
+
 [node name="Debug" type="CanvasLayer" parent="." unique_id=268334845]
-visible = false
 script = ExtResource("9_bc0i0")
+
+[node name="Label" type="Label" parent="Debug" unique_id=1797530288]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Mouse: "
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=66950446]
 bus = &"Music"
