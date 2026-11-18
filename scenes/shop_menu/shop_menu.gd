@@ -9,6 +9,10 @@ signal continue_requested
 @export var shop_item_container: Container
 @export var continue_button: Button
 
+@export var med_kit_button: Button
+@export var land_mine_button: Button
+
+
 @onready var shop: Shop = Main.get_node("GameState/Shop")
 @onready var inventory: Inventory = Main.get_node("GameState/Inventory")
 
@@ -16,7 +20,7 @@ signal continue_requested
 func initalize_shop() -> void:
 	cash_label.text = "Cash: %s" % inventory.cash
 
-	var available_items = shop.get_available_items()
+	var available_items = shop.get_available_upgrades()
 
 	if available_items.is_empty():
 		print("Shop has no available items!")
@@ -28,7 +32,6 @@ func initalize_shop() -> void:
 
 
 	for item in available_items:
-		
 		var item_name := ""
 
 		match item:
@@ -52,6 +55,8 @@ func initalize_shop() -> void:
 
 		if not inventory.can_afford(item_cost):
 			new_shop_item.button.disabled = true
+	
+	update_consumables()
 
 
 func buy_item(shop_item: ShopItemContainer) -> void:
@@ -83,6 +88,23 @@ func select_continue_button() -> void:
 		continue_button.grab_focus.call_deferred()
 
 
+func update_consumables() -> void:
+	med_kit_button.text = "%s/%s" % [inventory.med_kits, inventory.MAX_MED_KITS]
+	if inventory.can_afford(100) and inventory.med_kits < inventory.MAX_MED_KITS:
+		med_kit_button.disabled = false
+	else:
+		med_kit_button.disabled = true
+
+	land_mine_button.text = "%s/%s" % [inventory.mines, inventory.MAX_MED_KITS]
+	if inventory.can_afford(500) and inventory.mines < inventory.MAX_MED_KITS:
+		land_mine_button.disabled = false
+	else:
+		land_mine_button.disabled = true
+
+	
+
+
+
 func _add_effect_to_music() -> void:
 	var music_index := AudioServer.get_bus_index("Music")
 	AudioServer.set_bus_effect_enabled(music_index, 0, true)
@@ -111,3 +133,19 @@ func _on_visibility_changed() -> void:
 		$AnimationPlayer.play("open_phone")
 		await $AnimationPlayer.animation_finished
 		panel.process_mode = PROCESS_MODE_INHERIT
+
+
+func _on_land_mine_button_button_down() -> void:
+	inventory.spend_cash(500)
+	inventory.mines += 1
+
+	initalize_shop()
+	land_mine_button.grab_focus()
+
+
+func _on_med_kit_button_button_down() -> void:
+	inventory.spend_cash(100)
+	inventory.med_kits += 1
+
+	initalize_shop()
+	med_kit_button.grab_focus()

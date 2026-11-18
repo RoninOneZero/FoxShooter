@@ -1,5 +1,9 @@
 class_name Shop extends Node
 
+enum Consumable {
+	MED_KIT,
+	LAND_MINE,
+}
 
 @export var attribute_costs: Dictionary[WeaponData.WeaponAttribute, Array] = {
 	WeaponData.WeaponAttribute.DAMAGE: 				[500, 1000, 2000],
@@ -9,8 +13,15 @@ class_name Shop extends Node
 	#WeaponData.WeaponAttribute.DAMAGE: 			[500, 1000, 2000],
 }
 
+@export var consumable_costs: Dictionary [Consumable, int] = {
+	Consumable.MED_KIT: 100,
+	Consumable.LAND_MINE: 500,
+}
 
-func get_available_items() -> Array:
+
+func get_available_upgrades() -> Array:
 	return attribute_costs.keys()
 
-# @onready var inventory: Inventory = Main.get_node("GameState/Inventory")
+
+func get_available_consumabled() -> Array:
+	return consumable_costs.keys()

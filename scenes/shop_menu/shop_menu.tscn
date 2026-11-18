@@ -84,7 +84,7 @@ _data = {
 &"open_phone": SubResource("Animation_vsaxo")
 }
 
-[node name="ShopMenu" type="Control" unique_id=1613396732 node_paths=PackedStringArray("cash_label", "panel", "shop_item_container", "continue_button")]
+[node name="ShopMenu" type="Control" unique_id=1613396732 node_paths=PackedStringArray("cash_label", "panel", "shop_item_container", "continue_button", "med_kit_button", "land_mine_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -96,8 +96,10 @@ script = ExtResource("1_aco41")
 packed_shop_item = ExtResource("3_fb2vq")
 cash_label = NodePath("MarginContainer/Panel/CashLabel")
 panel = NodePath("MarginContainer/Panel")
-shop_item_container = NodePath("MarginContainer/Panel/ScrollContainer/ShopItems")
+shop_item_container = NodePath("MarginContainer/Panel/TabContainer/Upgrades/ShopItems")
 continue_button = NodePath("MarginContainer/Panel/ContinueButton")
+med_kit_button = NodePath("MarginContainer/Panel/TabContainer/Consumables/ConsumableItems/MedKit/MedKitButton")
+land_mine_button = NodePath("MarginContainer/Panel/TabContainer/Consumables/ConsumableItems/LandMine/LandMineButton")
 
 [node name="PhoneTexture" type="TextureRect" parent="." unique_id=321128744]
 layout_mode = 0
@@ -158,17 +160,83 @@ offset_bottom = 57.0
 theme_override_font_sizes/font_size = 32
 text = "CASH: 0000"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/Panel" unique_id=1095327445]
-layout_mode = 0
-offset_left = 40.0
-offset_top = 70.0
-offset_right = 486.0
-offset_bottom = 232.0
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/Panel" unique_id=1038650148]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -226.5
+offset_top = -83.5
+offset_right = 226.5
+offset_bottom = 83.5
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 0
 
-[node name="ShopItems" type="VBoxContainer" parent="MarginContainer/Panel/ScrollContainer" unique_id=917998821]
+[node name="Upgrades" type="ScrollContainer" parent="MarginContainer/Panel/TabContainer" unique_id=1095327445]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="ShopItems" type="VBoxContainer" parent="MarginContainer/Panel/TabContainer/Upgrades" unique_id=917998821]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
+
+[node name="Consumables" type="ScrollContainer" parent="MarginContainer/Panel/TabContainer" unique_id=2115236065]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="ConsumableItems" type="VBoxContainer" parent="MarginContainer/Panel/TabContainer/Consumables" unique_id=370829154]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="MedKit" type="HBoxContainer" parent="MarginContainer/Panel/TabContainer/Consumables/ConsumableItems" unique_id=764417417]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/Panel/TabContainer/Consumables/ConsumableItems/MedKit" unique_id=1618248407]
+layout_mode = 2
+text = "MED KIT"
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/Panel/TabContainer/Consumables/ConsumableItems/MedKit" unique_id=926911469]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/Panel/TabContainer/Consumables/ConsumableItems/MedKit" unique_id=218096705]
+layout_mode = 2
+text = "100"
+
+[node name="VSeparator2" type="VSeparator" parent="MarginContainer/Panel/TabContainer/Consumables/ConsumableItems/MedKit" unique_id=210007607]
+layout_mode = 2
+
+[node name="MedKitButton" type="Button" parent="MarginContainer/Panel/TabContainer/Consumables/ConsumableItems/MedKit" unique_id=419718903]
+layout_mode = 2
+text = "BUY: 100"
+
+[node name="LandMine" type="HBoxContainer" parent="MarginContainer/Panel/TabContainer/Consumables/ConsumableItems" unique_id=1547286580]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/Panel/TabContainer/Consumables/ConsumableItems/LandMine" unique_id=1318438463]
+layout_mode = 2
+text = "Land Mine"
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/Panel/TabContainer/Consumables/ConsumableItems/LandMine" unique_id=1428275685]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/Panel/TabContainer/Consumables/ConsumableItems/LandMine" unique_id=1853817199]
+layout_mode = 2
+text = "500"
+
+[node name="VSeparator2" type="VSeparator" parent="MarginContainer/Panel/TabContainer/Consumables/ConsumableItems/LandMine" unique_id=2081465903]
+layout_mode = 2
+
+[node name="LandMineButton" type="Button" parent="MarginContainer/Panel/TabContainer/Consumables/ConsumableItems/LandMine" unique_id=2135932961]
+layout_mode = 2
+text = "BUY: 500"
 
 [node name="ContinueButton" type="Button" parent="MarginContainer/Panel" unique_id=365918565]
 layout_mode = 0
@@ -179,4 +247,6 @@ offset_bottom = 279.0
 text = "CONTINUE"
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="button_down" from="MarginContainer/Panel/TabContainer/Consumables/ConsumableItems/MedKit/MedKitButton" to="." method="_on_med_kit_button_button_down"]
+[connection signal="button_down" from="MarginContainer/Panel/TabContainer/Consumables/ConsumableItems/LandMine/LandMineButton" to="." method="_on_land_mine_button_button_down"]
 [connection signal="button_down" from="MarginContainer/Panel/ContinueButton" to="." method="_on_continue_button_button_down"]
