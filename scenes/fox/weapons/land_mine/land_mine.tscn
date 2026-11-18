@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://cexxn03qf030n"]
+
+[ext_resource type="Script" uid="uid://dtxbjvb45m13p" path="res://scenes/fox/weapons/land_mine/land_mine.gd" id="1_kpai8"]
+[ext_resource type="Texture2D" uid="uid://byi8ngv0pig2l" path="res://assets/textures/character_sprites/weapons/land_mine.png" id="1_qn836"]
+[ext_resource type="Script" uid="uid://cndn410gup7sm" path="res://src/gameplay/combat/hit_box2d.gd" id="3_8pweo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ceijg"]
+size = Vector2(32, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xewka"]
+size = Vector2(128, 72)
+
+[node name="LandMine" type="Area2D" unique_id=1941003103]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_kpai8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1784864023]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_ceijg")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1256646346]
+position = Vector2(0, -12)
+texture = ExtResource("1_qn836")
+
+[node name="ArmingTimer" type="Timer" parent="." unique_id=1388068312]
+one_shot = true
+
+[node name="HitBox2D" type="Area2D" parent="." unique_id=820886164]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("3_8pweo")
+metadata/_custom_type_script = "uid://cndn410gup7sm"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox2D" unique_id=1031718804]
+position = Vector2(0, -28)
+shape = SubResource("RectangleShape2D_xewka")
+debug_color = Color(0.7, 0, 0.011666489, 0.41960785)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="ArmingTimer" to="." method="_on_arming_timer_timeout"]

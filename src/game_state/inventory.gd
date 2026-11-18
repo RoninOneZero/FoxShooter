@@ -1,7 +1,10 @@
 @icon("res://addons/at-icons/node/chest.svg")
 class_name Inventory extends Node
 
-const BASE_DAMAGE = 1
+signal med_kits_changed(amount: int)
+signal mines_changed(amount: int)
+
+const MAX_MED_KITS := 3
 
 @export var current_weapon_base: WeaponData
 @export var weapon: WeaponData
@@ -10,6 +13,11 @@ const BASE_DAMAGE = 1
 
 ## Contains upgrade name as a string as keys, and the number of purchased upgrades as values.
 var upgrades: Dictionary[WeaponData.WeaponAttribute, int] = {}
+var med_kits: int = 1
+var mines: int = 1 : 
+	set(x): 
+		mines = x
+		mines_changed.emit(mines)
 
 @onready var cash := starting_cash
 
@@ -33,3 +41,18 @@ func get_upgraded_weapon_data() -> WeaponData:
 	var upgraded_weapon_data := current_weapon_base
 
 	return upgraded_weapon_data
+
+
+func use_med_kit() -> void:
+	if med_kits - 1 >= 0:
+		med_kits -= 1
+		med_kits_changed.emit(med_kits)
+
+
+func add_med_kit () -> void:
+	if med_kits + 1 <= MAX_MED_KITS:
+		med_kits += 1
+		med_kits_changed.emit(med_kits)
+
+
+

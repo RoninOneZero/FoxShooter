@@ -51,10 +51,15 @@ func _on_game_lost() -> void:
 
 
 func _on_round_ended() -> void:
+	var game_state: GameState = get_node("GameState")
 	var inventory: Inventory = get_node("GameState/Inventory")
 	var combat: CombatManager = get_node("GameState/Combat")
 	inventory.add_cash_from_bounty(combat.current_bounty)
 	shop_menu.show()
+
+	var player = get_tree().get_first_node_in_group("Player")
+	var health_component: Health = player.get_node("Health")
+	game_state.player_health = health_component.current_health
 
 
 func _on_title_screen_requested() -> void:

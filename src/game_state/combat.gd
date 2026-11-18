@@ -8,14 +8,14 @@ var current_bounty: int = 0
 @export var combat_log: Array = []
 
 var horde_sizes = [
-	2, # + 0
-	3, # + 1
+	1, # + 0
+	2, # + 1
 	3, # + 2
 	5, # + 3
 ]
 
 var max_enemies = [
-	3,
+	2,
 	5,
 	8,
 	12,
@@ -58,5 +58,4 @@ func _on_wave_ended() -> void:
 
 
 func _on_tree_exiting() -> void:
-	print("sus!")
 	print(combat_log)

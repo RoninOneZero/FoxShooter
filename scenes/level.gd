@@ -20,6 +20,7 @@ var last_used_spawn: Node2D
 var _enemies: Array[Pawn2D] = []
 
 @onready var time_remaining := round_time
+@onready var game_state: GameState = Main.get_node("GameState")
 @onready var combat: CombatManager = Main.get_node("GameState/Combat")
 
 
@@ -30,6 +31,11 @@ func _ready() -> void:
 
 	var player_health: Health = player.get_node("Health")
 	player_health.depleted.connect(_on_player_defeated)
+	var saved_health = game_state.player_health
+	if saved_health > 0:
+		player_health.current_health = saved_health
+
+
 
 	combat.current_bounty = 0
 
@@ -62,12 +68,20 @@ func _process(delta: float) -> void:
 
 func initalize_hud() -> void:
 	var hud: HUD = Main.get_node("UserInterface/HUD")
-	var player_health: Health = player.get_node("Health")
+	var player_health: PlayerHealth = player.get_node("Health")
+	var inventory : Inventory = Main.get_node("GameState/Inventory")
 
 	hud.set_max_health(player_health.max_health)
 	hud.set_health(player_health.current_health)
+	hud.set_med_kits(inventory.med_kits)
 
 	player_health.health_changed.connect(hud.set_health)
+
+	if not inventory.med_kits_changed.is_connected(hud.set_med_kits):
+		inventory.med_kits_changed.connect(hud.set_med_kits)
+	
+	if not inventory.mines_changed.is_connected(hud.set_mines):
+		inventory.mines_changed.connect(hud.set_mines)
 
 	hud.set_kill_count(0)
 	hud.set_wave(combat.current_wave)

@@ -50,6 +50,9 @@ func _on_start_game_pressed() -> void:
 		printerr("No starting level was set!")
 		return
 
+	var game_state: GameState = Main.get_node("GameState")
+	game_state.initialize_game_state()
+
 	var combat: CombatManager = Main.get_node("GameState/Combat")
 	combat.current_wave = 1
 	get_tree().change_scene_to_file(starting_level_path)

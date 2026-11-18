@@ -2,11 +2,13 @@
 
 [ext_resource type="Script" uid="uid://bpx88lo7iqa7a" path="res://scenes/hud/hud.gd" id="1_48c2t"]
 
-[node name="HUD" type="Control" unique_id=1996295604 node_paths=PackedStringArray("health_bar", "kill_count", "time_count", "wave_count")]
+[node name="HUD" type="Control" unique_id=1996295604 node_paths=PackedStringArray("health_bar", "kill_count", "time_count", "wave_count", "med_kits_count", "mines_count")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 64.0
+offset_right = -64.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -15,6 +17,8 @@ health_bar = NodePath("HealthVBox/ProgressBar")
 kill_count = NodePath("KillCount")
 time_count = NodePath("TimeCount")
 wave_count = NodePath("WaveCount")
+med_kits_count = NodePath("MedKitsCount")
+mines_count = NodePath("MinesCount")
 
 [node name="HealthVBox" type="VBoxContainer" parent="." unique_id=577523793]
 layout_mode = 0
@@ -31,39 +35,51 @@ text = "HEALTH"
 layout_mode = 2
 
 [node name="KillCount" type="Label" parent="." unique_id=356834215]
-layout_mode = 0
-offset_left = 528.0
-offset_top = 24.0
-offset_right = 597.0
-offset_bottom = 47.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -69.0
+offset_bottom = 23.0
+grow_horizontal = 0
 text = "KILLS: 00"
 
 [node name="TimeCount" type="Label" parent="." unique_id=1009756778]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -9.0
-offset_top = -159.5
-offset_right = 162.0
-offset_bottom = -129.5
+offset_left = -85.5
+offset_right = 85.5
+offset_bottom = 30.0
 grow_horizontal = 2
-grow_vertical = 2
 text = "Time: 000"
+horizontal_alignment = 1
 
 [node name="WaveCount" type="Label" parent="." unique_id=709915446]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -296.0
-offset_top = 139.0
-offset_right = -221.0
-offset_bottom = 162.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -35.0
+offset_right = 99.0
+offset_bottom = -12.0
+grow_vertical = 0
 text = "Wave: 01"
+
+[node name="MedKitsCount" type="Label" parent="." unique_id=440996393]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 62.0
+offset_right = 124.0
+offset_bottom = 85.0
+text = "MED KITS: 00"
+
+[node name="MinesCount" type="Label" parent="." unique_id=944605520]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 85.0
+offset_right = 124.0
+offset_bottom = 108.0
+text = "MINES: 00"

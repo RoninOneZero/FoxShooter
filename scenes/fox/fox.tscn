@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://do3slqiquyb0a"]
 
 [ext_resource type="Script" uid="uid://ce7j1il14jnqp" path="res://scenes/fox/fox.gd" id="1_cmr24"]
+[ext_resource type="PackedScene" uid="uid://cexxn03qf030n" path="res://scenes/fox/weapons/land_mine/land_mine.tscn" id="2_o8wqq"]
 [ext_resource type="Script" uid="uid://b15viop4pc36g" path="res://src/pawn/facing.gd" id="3_jaa0m"]
 [ext_resource type="Texture2D" uid="uid://iyxspt54jlxv" path="res://assets/textures/character_sprites/platformerDefense/sprite/dead.png" id="3_jxqej"]
 [ext_resource type="Texture2D" uid="uid://c733g2uejw0i6" path="res://assets/textures/Sprite-0003.png" id="3_vemp1"]
@@ -16,10 +17,10 @@
 [ext_resource type="Script" uid="uid://bw7nieib55dp1" path="res://scenes/fox/hurt_state.gd" id="12_sfg1d"]
 [ext_resource type="Script" uid="uid://6raksy1dnjw5" path="res://scenes/fox/die_state.gd" id="13_r1aym"]
 [ext_resource type="Script" uid="uid://016fiiavb5sm" path="res://scenes/fox/reload_state.gd" id="14_hmeia"]
-[ext_resource type="Script" uid="uid://d4m6ppgju316w" path="res://src/gameplay/combat/health.gd" id="16_4g33i"]
 [ext_resource type="Script" uid="uid://cah0r1dhodmwx" path="res://scenes/fox/slash_state.gd" id="16_hmeia"]
 [ext_resource type="PackedScene" uid="uid://bo6qbadfwqfn3" path="res://scenes/fox/weapons/pistol.tscn" id="17_r1aym"]
 [ext_resource type="AudioStream" uid="uid://p80o8hetcjn0" path="res://assets/audio/weapon_sounds/usp2.wav" id="17_sfg1d"]
+[ext_resource type="Script" uid="uid://4wlowrerpf58" path="res://scenes/fox/player_health.gd" id="18_8hymu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w7c3h"]
 size = Vector2(32, 104)
@@ -238,10 +239,11 @@ size = Vector2(64, 98)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xewka"]
 size = Vector2(87, 20)
 
-[node name="Fox" type="CharacterBody2D" unique_id=458270211]
+[node name="Fox" type="CharacterBody2D" unique_id=458270211 groups=["Player"]]
 collision_layer = 2
 collision_mask = 33
 script = ExtResource("1_cmr24")
+mine_packed_scene = ExtResource("2_o8wqq")
 walk_speed = 150.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1239253769]
@@ -371,10 +373,14 @@ facing = NodePath("../../Facing")
 hit_box = NodePath("../../HitBox2D")
 aim_state = NodePath("../AimState")
 
-[node name="Health" type="Node" parent="." unique_id=1601939173]
-script = ExtResource("16_4g33i")
+[node name="Health" type="Node" parent="." unique_id=1601939173 node_paths=PackedStringArray("med_kit_cooldown")]
+script = ExtResource("18_8hymu")
+med_kit_cooldown = NodePath("Timer")
 max_health = 6
 metadata/_custom_type_script = "uid://d4m6ppgju316w"
+
+[node name="Timer" type="Timer" parent="Health" unique_id=1097115912]
+one_shot = true
 
 [node name="GunShot" type="AudioStreamPlayer2D" parent="." unique_id=611931988]
 stream = ExtResource("17_sfg1d")
@@ -385,5 +391,9 @@ bus = &"SoundEffects"
 [node name="Pistol" parent="." unique_id=716932389 instance=ExtResource("17_r1aym")]
 position = Vector2(0, -21)
 
+[node name="FloorRayCast" type="RayCast2D" parent="." unique_id=379620454]
+target_position = Vector2(0, 110)
+
 [connection signal="damage_taken" from="HurtBox2D" to="." method="_on_hurt_box_2d_damage_taken"]
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]
+[connection signal="timeout" from="Health/Timer" to="Health" method="_on_timer_timeout"]
