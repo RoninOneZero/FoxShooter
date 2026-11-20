@@ -2,6 +2,16 @@
 
 [ext_resource type="PackedScene" uid="uid://1hvartqh6avp" path="res://scenes/fox/weapons/weapon.tscn" id="1_cwik2"]
 [ext_resource type="Resource" uid="uid://yqx7o3r2cmyb" path="res://resources/weapon_data/pistol.tres" id="2_kr68w"]
+[ext_resource type="AudioStream" uid="uid://p80o8hetcjn0" path="res://assets/audio/weapon_sounds/usp2.wav" id="3_glto5"]
 
-[node name="Pistol" unique_id=716932389 instance=ExtResource("1_cwik2")]
+[node name="Pistol" unique_id=716932389 node_paths=PackedStringArray("sound_effect") instance=ExtResource("1_cwik2")]
 data = ExtResource("2_kr68w")
+sound_effect = NodePath("GunShot")
+
+[node name="GunShot" type="AudioStreamPlayer2D" parent="." index="5" unique_id=136439529]
+stream = ExtResource("3_glto5")
+volume_db = 6.0
+max_polyphony = 6
+bus = &"SoundEffects"
+
+[connection signal="activated" from="." to="." method="_on_activated"]

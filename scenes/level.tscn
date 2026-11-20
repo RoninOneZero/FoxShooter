@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://t6c82h1hm0a" path="res://assets/textures/environment/space_background.png" id="5_klq6b"]
 [ext_resource type="Texture2D" uid="uid://dmf8x0jhuhwj2" path="res://assets/textures/environment/window_background-export.png" id="6_klq6b"]
 [ext_resource type="Texture2D" uid="uid://cn0sx7p0r0jef" path="res://resources/white_square_64.tres" id="8_b121j"]
+[ext_resource type="Script" uid="uid://bvd72s8h8moj4" path="res://scenes/wave_spawner.gd" id="9_8c41q"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_w7c3h"]
 
@@ -18,14 +19,13 @@ colors = PackedColorArray(0, 0, 0, 0.6117647)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_klq6b"]
 gradient = SubResource("Gradient_klq6b")
 
-[node name="Level" type="Node2D" unique_id=897164410 node_paths=PackedStringArray("spawn_delay_timer", "enemy_spawn_points", "spawn_target_node", "player")]
+[node name="Level" type="Node2D" unique_id=897164410 node_paths=PackedStringArray("spawn_timer", "enemy_spawn_points", "spawn_target_node", "player")]
 script = ExtResource("1_mx8sn")
 music = ExtResource("2_klq6b")
-enemy_spawn_delay = 0.5
+round_time = 99.0
 packed_enemy_scene = ExtResource("3_w8frs")
 packed_stronger_enemy_scene = ExtResource("3_2r41h")
-spawn_delay_timer = NodePath("SpawnTimer")
-horde_spawn_delay = 0.8
+spawn_timer = NodePath("SpawnTimer")
 enemy_spawn_points = [NodePath("EnemySpawnPoint"), NodePath("EnemySpawnPoint2")]
 spawn_target_node = NodePath("Sprite2D")
 player = NodePath("Fox")
@@ -79,8 +79,6 @@ shape = SubResource("WorldBoundaryShape2D_w7c3h")
 [node name="Fox" parent="." unique_id=458270211 instance=ExtResource("2_w7c3h")]
 position = Vector2(304, 232)
 
-[node name="SpawnTimer" type="Timer" parent="." unique_id=1872382679]
-
 [node name="EnemySpawnPoint" type="Marker2D" parent="." unique_id=1653752704]
 position = Vector2(699, 234)
 
@@ -116,4 +114,8 @@ offset_right = 640.0
 offset_bottom = 360.0
 texture = SubResource("GradientTexture2D_klq6b")
 
-[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[node name="SpawnTimer" type="Node" parent="." unique_id=1184939378]
+script = ExtResource("9_8c41q")
+max_spawn_rate = 1.3
+
+[connection signal="enemy_requested" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

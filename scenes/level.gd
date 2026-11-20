@@ -5,21 +5,21 @@ signal round_ended()
 
 @export var music: AudioStream
 @export var round_time := 60.0
-@export var enemy_spawn_delay := 1.0
+# @export var enemy_spawn_delay := 1.0
+# @export var horde_spawn_delay: float
 @export var packed_enemy_scene: PackedScene
 @export var packed_stronger_enemy_scene: PackedScene
-@export var spawn_delay_timer: Timer
-@export var horde_spawn_delay: float
 
+@export var spawn_timer: SpawnTimer
 @export var enemy_spawn_points: Array[Node2D] = []
 @export var spawn_target_node: Node2D
 @export var player: Pawn2D
 
-var last_used_spawn: Node2D
 
 var _enemies: Array[Pawn2D] = []
 
 @onready var time_remaining := round_time
+
 @onready var game_state: GameState = Main.get_node("GameState")
 @onready var combat: CombatManager = Main.get_node("GameState/Combat")
 
@@ -35,13 +35,15 @@ func _ready() -> void:
 	if saved_health > 0:
 		player_health.current_health = saved_health
 
+	# Configure spawn timer
+	spawn_timer.max_enemies = combat.get_max_enemies_for_wave()
+	spawn_timer.max_spawn_rate = 1.3
 
 
 	combat.current_bounty = 0
 
 	initalize_hud()
 
-	$SpawnTimer.start(enemy_spawn_delay)
 
 	Main.play_music(music)
 
@@ -60,6 +62,7 @@ func _process(delta: float) -> void:
 		time_remaining = 0.0
 
 	Main.hud.set_time(time_remaining)
+	spawn_timer.enemies = _enemies.size()
 
 	if time_remaining <= 0.0:
 		get_tree().paused = true
@@ -89,23 +92,6 @@ func initalize_hud() -> void:
 	hud.show()
 
 
-func get_horde() -> Array[Pawn2D]:
-	var max_enemies := combat.get_max_enemies_for_wave()
-	var enemy_budget := max_enemies - _enemies.size()
-
-	if enemy_budget <= 0:
-		return []
-
-	var max_group_size := mini(combat.get_horde_size_for_wave(), enemy_budget)
-	var amount_to_spawn = randi_range(1, max_group_size)
-
-	var enemies_to_spawn: Array[Pawn2D] = []
-	for i in amount_to_spawn:
-		enemies_to_spawn.append(packed_enemy_scene.instantiate())
-	
-	return enemies_to_spawn
-
-
 func spawn_enemy(enemy: Pawn2D, location: Vector2) -> void:
 	var controller := enemy.get_node("AIController") as AIController
 	controller.target = player
@@ -117,32 +103,34 @@ func spawn_enemy(enemy: Pawn2D, location: Vector2) -> void:
 	enemy.global_position = location
 
 	_enemies.append(enemy)
-	if _enemies.size() >= combat.get_max_enemies_for_wave():
-		spawn_delay_timer.stop()
 
 
-func get_spawn_point() -> Vector2:
-	var modified_list = enemy_spawn_points.duplicate()
+func spawn_group() -> void:
+	# Determine group size
+	var size := 3
+	if _enemies.size() + size >= combat.get_max_enemies_for_wave():
+		size = 1
 
-	if last_used_spawn != null:
-		modified_list.erase(last_used_spawn)
+	var new_enemies: Array[Pawn2D] = []
 
-	last_used_spawn = modified_list.pick_random()
+	# Determine group composition
+	var elite_chance := combat.current_wave / 50.0
 
-	return last_used_spawn.global_position
+	for i in size:
+		var chance := randf()
+
+		if chance <= elite_chance:
+			new_enemies.append(packed_stronger_enemy_scene.instantiate())
+		else:
+			new_enemies.append(packed_enemy_scene.instantiate())
+		
 
 
-func spawn_horde() -> void:
-	var horde := get_horde()
-	if horde.is_empty():
-		return
-
-	var spawn_location := get_spawn_point()
-
-	for enemy in horde:
-		spawn_enemy(enemy, spawn_location)
-		await get_tree().create_timer(horde_spawn_delay).timeout
-
+	# Spawn nodes
+	for enemy in new_enemies:
+		var random_spawn: Node2D = enemy_spawn_points.pick_random()
+		var spawn_point: Vector2 = random_spawn.global_position
+		spawn_enemy(enemy, spawn_point)
 
 
 func _on_player_defeated() -> void:
@@ -151,17 +139,12 @@ func _on_player_defeated() -> void:
 
 
 func _on_enemy_killed(enemy: Pawn2D) -> void:
-	var was_full := _enemies.size() >= combat.get_max_enemies_for_wave()
-	_enemies.erase(enemy)
-	
+	_enemies.erase(enemy)	
 	combat.current_bounty += 1
 	
 	var hud: HUD = Main.get_node("UserInterface/HUD")
 	hud.set_kill_count(combat.current_bounty)
 
-	if was_full:
-		spawn_delay_timer.start(enemy_spawn_delay)
-
 
 func _on_spawn_timer_timeout() -> void:
-	spawn_horde()
+	spawn_group()

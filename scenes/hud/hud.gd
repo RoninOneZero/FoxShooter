@@ -28,7 +28,7 @@ func set_time(time: float) -> void:
 
 
 func set_wave(amount: int) -> void:
-	var string := "Wave: %02d" % amount
+	var string := "Wave: %02d" % (amount + 1)
 	wave_count.text = string
 
 

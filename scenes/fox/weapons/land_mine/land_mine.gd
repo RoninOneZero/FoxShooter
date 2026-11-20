@@ -17,6 +17,7 @@ func arm() -> void:
 
 
 func explode() -> void:
+	#TODO add delay to detonation so that enemies pile up a bit
 	var damage_data := DamageData.new()
 	damage_data.amount = 200
 	

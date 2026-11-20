@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_hsgtw")
 base_fire_rate = 100
-damage_ranks = Array[int]([20, 999, 999])
+damage_ranks = Array[int]([30, 40, 50])
 metadata/_custom_type_script = "uid://eokbm1ubas50"

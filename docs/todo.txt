@@ -1,17 +1,22 @@
 robusted combat mechanics
 add reloading
-add bullet types
-add knife attack
 add chance to stun
 add penetration chance
+(B) add bullet types
+x add knife attack
 x placeable mines
 x add med kits
+
+make knockback force proportional to number of enmies hit and distance
+give enemies attack state
 
 game feel
 add aiming and steady shot
 wave counter that is saved to high scores
 add score system a la DMC
 user interface overhaul
+x redo gamestate class to allow for one-stop fine tuning
+x redo the wave spawner
 x make movement acceleration based
 x weapon class redo
 x make weapon scenes with different stats each for testing

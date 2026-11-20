@@ -19,7 +19,6 @@
 [ext_resource type="Script" uid="uid://016fiiavb5sm" path="res://scenes/fox/reload_state.gd" id="14_hmeia"]
 [ext_resource type="Script" uid="uid://cah0r1dhodmwx" path="res://scenes/fox/slash_state.gd" id="16_hmeia"]
 [ext_resource type="PackedScene" uid="uid://bo6qbadfwqfn3" path="res://scenes/fox/weapons/pistol.tscn" id="17_r1aym"]
-[ext_resource type="AudioStream" uid="uid://p80o8hetcjn0" path="res://assets/audio/weapon_sounds/usp2.wav" id="17_sfg1d"]
 [ext_resource type="Script" uid="uid://4wlowrerpf58" path="res://scenes/fox/player_health.gd" id="18_8hymu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w7c3h"]
@@ -381,12 +380,6 @@ metadata/_custom_type_script = "uid://d4m6ppgju316w"
 
 [node name="Timer" type="Timer" parent="Health" unique_id=1097115912]
 one_shot = true
-
-[node name="GunShot" type="AudioStreamPlayer2D" parent="." unique_id=611931988]
-stream = ExtResource("17_sfg1d")
-volume_db = 6.0
-max_polyphony = 6
-bus = &"SoundEffects"
 
 [node name="Pistol" parent="." unique_id=716932389 instance=ExtResource("17_r1aym")]
 position = Vector2(0, -21)

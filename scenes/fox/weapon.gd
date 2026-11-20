@@ -6,6 +6,7 @@ signal activated
 @export var data: WeaponData
 @export var tracer_height_variance: float = 4.0
 @export var crit_animation: AnimationPlayer
+@export var sound_effect: AudioStreamPlayer2D
 
 var _rounds: int = 0
 
@@ -102,3 +103,8 @@ func _draw_tracer(end_point: Vector2) -> void:
 func reload() -> void:
 	_rounds = data.base_magazine_size
 	reloaded.emit()
+
+
+func _on_activated() -> void:
+	if sound_effect:
+		sound_effect.play()
