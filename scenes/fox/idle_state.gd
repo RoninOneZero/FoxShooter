@@ -18,11 +18,15 @@ func enter() -> void:
 
 func update(_delta: float) -> void:
 	if controller.attack_pressed:
-		state_machine.change_state("aim_state")
+		if weapon.can_activate():
+			state_machine.change_state(&"preaimstate")
+		elif weapon.rounds == 0:
+			state_machine.change_state(&"reload_state")
+		return
 
 	
 	if controller.direction != Vector2.ZERO:
-		state_machine.change_state("walk_state")
+		state_machine.change_state(&"walk_state")
 		return
 	
 
@@ -33,7 +37,5 @@ func update(_delta: float) -> void:
 
 func receive_event(_event: String) -> void:
 	match _event:
-		"attack": 
-			state_machine.change_state("aim_state")
 		"melee":
 			state_machine.change_state("slash_state")

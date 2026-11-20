@@ -6,6 +6,7 @@ class_name HUD extends Control
 @export var wave_count: Label
 @export var med_kits_count: Label
 @export var mines_count: Label
+@export var ammo_count: Label
 
 func set_max_health(amount: int) -> void:
 	if health_bar:
@@ -40,3 +41,12 @@ func set_med_kits(amount: int) -> void:
 func set_mines(amount: int) -> void:
 	var string := "MINES: %s" % amount
 	mines_count.text = string
+
+
+func set_ammo(amount:int ) -> void:
+	var string := ""
+	if amount > 0:
+		string = "A".repeat(amount)
+	else:
+		string = "-none-"
+	ammo_count.text = string

@@ -12,6 +12,7 @@ extends State
 @export var facing: Facing
 @export var hit_box: HitBox2D
 @export var aim_state: State
+@export var weapon: Weapon
 # @export var animation_player: AnimationPlayer
 
 var _time := 0.0
@@ -40,10 +41,13 @@ func update(_delta: float) -> void:
 
 	if _time >= duration:
 		if controller.attack_pressed:
-			state_machine.change_state("aim_state")
-			aim_state.ready_to_fire = true
+			if weapon.rounds > 0:
+				state_machine.change_state(&"aim_state")
+				aim_state.ready_to_fire = true
+			else:
+				state_machine.change_state(&"reload_state")
 		else:
-			state_machine.change_state("idle_state")
+			state_machine.change_state(&"idle_state")
 		return
 
 

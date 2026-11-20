@@ -1,5 +1,7 @@
 class_name Weapon extends Node2D
 
+signal rounds_changed(amount: int)
+signal reload_started
 signal reloaded
 signal activated
 
@@ -7,8 +9,12 @@ signal activated
 @export var tracer_height_variance: float = 4.0
 @export var crit_animation: AnimationPlayer
 @export var sound_effect: AudioStreamPlayer2D
+@export var reload_timer: Timer
 
-var _rounds: int = 0
+var rounds: int = 0 :
+	set(x):
+		rounds = x
+		rounds_changed.emit(rounds)
 
 @onready var ray_cast: RayCast2D = $RayCast2D
 @onready var refire_timer: Timer = $RefireTimer
@@ -18,8 +24,14 @@ var _rounds: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	var hud: HUD = Main.get_node("UserInterface/HUD")
+	rounds_changed.connect(hud.set_ammo)
+
 	initialize_upgrades()
-	reload()
+	rounds = data.base_magazine_size
+
+
+
 
 
 func initialize_upgrades() -> void:
@@ -28,7 +40,13 @@ func initialize_upgrades() -> void:
 
 
 func can_activate() -> bool:
-	return refire_timer.time_left <= 0
+	if refire_timer.time_left > 0:
+		return false
+	
+	if data.base_magazine_size > 0 and rounds < 1:
+		return false
+	
+	return true
 
 
 ## Attempts to activate the weapon. Returns true if successful, false if not.
@@ -51,7 +69,8 @@ func activate() -> bool:
 			collider.take_damage(_get_damage_data())
 			# print("Damage: ", damage_data.amount)
 			# print("Knockback: ", damage_data.knockback)
-			
+	
+	rounds -= 1
 	_draw_tracer(tracer_end_point)
 	var refire_delay: float = 60.0 / data.base_fire_rate
 	refire_timer.start(refire_delay)
@@ -101,7 +120,11 @@ func _draw_tracer(end_point: Vector2) -> void:
 
 
 func reload() -> void:
-	_rounds = data.base_magazine_size
+	reload_started.emit()
+	reload_timer.start(data.base_reload_time)
+	await reload_timer.timeout
+
+	rounds = data.base_magazine_size
 	reloaded.emit()
 
 

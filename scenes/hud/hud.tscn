@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bpx88lo7iqa7a" path="res://scenes/hud/hud.gd" id="1_48c2t"]
 
-[node name="HUD" type="Control" unique_id=1996295604 node_paths=PackedStringArray("health_bar", "kill_count", "time_count", "wave_count", "med_kits_count", "mines_count")]
+[node name="HUD" type="Control" unique_id=1996295604 node_paths=PackedStringArray("health_bar", "kill_count", "time_count", "wave_count", "med_kits_count", "mines_count", "ammo_count")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,6 +19,7 @@ time_count = NodePath("TimeCount")
 wave_count = NodePath("WaveCount")
 med_kits_count = NodePath("MedKitsCount")
 mines_count = NodePath("MinesCount")
+ammo_count = NodePath("AmmoCount")
 
 [node name="HealthVBox" type="VBoxContainer" parent="." unique_id=577523793]
 layout_mode = 0
@@ -83,3 +84,11 @@ offset_top = 85.0
 offset_right = 124.0
 offset_bottom = 108.0
 text = "MINES: 00"
+
+[node name="AmmoCount" type="Label" parent="." unique_id=1077611599]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 296.0
+offset_right = 99.0
+offset_bottom = 319.0
+text = "Ammo"

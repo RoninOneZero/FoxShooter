@@ -1,5 +1,7 @@
 extends State
 
+
+
 @export var pawn: Pawn2D
 @export var controller: Controller
 @export var sprite: AnimatedSprite2D
@@ -9,7 +11,12 @@ extends State
 
 var ready_to_fire := false
 
+
 func enter() -> void:
+	if state_machine.previous_state.name == "":
+		pass
+
+
 	sprite.play("aim")
 	ready_to_fire = false
 
@@ -33,6 +40,8 @@ func update(_delta: float) -> void:
 		sprite.stop()
 		sprite.play("shoot")
 		weapon.activate()
+		return
+	
 
 
 # func physics_update(_delta: float) -> void:
@@ -42,6 +51,9 @@ func update(_delta: float) -> void:
 
 func receive_event(_event: String) -> void:
 	match _event:
+		"attack":
+			if weapon.rounds == 0:
+				state_machine.change_state(&"reload_state")
 		"melee":
 			if %KnifeRefire.time_left == 0.0:
-				state_machine.change_state("slash_state")
+				state_machine.change_state(&"slash_state")

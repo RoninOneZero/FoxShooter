@@ -5,10 +5,16 @@ extends State
 @export var sprite: AnimatedSprite2D
 @export var facing: Facing
 # @export var animation_player: AnimationPlayer
-
+@export var weapon: Weapon
 
 func enter() -> void:
 	sprite.play("reload")
+	await weapon.reload()
+
+	if is_active:
+		state_machine.change_state(&"aim_state")
+
+
 
 
 # func exit() -> void:

@@ -15,22 +15,16 @@
 [ext_resource type="Script" uid="uid://c21hyptxoqrib" path="res://scenes/fox/aim_state.gd" id="10_rbbum"]
 [ext_resource type="Script" uid="uid://p5xgehcl3ckr" path="res://scenes/fox/shoot_state.gd" id="11_4g33i"]
 [ext_resource type="Script" uid="uid://bw7nieib55dp1" path="res://scenes/fox/hurt_state.gd" id="12_sfg1d"]
+[ext_resource type="Script" uid="uid://dop8l2438k8gh" path="res://scenes/fox/pre_aim.gd" id="13_o8wqq"]
 [ext_resource type="Script" uid="uid://6raksy1dnjw5" path="res://scenes/fox/die_state.gd" id="13_r1aym"]
 [ext_resource type="Script" uid="uid://016fiiavb5sm" path="res://scenes/fox/reload_state.gd" id="14_hmeia"]
 [ext_resource type="Script" uid="uid://cah0r1dhodmwx" path="res://scenes/fox/slash_state.gd" id="16_hmeia"]
 [ext_resource type="PackedScene" uid="uid://bo6qbadfwqfn3" path="res://scenes/fox/weapons/pistol.tscn" id="17_r1aym"]
 [ext_resource type="Script" uid="uid://4wlowrerpf58" path="res://scenes/fox/player_health.gd" id="18_8hymu"]
+[ext_resource type="AudioStream" uid="uid://cu1a1v73yikhe" path="res://assets/audio/weapon_sounds/knife_slash1.wav" id="22_dmnom"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w7c3h"]
 size = Vector2(32, 104)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sytu0"]
-atlas = ExtResource("3_vemp1")
-region = Rect2(0, 128, 64, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cl8bj"]
-atlas = ExtResource("3_vemp1")
-region = Rect2(64, 128, 64, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xmqtq"]
 atlas = ExtResource("3_vemp1")
@@ -59,6 +53,14 @@ region = Rect2(64, 0, 64, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_dmnom"]
 atlas = ExtResource("3_vemp1")
 region = Rect2(128, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sytu0"]
+atlas = ExtResource("3_vemp1")
+region = Rect2(0, 128, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cl8bj"]
+atlas = ExtResource("3_vemp1")
+region = Rect2(64, 128, 64, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pgjlv"]
 atlas = ExtResource("3_vemp1")
@@ -100,12 +102,6 @@ region = Rect2(128, 512, 64, 128)
 animations = [{
 "frames": [{
 "duration": 2.0,
-"texture": SubResource("AtlasTexture_sytu0")
-}, {
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_cl8bj")
-}, {
-"duration": 2.0,
 "texture": SubResource("AtlasTexture_xmqtq")
 }],
 "loop": 0,
@@ -146,6 +142,34 @@ animations = [{
 }],
 "loop": 1,
 "name": &"idle",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_sytu0")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_cl8bj")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_xmqtq")
+}],
+"loop": 0,
+"name": &"ready_weapon",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_sytu0")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_cl8bj")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_xmqtq")
+}],
+"loop": 0,
+"name": &"reload",
 "speed": 12.0
 }, {
 "frames": [{
@@ -252,7 +276,7 @@ shape = SubResource("RectangleShape2D_w7c3h")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1430646362]
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_46bbx")
-animation = &"idle"
+animation = &"reload"
 offset = Vector2(0, -2)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=714089143]
@@ -322,6 +346,14 @@ sprite = NodePath("../../AnimatedSprite2D")
 facing = NodePath("../../Facing")
 weapon = NodePath("../../Pistol")
 
+[node name="PreAimState" type="Node" parent="StateMachine" unique_id=1280817901 node_paths=PackedStringArray("pawn", "controller", "sprite", "facing")]
+script = ExtResource("13_o8wqq")
+duration = 0.5
+pawn = NodePath("../..")
+controller = NodePath("../../InputController")
+sprite = NodePath("../../AnimatedSprite2D")
+facing = NodePath("../../Facing")
+
 [node name="AimState" type="Node" parent="StateMachine" unique_id=272267513 node_paths=PackedStringArray("pawn", "controller", "sprite", "facing", "weapon")]
 script = ExtResource("10_rbbum")
 pawn = NodePath("../..")
@@ -355,14 +387,15 @@ sprite = NodePath("../../AnimatedSprite2D")
 facing = NodePath("../../Facing")
 hurt_box = NodePath("../../HurtBox2D")
 
-[node name="ReloadState" type="Node" parent="StateMachine" unique_id=96954027 node_paths=PackedStringArray("pawn", "controller", "sprite", "facing")]
+[node name="ReloadState" type="Node" parent="StateMachine" unique_id=96954027 node_paths=PackedStringArray("pawn", "controller", "sprite", "facing", "weapon")]
 script = ExtResource("14_hmeia")
 pawn = NodePath("../..")
 controller = NodePath("../../InputController")
 sprite = NodePath("../../AnimatedSprite2D")
 facing = NodePath("../../Facing")
+weapon = NodePath("../../Pistol")
 
-[node name="SlashState" type="Node" parent="StateMachine" unique_id=1574196028 node_paths=PackedStringArray("pawn", "controller", "sprite", "facing", "hit_box", "aim_state")]
+[node name="SlashState" type="Node" parent="StateMachine" unique_id=1574196028 node_paths=PackedStringArray("pawn", "controller", "sprite", "facing", "hit_box", "aim_state", "weapon")]
 script = ExtResource("16_hmeia")
 knockback_force = 50.0
 pawn = NodePath("../..")
@@ -371,6 +404,7 @@ sprite = NodePath("../../AnimatedSprite2D")
 facing = NodePath("../../Facing")
 hit_box = NodePath("../../HitBox2D")
 aim_state = NodePath("../AimState")
+weapon = NodePath("../../Pistol")
 
 [node name="Health" type="Node" parent="." unique_id=1601939173 node_paths=PackedStringArray("med_kit_cooldown")]
 script = ExtResource("18_8hymu")
@@ -387,6 +421,11 @@ position = Vector2(0, -21)
 [node name="FloorRayCast" type="RayCast2D" parent="." unique_id=379620454]
 target_position = Vector2(0, 110)
 
+[node name="SlashSFX" type="AudioStreamPlayer2D" parent="." unique_id=545700894]
+stream = ExtResource("22_dmnom")
+volume_db = 6.0
+
 [connection signal="damage_taken" from="HurtBox2D" to="." method="_on_hurt_box_2d_damage_taken"]
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]
+[connection signal="entered" from="StateMachine/SlashState" to="SlashSFX" method="play"]
 [connection signal="timeout" from="Health/Timer" to="Health" method="_on_timer_timeout"]
