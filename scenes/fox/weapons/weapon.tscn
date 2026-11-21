@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://1hvartqh6avp"]
 
 [ext_resource type="Script" uid="uid://d1ab03x8dacfb" path="res://scenes/fox/weapon.gd" id="1_277vt"]
+[ext_resource type="Script" uid="uid://boq0pt80rpjw6" path="res://scenes/fox/weapons/bullet_casing_emitter.gd" id="2_ex332"]
+[ext_resource type="PackedScene" uid="uid://cpy1tspl6s2it" path="res://scenes/fox/weapons/bullet_casing.tscn" id="3_lr4rg"]
 
 [sub_resource type="Animation" id="Animation_hmeia"]
 length = 0.001
@@ -39,17 +41,12 @@ _data = {
 &"crit": SubResource("Animation_r1aym")
 }
 
-[node name="Weapon" type="Node2D" unique_id=716932389 node_paths=PackedStringArray("crit_animation")]
+[node name="Weapon" type="Node2D" unique_id=716932389 node_paths=PackedStringArray("crit_animation", "reload_timer", "bullet_casing_emitter")]
 process_mode = 3
 script = ExtResource("1_277vt")
-base_damage = 20
-damage_per_upgrade = 10
-base_knockback = 50.0
-knockback_per_upgrade = 5.0
-fire_rate = 200
-critical_hit_chance = 0.05
-critical_damage_modifier = 4.0
 crit_animation = NodePath("FirePoint/CritSprite/AnimationPlayer")
+reload_timer = NodePath("ReloadTimer")
+bullet_casing_emitter = NodePath("FirePoint/BulletCasingEmitter")
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=25436035]
 target_position = Vector2(1000, 0)
@@ -68,6 +65,13 @@ scale = Vector2(0.15625, 0.15625)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="FirePoint/CritSprite" unique_id=1367493268]
 libraries/ = SubResource("AnimationLibrary_hmeia")
+
+[node name="BulletCasingEmitter" type="Node2D" parent="FirePoint" unique_id=1252681576]
+script = ExtResource("2_ex332")
+bullet_casing = ExtResource("3_lr4rg")
+eject_velocity = Vector2(-10, -10)
+angular_velocity = -1440.0
+angular_randomness = 0.1
 
 [node name="RefireTimer" type="Timer" parent="." unique_id=101339470]
 one_shot = true

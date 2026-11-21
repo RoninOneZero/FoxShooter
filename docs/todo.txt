@@ -1,5 +1,5 @@
 robusted combat mechanics
-add reloading
+x add reloading
 add chance to stun
 add penetration chance
 (B) add bullet types
@@ -11,10 +11,12 @@ make knockback force proportional to number of enmies hit and distance
 give enemies attack state
 
 game feel
+different SFX at low ammo
 add aiming and steady shot
 wave counter that is saved to high scores
 add score system a la DMC
 user interface overhaul
+(B) active reload
 x redo gamestate class to allow for one-stop fine tuning
 x redo the wave spawner
 x make movement acceleration based

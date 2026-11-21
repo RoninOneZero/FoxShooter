@@ -5,10 +5,13 @@
 [ext_resource type="AudioStream" uid="uid://p80o8hetcjn0" path="res://assets/audio/weapon_sounds/usp2.wav" id="3_glto5"]
 [ext_resource type="AudioStream" uid="uid://cevvlrpehq8vp" path="res://assets/audio/weapon_sounds/clipout1.wav" id="4_0qp4b"]
 
-[node name="Pistol" unique_id=716932389 node_paths=PackedStringArray("sound_effect", "reload_timer") instance=ExtResource("1_cwik2")]
+[node name="Pistol" unique_id=716932389 node_paths=PackedStringArray("sound_effect") instance=ExtResource("1_cwik2")]
 data = ExtResource("2_kr68w")
 sound_effect = NodePath("GunShot")
-reload_timer = NodePath("ReloadTimer")
+
+[node name="BulletCasingEmitter" parent="FirePoint" parent_id_path=PackedInt32Array(277889043) index="1" unique_id=1252681576]
+position = Vector2(-6, 0)
+eject_velocity = Vector2(-100, -250)
 
 [node name="GunShot" type="AudioStreamPlayer2D" parent="." index="5" unique_id=136439529]
 stream = ExtResource("3_glto5")

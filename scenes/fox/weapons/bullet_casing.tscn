@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://cpy1tspl6s2it"]
+
+[ext_resource type="Script" uid="uid://dah60at2eresq" path="res://scenes/fox/weapons/bullet_casing.gd" id="1_lyl0j"]
+[ext_resource type="AudioStream" uid="uid://c0q3h1xsb3ub1" path="res://assets/audio/weapon_sounds/he_bounce-1.wav" id="2_010b2"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_010b2"]
+rough = true
+bounce = 0.6
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_010b2"]
+radius = 4.0
+
+[sub_resource type="Gradient" id="Gradient_02sgn"]
+offsets = PackedFloat32Array(0, 0.26158038, 1)
+colors = PackedColorArray(0.77254903, 0.24705882, 0, 1, 0.9925629, 0.97538066, 0, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_02sgn"]
+gradient = SubResource("Gradient_02sgn")
+width = 6
+height = 3
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_010b2"]
+random_pitch = 1.0905077
+streams_count = 1
+stream_0/stream = ExtResource("2_010b2")
+
+[node name="BulletCasing" type="RigidBody2D" unique_id=171561589]
+collision_layer = 0
+mass = 0.1
+physics_material_override = SubResource("PhysicsMaterial_010b2")
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_lyl0j")
+fade_time = 1.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=548560076]
+rotation = 1.5707964
+shape = SubResource("CircleShape2D_010b2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2121196746]
+texture = SubResource("GradientTexture2D_02sgn")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=998435034]
+stream = SubResource("AudioStreamRandomizer_010b2")
+pitch_scale = 2.0
+bus = &"SoundEffects"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

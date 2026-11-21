@@ -19,6 +19,9 @@ colors = PackedColorArray(0, 0, 0, 0.6117647)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_klq6b"]
 gradient = SubResource("Gradient_klq6b")
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ceijg"]
+polygon = PackedVector2Array(-256, 320, 832, 320, 832, 384, -256, 384)
+
 [node name="Level" type="Node2D" unique_id=897164410 node_paths=PackedStringArray("spawn_timer", "enemy_spawn_points", "spawn_target_node", "player")]
 script = ExtResource("1_mx8sn")
 music = ExtResource("2_klq6b")
@@ -117,5 +120,8 @@ texture = SubResource("GradientTexture2D_klq6b")
 [node name="SpawnTimer" type="Node" parent="." unique_id=1184939378]
 script = ExtResource("9_8c41q")
 max_spawn_rate = 1.3
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=59994929]
+occluder = SubResource("OccluderPolygon2D_ceijg")
 
 [connection signal="enemy_requested" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

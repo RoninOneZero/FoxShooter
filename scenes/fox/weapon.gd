@@ -10,6 +10,7 @@ signal activated
 @export var crit_animation: AnimationPlayer
 @export var sound_effect: AudioStreamPlayer2D
 @export var reload_timer: Timer
+@export var bullet_casing_emitter: BulletCasingEmitter
 
 var rounds: int = 0 :
 	set(x):
@@ -74,6 +75,9 @@ func activate() -> bool:
 	_draw_tracer(tracer_end_point)
 	var refire_delay: float = 60.0 / data.base_fire_rate
 	refire_timer.start(refire_delay)
+
+	var bullet_casing = bullet_casing_emitter.get_casing(scale)
+	get_parent().add_sibling(bullet_casing)
 
 	activated.emit()
 	return true

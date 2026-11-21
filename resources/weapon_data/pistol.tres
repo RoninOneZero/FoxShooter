@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_hsgtw")
 base_fire_rate = 100
-base_magazine_size = 3
+base_magazine_size = 2
 base_reload_time = 0.5
 damage_ranks = Array[int]([30, 40, 50])
 metadata/_custom_type_script = "uid://eokbm1ubas50"
